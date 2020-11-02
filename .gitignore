@@ -12,6 +12,7 @@ dist/
 *.lock
 *.tmp
 ~$*.docx
+*.bak
 
 # Compiled Python bytecode
 *.py[cod]
