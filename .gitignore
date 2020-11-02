@@ -9,6 +9,10 @@ dist/
 
 # Compiled Java class files
 *.class
+*.lock
+*.tmp
+~$*.docx
+*.bak
 
 # Compiled Python bytecode
 *.py[cod]
