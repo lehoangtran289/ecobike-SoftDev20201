@@ -56,6 +56,16 @@ public class BikeRepositoryImpl implements BikeRepository {
         }
     }
 
+    @Override
+    public void delete(String id) {
+        findById(id).ifPresent(bike -> {
+            updateStationAfterRemovingBike(bike);
+            bikes = bikes.stream()
+                    .filter(b -> !b.getId().equals(id))
+                    .collect(Collectors.toList());
+        });
+    }
+
     private void updateStationAfterAddingBike(Bike addedBike) {
         String dockingStationId = Optional.ofNullable(addedBike.getDockingStationId()).orElse("");
         dockingStationRepository.findById(dockingStationId)
@@ -66,16 +76,6 @@ public class BikeRepositoryImpl implements BikeRepository {
         String dockingStationId = Optional.ofNullable(removedBike.getDockingStationId()).orElse("");
         dockingStationRepository.findById(dockingStationId)
                 .ifPresent(station -> station.getBikeIds().remove(removedBike.getId()));
-    }
-
-    @Override
-    public void delete(String id) {
-        findById(id).ifPresent(bike -> {
-            updateStationAfterRemovingBike(bike);
-            bikes = bikes.stream()
-                    .filter(b -> !b.getId().equals(id))
-                    .collect(Collectors.toList());
-        });
     }
 
 }

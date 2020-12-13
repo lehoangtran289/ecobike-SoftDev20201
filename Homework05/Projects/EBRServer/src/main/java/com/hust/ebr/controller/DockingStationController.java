@@ -6,6 +6,7 @@ import com.hust.ebr.service.DockingStationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,9 +25,7 @@ public class DockingStationController {
 
     @GetMapping("/docking-stations/{id}")
     public DockingStationResDTO getDockingStation(@PathVariable("id") String id) {
-        return Optional.ofNullable(id)
-                .map(dockingStationService::findById)
-                .orElse(null);
+        return StringUtils.hasText(id) ? dockingStationService.findById(id) : null;
     }
 
     @PutMapping("/docking-stations/{id}")

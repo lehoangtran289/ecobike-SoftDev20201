@@ -4,6 +4,7 @@ import com.hust.ebr.model.Bike;
 import com.hust.ebr.service.BikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class BikeController {
 
     @GetMapping("/bikes/{id}")
     public Bike getBike(@PathVariable("id") String id) {
-        return Optional.ofNullable(id).map(bikeService::findById).orElse(null);
+        return StringUtils.hasText(id) ? bikeService.findById(id) : null;
     }
 
     @PostMapping("/bikes")
