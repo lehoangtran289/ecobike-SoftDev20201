@@ -41,7 +41,9 @@ public class BikeRepositoryImpl implements BikeRepository {
 
     @Override
     public Bike update(Bike bike) {
-        bikes = bikes.stream().map(b -> b.equals(bike) ? bike : b).collect(Collectors.toList());
+        bikes = bikes.stream()
+                .map(b -> b.equals(bike) ? bike : b)
+                .collect(Collectors.toList());
         return findById(bike.getId()).orElse(null);
     }
 
