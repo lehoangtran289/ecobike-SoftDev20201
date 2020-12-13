@@ -1,0 +1,23 @@
+[
+  {
+    "id": "ds1",
+    "stationName": "Docking Station 1",
+    "stationAddress": "1 Dai Co Viet",
+    "emptyDockCount": 10,
+    "bikeIds": ["nb1","nb2"]
+  },
+  {
+    "id": "ds2",
+    "stationName": "Docking Station 2",
+    "stationAddress": "1 Ta Quang Buu",
+    "emptyDockCount": 3,
+    "bikeIds": ["nb3","eb2","tb1"]
+  },
+  {
+    "id": "ds3",
+    "stationName": "Docking Station 3",
+    "stationAddress": "1 Le Thanh Nghi",
+    "emptyDockCount": 0,
+    "bikeIds": ["eb3","tb2","tb3","eb1"]
+  }
+]
