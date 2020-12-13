@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hust.ebr.model.Bike;
+import com.hust.ebr.model.CreditCard;
 import com.hust.ebr.model.DockingStation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class Seed {
     private final ObjectMapper mapper;
     private List<Bike> bikes;
     private List<DockingStation> dockingStations;
+    private List<CreditCard> creditCards;
 
     @PostConstruct
     public void init() throws JsonProcessingException {
@@ -34,6 +36,10 @@ public class Seed {
         dockingStations = new ArrayList<>();
         String dockingStationsJson = FileReader.read(new File(ROOT_PATH + "dockingStations.json").getAbsolutePath());
         dockingStations.addAll(mapper.readValue(dockingStationsJson, new TypeReference<>() {}));
+
+        creditCards = new ArrayList<>();
+        String creditCardsJson = FileReader.read(new File(ROOT_PATH + "creditCards.json").getAbsolutePath());
+        creditCards.addAll(mapper.readValue(creditCardsJson, new TypeReference<>() {}));
     }
 
     private ArrayList<Bike> generateBikeFromFile(String filePath) {
