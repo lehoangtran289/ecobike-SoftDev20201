@@ -21,8 +21,8 @@ public class NormalBike extends Bike {
         boolean res = super.match(bike);
         if (!res)
             return false;
-        if (!(bike instanceof NormalBike))
-            return false;
+//        if (!(bike instanceof NormalBike))
+//            return false;
         return true;
     }
 }

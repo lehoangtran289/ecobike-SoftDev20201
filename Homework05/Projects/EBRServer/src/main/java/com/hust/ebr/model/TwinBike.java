@@ -21,8 +21,8 @@ public class TwinBike extends Bike {
         boolean res = super.match(bike);
         if (!res)
             return false;
-        if (!(bike instanceof TwinBike))
-            return false;
+//        if (!(bike instanceof TwinBike))
+//            return false;
         return true;
     }
 }

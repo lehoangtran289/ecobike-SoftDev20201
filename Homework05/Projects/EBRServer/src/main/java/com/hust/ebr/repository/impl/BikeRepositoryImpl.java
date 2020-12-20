@@ -1,6 +1,9 @@
 package com.hust.ebr.repository.impl;
 
 import com.hust.ebr.model.Bike;
+import com.hust.ebr.model.EBike;
+import com.hust.ebr.model.NormalBike;
+import com.hust.ebr.model.TwinBike;
 import com.hust.ebr.repository.BikeRepository;
 import com.hust.ebr.repository.DockingStationRepository;
 import com.hust.ebr.repository.seed.Seed;
@@ -30,6 +33,31 @@ public class BikeRepositoryImpl implements BikeRepository {
         return bikes.stream()
                 .filter(b -> b.match(bike))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Bike> search(String type, Bike bike) {
+        switch (type) {
+            case "normalBike":
+                return bikes.stream()
+                        .filter(b -> b instanceof NormalBike)
+                        .filter(b -> b.match(bike))
+                        .collect(Collectors.toList());
+            case "twinBike":
+                return bikes.stream()
+                        .filter(b -> b instanceof TwinBike)
+                        .filter(b -> b.match(bike))
+                        .collect(Collectors.toList());
+            case "eBike":
+                return bikes.stream()
+                        .filter(b -> b instanceof EBike)
+                        .filter(b -> b.match(bike))
+                        .collect(Collectors.toList());
+            default:
+                return bikes.stream()
+                        .filter(b -> b.match(bike))
+                        .collect(Collectors.toList());
+        }
     }
 
     @Override

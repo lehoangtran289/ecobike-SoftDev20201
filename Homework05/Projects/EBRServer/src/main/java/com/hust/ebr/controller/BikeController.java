@@ -8,7 +8,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -17,8 +16,8 @@ public class BikeController {
     private final BikeService bikeService;
 
     @GetMapping("/bikes")
-    public List<Bike> getBikes() {
-        return bikeService.getBikes(null);
+    public List<Bike> getBikes(String type, Bike bike) {
+        return StringUtils.hasText(type) ? bikeService.getBikes(type, bike) : bikeService.getBikes(bike);
     }
 
     @GetMapping("/bikes/{id}")
@@ -29,6 +28,13 @@ public class BikeController {
     @PostMapping("/bikes")
     public Bike addBike(@RequestBody Bike bike) {
         return bikeService.save(bike);
+    }
+
+    @PutMapping("/bikes/{id}")
+    public ResponseEntity<?> updateBike(@PathVariable("id") String id, @RequestBody Bike bike) {
+        if (!StringUtils.hasText(bike.getId()) || !bikeService.getBikeIds().contains(id))
+            return ResponseEntity.badRequest().body("");
+        return ResponseEntity.ok(bikeService.update(bike));
     }
 
     @DeleteMapping("/bikes/{id}")
