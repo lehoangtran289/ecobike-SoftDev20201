@@ -1,4 +1,4 @@
-package com.hust.ebr.model;
+package com.hust.ebr.beans;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -9,10 +9,12 @@ import lombok.ToString;
 @Setter
 @RequiredArgsConstructor
 @ToString(callSuper = true)
-public class TwinBike extends Bike {
-    private static final int SADDLE_COUNT = 2;
-    private static final int PEDAL_COUNT = 2;
+public class EBike extends Bike {
+    private static final int SADDLE_COUNT = 1;
+    private static final int PEDAL_COUNT = 1;
     private static final int SEAT_COUNT = 1;
+
+    private Motor motor;
 
     @Override
     public boolean match(Bike bike) {
@@ -21,8 +23,6 @@ public class TwinBike extends Bike {
         boolean res = super.match(bike);
         if (!res)
             return false;
-//        if (!(bike instanceof TwinBike))
-//            return false;
         return true;
     }
 }

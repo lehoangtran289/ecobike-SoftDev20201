@@ -21,20 +21,4 @@ public class TwinBikeController {
     public List<Bike> getTwinBikes(TwinBike twinBike) {
         return bikeService.getBikes(twinBike);
     }
-
-    @PutMapping("/twinBikes/{id}")
-    public ResponseEntity<?> updateTwinBike(@PathVariable("id") String id, @RequestBody TwinBike twinBike) {
-        if (!twinBike.getId().equals(id) || !bikeService.getTwinBikeIds().contains(id))
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("invalid id");
-        return ResponseEntity.ok(bikeService.update(twinBike));
-    }
-
-    @DeleteMapping("/twinBikes/{id}")
-    public ResponseEntity<?> deleteTwinBike(@PathVariable("id") String id) {
-        if (bikeService.getTwinBikeIds().contains(id)) {
-            bikeService.deleteBike(id);
-            return ResponseEntity.ok().body("deleted");
-        }
-        return ResponseEntity.badRequest().body("invalid TwinBike id!");
-    }
 }

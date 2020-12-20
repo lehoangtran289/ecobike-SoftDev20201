@@ -1,10 +1,10 @@
-package com.hust.ebr.model;
+package com.hust.ebr.beans;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.*;
-import org.springframework.util.StringUtils;
 
 import java.util.Date;
 
@@ -14,20 +14,23 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({@Type(value = NormalBike.class, name = "normalBike"),
-        @Type(value = TwinBike.class, name = "twinBike"),
-        @Type(value = EBike.class, name = "eBike")})
+@JsonSubTypes({@JsonSubTypes.Type(value = NormalBike.class, name = "normalBike"),
+        @JsonSubTypes.Type(value = TwinBike.class, name = "twinBike"),
+        @JsonSubTypes.Type(value = EBike.class, name = "eBike")})
 public class Bike {
     @NonNull
     private String id;
     private String name;
     private float weight;
     private String licensePlate;
+    @JsonFormat(pattern="dd/MM/yyyy")
     private Date manufacturingDate;
     private String producer;
     private float cost;
-    private Status status;
+    private Status status = Status.Available;
     private String dockingStationId;
+
+    public enum Status {Available, Renting}
 
     public boolean match(Bike bike) {
         if (bike == null)
@@ -54,7 +57,7 @@ public class Bike {
         if (bike.cost != 0 && this.cost != bike.cost) {
             return false;
         }
-        if (StringUtils.hasText(bike.dockingStationId) && !this.dockingStationId.equals(bike.dockingStationId)) {
+        if (bike.dockingStationId != null && !bike.dockingStationId.equals("") && !this.dockingStationId.equals(bike.dockingStationId)) {
             return false;
         }
         if (bike.status != null && this.status != bike.status) {
@@ -71,6 +74,5 @@ public class Bike {
         return false;
     }
 
-    public enum Status {Available, Renting}
 
 }

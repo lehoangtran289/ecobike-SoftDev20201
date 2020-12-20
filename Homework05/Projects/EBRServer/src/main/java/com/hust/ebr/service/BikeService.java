@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +19,10 @@ public class BikeService {
 
     public List<Bike> getBikes(Bike bike) {
         return bikeRepository.search(bike);
+    }
+
+    public List<Bike> getBikes(String type, Bike bike) {
+        return bikeRepository.search(type, bike);
     }
 
     public Bike findById(String id) {
@@ -38,6 +41,13 @@ public class BikeService {
         if (!StringUtils.hasText(id))
             throw new NullPointerException("id is null or empty!");
         bikeRepository.delete(id);
+    }
+
+    public List<String> getBikeIds() {
+        return bikeRepository.search(null)
+                .stream()
+                .map(Bike::getId)
+                .collect(Collectors.toList());
     }
 
     public List<String> getEBikeIds() {

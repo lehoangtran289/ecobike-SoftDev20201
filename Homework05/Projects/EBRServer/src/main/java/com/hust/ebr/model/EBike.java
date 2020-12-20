@@ -23,23 +23,23 @@ public class EBike extends Bike {
         boolean res = super.match(bike);
         if (!res)
             return false;
-        if (!(bike instanceof EBike))
-            return false;
-        EBike eBike = (EBike) bike;
-        if (eBike.motor != null) {
-            if (eBike.motor.getId() != null && !eBike.motor.getId().equals("") && this.motor.getId().contains(eBike.motor.getId())) {
-                return false;
-            }
-            if (eBike.motor.getBatteryPercentage() != 0 && this.motor.getBatteryPercentage() != eBike.motor.getBatteryPercentage()) {
-                return false;
-            }
-            if (eBike.motor.getLoadCycles() != 0 && this.motor.getLoadCycles() != eBike.motor.getLoadCycles()) {
-                return false;
-            }
-            if (eBike.motor.getRemainingTime() != 0 && this.motor.getRemainingTime() != eBike.motor.getRemainingTime()) {
-                return false;
-            }
-        }
+//        if (!(bike instanceof EBike))
+//            return false;
+//        EBike eBike = (EBike) bike;
+//        if (eBike.motor != null) {
+//            if (eBike.motor.getId() != null && !eBike.motor.getId().equals("") && this.motor.getId().contains(eBike.motor.getId())) {
+//                return false;
+//            }
+//            if (eBike.motor.getBatteryPercentage() != 0 && this.motor.getBatteryPercentage() != eBike.motor.getBatteryPercentage()) {
+//                return false;
+//            }
+//            if (eBike.motor.getLoadCycles() != 0 && this.motor.getLoadCycles() != eBike.motor.getLoadCycles()) {
+//                return false;
+//            }
+//            if (eBike.motor.getRemainingTime() != 0 && this.motor.getRemainingTime() != eBike.motor.getRemainingTime()) {
+//                return false;
+//            }
+//        }
         return true;
     }
 }
