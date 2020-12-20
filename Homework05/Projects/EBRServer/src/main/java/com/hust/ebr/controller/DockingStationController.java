@@ -29,9 +29,9 @@ public class DockingStationController {
     }
 
     @PutMapping("/docking-stations/{id}")
-    public ResponseEntity<DockingStationResDTO> updateDockingStation(@PathVariable("id") String id, @RequestBody DockingStation dockingStation) {
-        if (!dockingStation.getId().equals(id))
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    public ResponseEntity<?> updateDockingStation(@PathVariable("id") String id, @RequestBody DockingStation dockingStation) {
+        if (!StringUtils.hasText(dockingStation.getId()) || !dockingStation.getId().equals(id))
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("");
         return ResponseEntity.ok(dockingStationService.update(dockingStation));
     }
 

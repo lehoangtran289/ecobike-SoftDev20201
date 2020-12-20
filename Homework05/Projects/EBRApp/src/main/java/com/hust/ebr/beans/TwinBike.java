@@ -1,4 +1,4 @@
-package com.hust.ebr.model;
+package com.hust.ebr.beans;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +21,6 @@ public class TwinBike extends Bike {
         boolean res = super.match(bike);
         if (!res)
             return false;
-//        if (!(bike instanceof TwinBike))
-//            return false;
         return true;
     }
 }

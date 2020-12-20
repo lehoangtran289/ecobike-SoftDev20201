@@ -21,21 +21,4 @@ public class NormalBikeController {
     public List<Bike> getNormalBikes(NormalBike normalBike) {
         return bikeService.getBikes(normalBike);
     }
-
-    @PutMapping("/normalBikes/{id}")
-    public ResponseEntity<?> updateNormalBikes(@PathVariable("id") String id,
-                                                  @RequestBody NormalBike normalBike) {
-        if (!normalBike.getId().equals(id) || !bikeService.getNormalBikeIds().contains(id))
-            return ResponseEntity.badRequest().body("invalid id");
-        return ResponseEntity.ok(bikeService.update(normalBike));
-    }
-
-    @DeleteMapping("/normalBikes/{id}")
-    public ResponseEntity<?> deleteNormalBikes(@PathVariable("id") String id) {
-        if (bikeService.getNormalBikeIds().contains(id)) {
-            bikeService.deleteBike(id);
-            return ResponseEntity.ok().body("deleted");
-        }
-        return ResponseEntity.badRequest().body("invalid NormalBike id!");
-    }
 }

@@ -1,9 +1,6 @@
-package com.hust.ebr.model;
+package com.hust.ebr.beans;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
@@ -21,8 +18,6 @@ public class NormalBike extends Bike {
         boolean res = super.match(bike);
         if (!res)
             return false;
-//        if (!(bike instanceof NormalBike))
-//            return false;
         return true;
     }
 }
