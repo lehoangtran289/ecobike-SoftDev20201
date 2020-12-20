@@ -21,20 +21,4 @@ public class EBikeController {
     public List<Bike> getEBikes(EBike eBike) {
         return bikeService.getBikes(eBike);
     }
-
-    @PutMapping("/eBikes/{id}")
-    public ResponseEntity<?> updateEBike(@PathVariable("id") String id, @RequestBody EBike ebike) {
-        if (!ebike.getId().equals(id) || !bikeService.getEBikeIds().contains(id))
-            return ResponseEntity.badRequest().body("invalid id");
-        return ResponseEntity.ok(bikeService.update(ebike));
-    }
-
-    @DeleteMapping("/eBikes/{id}")
-    public ResponseEntity<?> deleteEBike(@PathVariable("id") String id) {
-        if (bikeService.getEBikeIds().contains(id)) {
-            bikeService.deleteBike(id);
-            return ResponseEntity.ok().body("deleted");
-        }
-        return ResponseEntity.badRequest().body("invalid Ebike id!");
-    }
 }
