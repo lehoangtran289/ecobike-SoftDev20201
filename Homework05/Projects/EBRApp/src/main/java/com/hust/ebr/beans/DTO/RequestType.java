@@ -1,4 +1,4 @@
-package com.hust.ebr.beans;
+package com.hust.ebr.beans.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
