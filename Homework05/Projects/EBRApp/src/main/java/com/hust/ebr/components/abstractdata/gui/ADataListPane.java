@@ -4,7 +4,6 @@ import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public abstract class ADataListPane<T> extends JScrollPane {
 
@@ -27,17 +26,15 @@ public abstract class ADataListPane<T> extends JScrollPane {
 
     public abstract void decorateSinglePane(ADataSinglePane<T> singlePane);
 
-    public void updateData(List<? extends T> list) {
+    public void updateData(T object) {
         pane.removeAll();
         pane.revalidate();
         pane.repaint();
 
-        for (T t: list) {
-            ADataSinglePane<T> singlePane = homePageController.createSinglePane();
-            decorateSinglePane(singlePane);
-            singlePane.updateData(t);
-            pane.add(singlePane);
-            pane.add(Box.createRigidArea(new Dimension(0, 40)));
-        }
+        ADataSinglePane<T> singlePane = homePageController.createSinglePane();
+        decorateSinglePane(singlePane);
+        singlePane.updateData(object);
+        pane.add(singlePane);
+        pane.add(Box.createRigidArea(new Dimension(0, 40)));
     }
 }
