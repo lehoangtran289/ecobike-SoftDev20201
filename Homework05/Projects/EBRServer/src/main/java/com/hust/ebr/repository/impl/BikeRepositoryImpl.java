@@ -70,7 +70,14 @@ public class BikeRepositoryImpl implements BikeRepository {
     @Override
     public Bike update(Bike bike) {
         bikes = bikes.stream()
-                .map(b -> b.equals(bike) ? bike : b)
+                .map(b -> {
+                    if (b.equals(bike) && !b.getDockingStationId().equals(bike.getDockingStationId())) {
+                        updateStationAfterAddingBike(bike);
+                        updateStationAfterRemovingBike(b);
+                        return bike;
+                    }
+                    return b;
+                })
                 .collect(Collectors.toList());
         return findById(bike.getId()).orElse(null);
     }
