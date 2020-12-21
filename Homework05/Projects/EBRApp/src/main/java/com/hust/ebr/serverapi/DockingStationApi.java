@@ -6,8 +6,8 @@ import javax.ws.rs.client.*;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class DockingStationApi {
@@ -18,11 +18,14 @@ public class DockingStationApi {
         client = ClientBuilder.newClient();
     }
 
-    public List<DockingStation> getAllStations() {
+    public List<DockingStation> getStations(Map<String, String> params) {
         WebTarget webTarget = client.target(PATH);
-        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-        Response response = invocationBuilder.get();
-        List<DockingStation> result = response.readEntity(new GenericType<ArrayList<DockingStation>>() {
+        if (params != null) {
+            for (Map.Entry<String, String> param : params.entrySet())
+                webTarget = webTarget.queryParam(param.getKey(), param.getValue());
+        }
+        Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
+        List<DockingStation> result = response.readEntity(new GenericType<List<DockingStation>>() {
         });
         System.out.println(result);
         return result;
