@@ -6,8 +6,6 @@ import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
 
 import javax.swing.*;
-import java.util.List;
-import java.util.Map;
 
 public abstract class ADataHomePageController<T> {
     private final ADataHomePagePane<T> homePagePane;
@@ -17,11 +15,9 @@ public abstract class ADataHomePageController<T> {
         ADataListPane<T> listPane = createListPane();
 
         searchPane.setSearchController(searchParams -> {
-            List<? extends T> list = ADataHomePageController.this.search(searchParams);
-            listPane.updateData(list);
+            T object = ADataHomePageController.this.search(searchParams);
+            listPane.updateData(object);
         });
-
-        searchPane.fireSearchEvent();
 
         homePagePane = new ADataHomePagePane<T>(searchPane, listPane);
     }
@@ -32,7 +28,7 @@ public abstract class ADataHomePageController<T> {
 
     public abstract ADataSearchPane createSearchPane();
 
-    public abstract List<? extends T> search(Map<String, String> searchParams);
+    public abstract T search(String searchParams);
 
     public abstract ADataSinglePane<T> createSinglePane();
 
