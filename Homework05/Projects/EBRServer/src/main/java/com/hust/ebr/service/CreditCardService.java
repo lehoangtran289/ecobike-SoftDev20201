@@ -18,6 +18,10 @@ public class CreditCardService {
         return creditCardRepository.findByCardNumber(cardNumber).orElse(null);
     }
 
+    public List<CreditCard> getCreditCards(CreditCard creditCard) {
+        return creditCardRepository.search(creditCard);
+    }
+
     public CreditCard refund(String cardNumber, double amount) {
         return creditCardRepository.findByCardNumber(cardNumber)
                 .map(c -> {
@@ -49,4 +53,5 @@ public class CreditCardService {
                 .map(CreditCard::getCardNumber)
                 .collect(Collectors.toList());
     }
+
 }
