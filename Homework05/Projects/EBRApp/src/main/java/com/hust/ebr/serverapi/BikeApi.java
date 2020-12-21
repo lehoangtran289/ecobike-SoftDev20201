@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class BikeApi {
     public static final String PATH = "http://localhost:8080/api/bikes";
@@ -46,8 +44,7 @@ public class BikeApi {
             for (Map.Entry<String, String> param : params.entrySet())
                 webTarget = webTarget.queryParam(param.getKey(), param.getValue());
         }
-        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-        Response response = invocationBuilder.get();
+        Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
         List<Bike> result = response.readEntity(new GenericType<List<Bike>>() {
         });
         System.out.println(result);
@@ -74,19 +71,6 @@ public class BikeApi {
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.delete();
         return response.getStatus() == 200;
-    }
-
-    public static void main(String[] args) {
-        Map<String, String> map = Stream.of(new String[][]{
-                {"id", "1"},
-                {"name", "1"}
-        }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
-        System.out.println(new BikeApi().getAllBikes());
-//        TwinBike bike = new TwinBike();
-//        bike.setId("tb5");
-//        System.out.println(new BikeApi().addBike(bike));
-
-//        System.out.println(new BikeApi().deleteBike("tb5"));
     }
 
 }
