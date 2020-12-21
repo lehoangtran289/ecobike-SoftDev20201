@@ -1,0 +1,40 @@
+package com.hust.ebr.components.abstractdata.gui;
+
+import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
+
+import javax.swing.*;
+import java.awt.*;
+
+public abstract class ADataListPane<T> extends JScrollPane {
+
+    private LayoutManager layout;
+    protected JPanel pane;
+
+    protected ADataHomePageController<T> homePageController;
+
+    public ADataListPane() {
+        pane = new JPanel();
+        layout = new BoxLayout(pane, BoxLayout.Y_AXIS);
+        pane.setLayout(layout);
+
+        this.setViewportView(pane);
+        this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        this.getVerticalScrollBar().setUnitIncrement(20);
+        this.getHorizontalScrollBar().setUnitIncrement(20);
+    }
+
+    public abstract void decorateSinglePane(ADataSinglePane<T> singlePane);
+
+    public void updateData(T object) {
+        pane.removeAll();
+        pane.revalidate();
+        pane.repaint();
+
+        ADataSinglePane<T> singlePane = homePageController.createSinglePane();
+        decorateSinglePane(singlePane);
+        singlePane.updateData(object);
+        pane.add(singlePane);
+        pane.add(Box.createRigidArea(new Dimension(0, 40)));
+    }
+}
