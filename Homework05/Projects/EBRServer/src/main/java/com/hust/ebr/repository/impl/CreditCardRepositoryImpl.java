@@ -25,6 +25,13 @@ public class CreditCardRepositoryImpl implements CreditCardRepository {
     }
 
     @Override
+    public List<CreditCard> search(CreditCard creditCard) {
+        return creditCards.stream()
+                .filter(c -> c.match(creditCard))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Optional<CreditCard> findByCardNumber(String cardNumber) {
         return creditCards.stream()
                 .filter(b -> b.getCardNumber().equals(cardNumber))
@@ -45,4 +52,5 @@ public class CreditCardRepositoryImpl implements CreditCardRepository {
                 .filter(c -> c.match(creditCard))
                 .collect(Collectors.toList());
     }
+
 }

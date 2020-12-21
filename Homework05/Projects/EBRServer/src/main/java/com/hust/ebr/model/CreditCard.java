@@ -1,23 +1,22 @@
 package com.hust.ebr.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.springframework.util.StringUtils;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
-import javax.validation.constraints.Size;
 
 @Data
 public class CreditCard {
-    @NotBlank
-    @Size(min = 9, max = 16)
-    private String cardNumber;
 
-    @NotBlank
+    private String cardNumber;
     private String cardOwner;
 
     @PositiveOrZero
     private double balance;
+
+    @JsonProperty("isRentingBike")
+    private Boolean isRentingBike;
 
     public boolean match(CreditCard creditCard) {
         if (creditCard == null)
@@ -29,10 +28,12 @@ public class CreditCard {
         if (StringUtils.hasText(creditCard.cardOwner) && !this.cardOwner.equals(creditCard.cardOwner)) {
             return false;
         }
-        if (creditCard.balance >= 0 && this.balance != creditCard.balance) {
+        if (creditCard.balance > 0 && this.balance != creditCard.balance) {
             return false;
         }
-
+        if (creditCard.isRentingBike != null && this.isRentingBike != creditCard.isRentingBike) {
+            return false;
+        }
         return true;
     }
 

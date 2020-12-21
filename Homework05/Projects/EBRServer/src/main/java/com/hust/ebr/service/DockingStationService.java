@@ -2,7 +2,6 @@ package com.hust.ebr.service;
 
 import com.hust.ebr.model.DockingStation;
 import com.hust.ebr.model.dto.response.DockingStationResDTO;
-import com.hust.ebr.repository.BikeRepository;
 import com.hust.ebr.repository.DockingStationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -61,11 +60,12 @@ public class DockingStationService {
         res.setId(dockingStation.getId());
         res.setStationAddress(dockingStation.getStationAddress());
         res.setStationName(dockingStation.getStationName());
-        res.setEmptyDockCount(dockingStation.getEmptyDockCount());
+        res.setTotalDockCount(dockingStation.getTotalDockCount());
         res.setBikeIds(currentBikeIds);
         res.setNormalBikeCount(normalBikesCount);
         res.setEBikeCount(eBikesCount);
         res.setTwinBikeCount(twinBikesCount);
+        res.setEmptyDockCount(dockingStation.getTotalDockCount() - normalBikesCount - eBikesCount - twinBikesCount);
 
         return res;
     }
