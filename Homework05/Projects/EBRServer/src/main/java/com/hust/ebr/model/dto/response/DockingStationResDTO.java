@@ -9,6 +9,7 @@ public class DockingStationResDTO {
     private String id;
     private String stationName;
     private String stationAddress;
+    private int totalDockCount;
     private int emptyDockCount;
     private int normalBikeCount;
     private int twinBikeCount;

@@ -9,7 +9,7 @@ public class DockingStation {
     private String id;
     private String stationName;
     private String stationAddress;
-    private int emptyDockCount;
+    private int totalDockCount;
     private List<String> bikeIds;
 
     public boolean match(DockingStation station) {
@@ -25,7 +25,7 @@ public class DockingStation {
         if (station.stationAddress != null && !station.stationAddress.equals("") && !this.stationAddress.contains(station.stationAddress)) {
             return false;
         }
-        if (station.emptyDockCount != 0 && this.emptyDockCount != station.emptyDockCount) {
+        if (station.totalDockCount != 0 && this.totalDockCount != station.totalDockCount) {
             return false;
         }
         return true;
