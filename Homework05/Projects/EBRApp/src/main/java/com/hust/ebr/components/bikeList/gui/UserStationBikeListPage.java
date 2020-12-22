@@ -9,9 +9,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UserDockBikeListPage extends ADataListPane<Bike> {
+public class UserStationBikeListPage extends ADataListPane<Bike> {
 
-    public UserDockBikeListPage(ADataHomePageController<Bike> bikeListController) {
+    public UserStationBikeListPage(ADataHomePageController<Bike> bikeListController) {
         this.homePageController = bikeListController;
     }
 

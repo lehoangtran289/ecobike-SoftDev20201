@@ -8,8 +8,8 @@ import java.awt.*;
 import static com.hust.ebr.utils.Constants.WINDOW_HEIGHT;
 import static com.hust.ebr.utils.Constants.WINDOW_WIDTH;
 
-public class ERBDockBikeList extends JFrame {
-    public ERBDockBikeList(ERBDockBikeListController controller, DockingStation dock) {
+public class ERBStationBikeList extends JFrame {
+    public ERBStationBikeList(ERBStationBikeListController controller, DockingStation dock) {
         JPanel rootPanel = new JPanel();
         setContentPane(rootPanel);
 

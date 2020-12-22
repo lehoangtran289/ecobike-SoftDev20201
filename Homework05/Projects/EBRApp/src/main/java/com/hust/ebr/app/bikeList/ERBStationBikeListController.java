@@ -2,17 +2,17 @@ package com.hust.ebr.app.bikeList;
 
 import com.hust.ebr.beans.Bike;
 import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
-import com.hust.ebr.components.bikeList.controller.UserDockBikeListPageController;
+import com.hust.ebr.components.bikeList.controller.UserStationBikeListPageController;
 
 import javax.swing.*;
 
-public class ERBDockBikeListController {
-    public ERBDockBikeListController() {
+public class ERBStationBikeListController {
+    public ERBStationBikeListController() {
 
     }
 
     public JPanel getBikeListPage() {
-        ADataHomePageController<Bike> controller = new UserDockBikeListPageController();
+        ADataHomePageController<Bike> controller = new UserStationBikeListPageController();
         return controller.getHomePagePane();
     }
 }

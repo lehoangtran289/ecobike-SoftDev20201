@@ -5,7 +5,7 @@ import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
 import javax.swing.*;
 import java.util.Map;
 
-public class DockBikeListSearchPane extends ADataSearchPane {
+public class StationBikeListSearchPane extends ADataSearchPane {
     private JTextField nameField;
     private JTextField licenseField;
     private JTextField manufacturerField;
@@ -58,6 +58,15 @@ public class DockBikeListSearchPane extends ADataSearchPane {
     @Override
     public Map<String, String> getQueryParams() {
         Map<String, String> res = super.getQueryParams();
+
+        String type = "";
+        if (singleBikeBox.isSelected())
+            type += "NormalBike";
+        if (twinBikeBox.isSelected())
+            type += "TwinBike";
+        if (eBikeBox.isSelected())
+            type += "eBike";
+        res.put("type", type);
 
         if (!nameField.getText().trim().equals("")) {
             res.put("name", nameField.getText().trim());

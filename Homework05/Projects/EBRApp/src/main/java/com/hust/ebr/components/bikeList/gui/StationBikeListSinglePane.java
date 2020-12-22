@@ -5,7 +5,7 @@ import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
 
 import javax.swing.*;
 
-public class DockBikeListSinglePane extends ADataSinglePane<Bike> {
+public class StationBikeListSinglePane extends ADataSinglePane<Bike> {
     private JLabel labelCode;
     private JLabel labelName;
     private JLabel labelWeight;
