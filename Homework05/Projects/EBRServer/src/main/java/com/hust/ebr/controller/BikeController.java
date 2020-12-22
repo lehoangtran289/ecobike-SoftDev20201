@@ -16,8 +16,10 @@ public class BikeController {
     private final BikeService bikeService;
 
     @GetMapping("/bikes")
-    public List<Bike> getBikes(String type, Bike bike) {
-        return StringUtils.hasText(type) ? bikeService.getBikes(type, bike) : bikeService.getBikes(bike);
+    public List<Bike> getBikes(@RequestParam(required = false) List<String> types, Bike bike) {
+        return types != null && types.size() > 0 ?
+                bikeService.getBikes(types, bike) :
+                bikeService.getBikes(bike);
     }
 
     @GetMapping("/bikes/{id}")

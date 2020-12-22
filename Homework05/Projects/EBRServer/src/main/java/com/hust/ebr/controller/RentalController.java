@@ -1,12 +1,8 @@
 package com.hust.ebr.controller;
 
-import com.hust.ebr.model.DockingStation;
 import com.hust.ebr.model.Rental;
-import com.hust.ebr.model.dto.response.DockingStationResDTO;
 import com.hust.ebr.service.RentalService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
