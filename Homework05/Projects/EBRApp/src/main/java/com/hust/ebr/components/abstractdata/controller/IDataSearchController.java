@@ -1,5 +1,7 @@
 package com.hust.ebr.components.abstractdata.controller;
 
+import java.util.Map;
+
 public interface IDataSearchController {
-    void search(String searchParams);
+    void search(Map<String, String> searchParams);
 }
