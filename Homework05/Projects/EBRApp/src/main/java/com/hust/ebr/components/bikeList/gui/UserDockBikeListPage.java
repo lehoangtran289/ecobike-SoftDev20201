@@ -1,7 +1,6 @@
 package com.hust.ebr.components.bikeList.gui;
 
 import com.hust.ebr.beans.Bike;
-import com.hust.ebr.components.abstractdata.controller.ADataDockBikeListController;
 import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
@@ -12,8 +11,8 @@ import java.awt.event.ActionListener;
 
 public class UserDockBikeListPage extends ADataListPane<Bike> {
 
-    public UserDockBikeListPage(ADataDockBikeListController<Bike> bikeListController) {
-        this. = bikeListController;
+    public UserDockBikeListPage(ADataHomePageController<Bike> bikeListController) {
+        this.homePageController = bikeListController;
     }
 
     @Override

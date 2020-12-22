@@ -24,8 +24,8 @@ public abstract class ADataSearchPane extends JPanel {
         buildControls();
 
         int row = getLastRowIndex();
-        c.gridx = 2;
-        c.gridy = row - 1;
+        c.gridx = 0;
+        c.gridy = row;
         JButton searchButton = new JButton("Search");
         add(searchButton, c);
         searchButton.addActionListener(e -> searchController.search(getQueryParams()));
