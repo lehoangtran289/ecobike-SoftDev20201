@@ -11,12 +11,20 @@ public class EBRAdmin extends JFrame {
     public EBRAdmin(EBRAdminController controller) {
         JPanel rootPanel = new JPanel();
         setContentPane(rootPanel);
-
         BorderLayout layout = new BorderLayout();
         rootPanel.setLayout(layout);
 
-        JPanel homePage = controller.getHomePage();
-        rootPanel.add(homePage);
+        JTabbedPane tabbedPane = new JTabbedPane();
+        rootPanel.add(tabbedPane, BorderLayout.CENTER);
+
+        JPanel stationPage = controller.getStationPage();
+        tabbedPane.addTab("Stations", null, stationPage, "Stations");
+
+        JPanel bikePage = controller.getBikePage();
+        tabbedPane.addTab("Bikes", null, bikePage, "Bikes");
+
+        JPanel historyPage = controller.getHistoryPage();
+        tabbedPane.addTab("Renting History", null, historyPage, "Renting History");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
