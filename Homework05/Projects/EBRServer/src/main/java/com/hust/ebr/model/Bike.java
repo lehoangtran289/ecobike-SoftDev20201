@@ -45,7 +45,7 @@ public class Bike {
         if (bike.licensePlate != null && !bike.licensePlate.equals("") && !this.licensePlate.contains(bike.licensePlate)) {
             return false;
         }
-        if (bike.manufacturingDate != null && this.manufacturingDate.equals(bike.manufacturingDate)) {
+        if (bike.manufacturingDate != null && !this.manufacturingDate.equals(bike.manufacturingDate)) {
             return false;
         }
         if (bike.producer != null && !bike.producer.equals("") && !this.producer.contains(bike.producer)) {

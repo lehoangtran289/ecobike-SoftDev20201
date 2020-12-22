@@ -1,9 +1,9 @@
-package com.hust.ebr.model;
+package com.hust.ebr.beans;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.util.StringUtils;
 
 import java.util.Date;
 
@@ -17,6 +17,7 @@ public class Rental {
     private String cardOwner;
     private String fromStationId;
     private String toStationId;
+    @JsonFormat(pattern="dd/MM/yyyy")
     private Date rentalDate;
     private long totalTime;
     private double totalMoney;
@@ -27,16 +28,16 @@ public class Rental {
         if (rental.bikeType != null && rental.bikeType != this.bikeType) {
             return false;
         }
-        if (StringUtils.hasText(rental.cardNumber) && !this.cardNumber.contains(rental.cardNumber)) {
+        if (rental.cardNumber != null && !rental.cardNumber.equals("") && !this.cardNumber.contains(rental.cardNumber)) {
             return false;
         }
-        if (StringUtils.hasText(rental.cardOwner) && !this.cardOwner.contains(rental.cardOwner)) {
+        if (rental.cardOwner != null && !rental.cardOwner.equals("") && !this.cardOwner.contains(rental.cardOwner)) {
             return false;
         }
-        if (StringUtils.hasText(rental.fromStationId) && !this.fromStationId.contains(rental.fromStationId)) {
+        if (rental.fromStationId != null && !rental.fromStationId.equals("") && !this.fromStationId.contains(rental.fromStationId)) {
             return false;
         }
-        if (StringUtils.hasText(rental.toStationId) && !this.toStationId.contains(rental.toStationId)) {
+        if (rental.toStationId != null && !rental.toStationId.equals("") && !this.toStationId.contains(rental.toStationId)) {
             return false;
         }
         if (rental.rentalDate != null && !this.rentalDate.equals(rental.rentalDate)) {

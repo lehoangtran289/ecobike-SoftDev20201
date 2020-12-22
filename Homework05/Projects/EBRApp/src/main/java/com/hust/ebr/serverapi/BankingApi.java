@@ -8,12 +8,12 @@ import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-public class RentingApi {
+public class BankingApi {
     public static final String PATH = "http://localhost:8080/api/docking-stations";
 
     private final Client client;
 
-    public RentingApi() {
+    public BankingApi() {
         client = ClientBuilder.newClient();
     }
 
