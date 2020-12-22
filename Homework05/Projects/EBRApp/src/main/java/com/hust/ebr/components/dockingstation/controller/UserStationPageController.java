@@ -5,14 +5,17 @@ import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
-import com.hust.ebr.components.dockingstation.gui.AdminDockingStationListPane;
 import com.hust.ebr.components.dockingstation.gui.DockingStationSearchPane;
 import com.hust.ebr.components.dockingstation.gui.DockingStationSinglePane;
+import com.hust.ebr.components.dockingstation.gui.UserDockingStationListPane;
 import com.hust.ebr.serverapi.DockingStationApi;
 
-public class AdminHomePageController extends ADataHomePageController<DockingStation> {
+import java.util.List;
+import java.util.Map;
 
-    public AdminHomePageController() {
+public class UserHomePageController extends ADataHomePageController<DockingStation> {
+
+    public UserHomePageController() {
         super();
     }
 
@@ -28,15 +31,11 @@ public class AdminHomePageController extends ADataHomePageController<DockingStat
 
     @Override
     public ADataListPane createListPane() {
-        return new AdminDockingStationListPane(this);
+        return new UserDockingStationListPane(this);
     }
 
     @Override
-    public DockingStation search(String searchParams) {
-        return new DockingStationApi().getStationById(searchParams);
-    }
-
-    public DockingStation updateDockingStation(DockingStation dockingStation) {
-        return new DockingStationApi().updateStation(dockingStation);
+    public List<? extends DockingStation> search(Map<String, String> searchParams) {
+        return new DockingStationApi().getStations(searchParams);
     }
 }
