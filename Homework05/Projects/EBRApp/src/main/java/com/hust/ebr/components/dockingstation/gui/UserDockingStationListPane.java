@@ -10,6 +10,7 @@ public class UserDockingStationListPane extends ADataListPane<DockingStation> {
     public UserDockingStationListPane(ADataHomePageController<DockingStation> homePageController) {
         this.homePageController = homePageController;
     }
+
     @Override
     public void decorateSinglePane(ADataSinglePane<DockingStation> singlePane) {
 
