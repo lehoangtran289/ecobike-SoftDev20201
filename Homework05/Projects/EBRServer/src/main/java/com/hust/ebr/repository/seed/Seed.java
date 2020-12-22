@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hust.ebr.model.Bike;
 import com.hust.ebr.model.CreditCard;
 import com.hust.ebr.model.DockingStation;
+import com.hust.ebr.model.Rental;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,7 @@ public class Seed {
     private List<Bike> bikes;
     private List<DockingStation> dockingStations;
     private List<CreditCard> creditCards;
+    private List<Rental> rentals;
 
     @PostConstruct
     public void init() throws JsonProcessingException {
@@ -40,6 +42,10 @@ public class Seed {
         creditCards = new ArrayList<>();
         String creditCardsJson = FileReader.read(new File(ROOT_PATH + "creditCards.json").getAbsolutePath());
         creditCards.addAll(mapper.readValue(creditCardsJson, new TypeReference<>() {}));
+
+        rentals = new ArrayList<>();
+        String rentalJson = FileReader.read(new File(ROOT_PATH + "rentalDemo.json").getAbsolutePath());
+        creditCards.addAll(mapper.readValue(rentalJson, new TypeReference<>() {}));
     }
 
     private ArrayList<Bike> generateBikeFromFile(String filePath) {
