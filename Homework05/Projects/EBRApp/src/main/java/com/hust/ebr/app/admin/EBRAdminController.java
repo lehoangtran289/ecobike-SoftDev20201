@@ -2,6 +2,7 @@ package com.hust.ebr.app.admin;
 
 import com.hust.ebr.beans.Bike;
 import com.hust.ebr.beans.DockingStation;
+import com.hust.ebr.beans.Rental;
 import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
 import com.hust.ebr.components.bike.controller.AdminBikePageController;
 import com.hust.ebr.components.dockingstation.controller.AdminStationPageController;
@@ -26,7 +27,7 @@ public class EBRAdminController {
     }
 
     public JPanel getHistoryPage() {
-        ADataHomePageController<> controller = new AdminHistoryPageController();
+        ADataHomePageController<Rental> controller = new AdminHistoryPageController();
         return controller.getHomePagePane();
     }
 }

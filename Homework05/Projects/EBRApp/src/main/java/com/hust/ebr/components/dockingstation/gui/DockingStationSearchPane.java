@@ -17,6 +17,9 @@ public class DockingStationSearchPane extends ADataSearchPane {
 
     @Override
     public void buildControls() {
+        idField = new JTextField(15);
+        nameField = new JTextField(15);
+        addressField = new JTextField(15);
         addNewField(idField, "ID");
         addNewField(nameField, "Name");
         addNewField(addressField, "Address");
@@ -24,7 +27,6 @@ public class DockingStationSearchPane extends ADataSearchPane {
 
     private void addNewField(JTextField field, String title) {
         JLabel nameLabel = new JLabel(title);
-        field = new JTextField(15);
         int row = getLastRowIndex();
         c.gridx = 0;
         c.gridy = row;
@@ -42,10 +44,10 @@ public class DockingStationSearchPane extends ADataSearchPane {
             res.put("id", idField.getText().trim());
         }
         if (!nameField.getText().trim().equals("")) {
-            res.put("name", nameField.getText().trim());
+            res.put("stationName", nameField.getText().trim());
         }
         if (!addressField.getText().trim().equals("")) {
-            res.put("address", addressField.getText().trim());
+            res.put("stationAddress", addressField.getText().trim());
         }
 
         return res;

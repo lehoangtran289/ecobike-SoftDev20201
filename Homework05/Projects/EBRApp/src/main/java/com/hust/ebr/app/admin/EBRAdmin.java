@@ -24,7 +24,7 @@ public class EBRAdmin extends JFrame {
         tabbedPane.addTab("Bikes", null, bikePage, "Bikes");
 
         JPanel historyPage = controller.getHistoryPage();
-        tabbedPane.addTab("Renting History", null, historyPage, "Histories");
+        tabbedPane.addTab("Renting History", null, historyPage, "Renting History");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

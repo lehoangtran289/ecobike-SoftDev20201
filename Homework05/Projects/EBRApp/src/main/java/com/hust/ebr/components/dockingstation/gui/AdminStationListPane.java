@@ -5,12 +5,13 @@ import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
 import com.hust.ebr.components.abstractdata.controller.IDataManageController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
+import com.hust.ebr.components.dockingstation.controller.AdminStationPageController;
 
 import javax.swing.*;
 
-public class AdminDockingStationListPane extends ADataListPane<DockingStation> {
+public class AdminStationListPane extends ADataListPane<DockingStation> {
 
-    public AdminDockingStationListPane(ADataHomePageController<DockingStation> homePageController) {
+    public AdminStationListPane(ADataHomePageController<DockingStation> homePageController) {
         this.homePageController = homePageController;
     }
     @Override
@@ -21,7 +22,7 @@ public class AdminDockingStationListPane extends ADataListPane<DockingStation> {
         IDataManageController<DockingStation> controller = new IDataManageController<DockingStation>() {
             @Override
             public void create(DockingStation dockingStation) {
-                
+
             }
 
             @Override
@@ -36,7 +37,10 @@ public class AdminDockingStationListPane extends ADataListPane<DockingStation> {
 
             @Override
             public void update(DockingStation dockingStation) {
-
+                if (homePageController instanceof AdminStationPageController) {
+                    DockingStation newDockingStation = ((AdminStationPageController) homePageController).updateDockingStation(dockingStation);
+                    singlePane.updateData(newDockingStation);
+                }
             }
         };
 

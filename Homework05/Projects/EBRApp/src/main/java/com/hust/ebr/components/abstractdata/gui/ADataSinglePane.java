@@ -18,7 +18,6 @@ public abstract class ADataSinglePane<T> extends JPanel {
     public ADataSinglePane(T t) {
         this();
         this.t = t;
-
         displayData();
     }
 
