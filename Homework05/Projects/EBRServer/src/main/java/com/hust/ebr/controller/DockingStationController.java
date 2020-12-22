@@ -28,6 +28,11 @@ public class DockingStationController {
         return StringUtils.hasText(id) ? dockingStationService.findById(id) : null;
     }
 
+    @GetMapping("/docking-stations/available")
+    public List<DockingStationResDTO> getAvailableDockingStations() {
+        return dockingStationService.getAvailableStations();
+    }
+
     @PutMapping("/docking-stations/{id}")
     public ResponseEntity<?> updateDockingStation(@PathVariable("id") String id, @RequestBody DockingStation dockingStation) {
         if (!StringUtils.hasText(dockingStation.getId()) || !dockingStation.getId().equals(id))
