@@ -45,7 +45,7 @@ public class Seed {
 
         rentals = new ArrayList<>();
         String rentalJson = FileReader.read(new File(ROOT_PATH + "rentalDemo.json").getAbsolutePath());
-        creditCards.addAll(mapper.readValue(rentalJson, new TypeReference<>() {}));
+        rentals.addAll(mapper.readValue(rentalJson, new TypeReference<>() {}));
     }
 
     private ArrayList<Bike> generateBikeFromFile(String filePath) {
