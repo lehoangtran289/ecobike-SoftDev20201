@@ -4,6 +4,8 @@ import com.hust.ebr.components.abstractdata.controller.IDataSearchController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class ADataSearchPane extends JPanel {
 
@@ -52,7 +54,11 @@ public abstract class ADataSearchPane extends JPanel {
         this.searchController = searchController;
     }
 
-    public String getQueryParams() {
-        return new String();
+    public Map<String, String> getQueryParams() {
+        return new HashMap<>();
+    }
+
+    public void fireSearchEvent() {
+        searchController.search(getQueryParams());
     }
 }
