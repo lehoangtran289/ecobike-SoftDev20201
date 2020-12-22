@@ -21,8 +21,8 @@ public class BikeService {
         return bikeRepository.search(bike);
     }
 
-    public List<Bike> getBikes(String type, Bike bike) {
-        return bikeRepository.search(type, bike);
+    public List<Bike> getBikes(List<String> types, Bike bike) {
+        return bikeRepository.search(types, bike);
     }
 
     public Bike findById(String id) {
