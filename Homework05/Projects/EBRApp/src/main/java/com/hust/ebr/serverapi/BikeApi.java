@@ -38,9 +38,10 @@ public class BikeApi {
         return result;
     }
 
-    public List<Bike> getBikes(List<String> types, Map<String, String> params) {
-        String typesRequestParam = String.join(",", types);
-        WebTarget webTarget = client.target(PATH).queryParam("types", typesRequestParam);
+    public List<Bike> getBikes(Map<String, String> params) {
+//        String typesRequestParam = String.join(",", types);
+//        WebTarget webTarget = client.target(PATH).queryParam("types", typesRequestParam);
+        WebTarget webTarget = client.target(PATH);
         if (params != null) {
             for (Map.Entry<String, String> param : params.entrySet())
                 webTarget = webTarget.queryParam(param.getKey(), param.getValue());
