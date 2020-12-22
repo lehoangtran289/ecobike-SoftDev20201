@@ -38,13 +38,15 @@ public class BikeApi {
         return result;
     }
 
-    public List<Bike> getBikes(String type, Map<String, String> params) {
-        WebTarget webTarget = client.target(PATH).queryParam("type", type);
+    public List<Bike> getBikes(List<String> types, Map<String, String> params) {
+        String typesRequestParam = String.join(",", types);
+        WebTarget webTarget = client.target(PATH).queryParam("types", typesRequestParam);
         if (params != null) {
             for (Map.Entry<String, String> param : params.entrySet())
                 webTarget = webTarget.queryParam(param.getKey(), param.getValue());
         }
         Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
+        System.out.println(response);
         List<Bike> result = response.readEntity(new GenericType<List<Bike>>() {
         });
         System.out.println(result);
