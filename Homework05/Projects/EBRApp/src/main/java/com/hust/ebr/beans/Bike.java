@@ -27,7 +27,7 @@ public class Bike {
     private Date manufacturingDate;
     private String producer;
     private float cost;
-    private Status status = Status.Available;
+    private Status status;
     private String dockingStationId;
 
     public enum Status {Available, Renting}
