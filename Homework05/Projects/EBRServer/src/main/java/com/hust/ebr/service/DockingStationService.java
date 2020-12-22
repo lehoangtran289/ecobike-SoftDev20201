@@ -28,6 +28,18 @@ public class DockingStationService {
         return dockingStationRepository.findById(id).map(this::convertToDTO).orElse(null);
     }
 
+    /**
+     * get all stations which are available to return bike (empty docks > 0)
+     * @return List<DockingStationResDTO>
+     */
+    public List<DockingStationResDTO> getAvailableStations() {
+        return dockingStationRepository.search(null)
+                .stream()
+                .map(this::convertToDTO)
+                .filter(station -> station.getEmptyDockCount() > 0)
+                .collect(Collectors.toList());
+    }
+
     public DockingStationResDTO update(DockingStation dockingStation) {
         return convertToDTO(dockingStationRepository.update(dockingStation));
     }

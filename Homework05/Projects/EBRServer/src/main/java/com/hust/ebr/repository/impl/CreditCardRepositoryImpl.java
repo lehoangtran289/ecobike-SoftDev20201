@@ -1,6 +1,5 @@
 package com.hust.ebr.repository.impl;
 
-import com.hust.ebr.model.Bike;
 import com.hust.ebr.model.CreditCard;
 import com.hust.ebr.repository.CreditCardRepository;
 import com.hust.ebr.repository.seed.Seed;
