@@ -28,7 +28,10 @@ public abstract class ADataSearchPane extends JPanel {
         c.gridy = row;
         JButton searchButton = new JButton("Search");
         add(searchButton, c);
-        searchButton.addActionListener(e -> searchController.search(getQueryParams()));
+        searchButton.addActionListener(e -> {
+            System.out.println(getQueryParams());
+            searchController.search(getQueryParams());
+        });
 
         // Empty label for resizing
         c.weightx = 1;

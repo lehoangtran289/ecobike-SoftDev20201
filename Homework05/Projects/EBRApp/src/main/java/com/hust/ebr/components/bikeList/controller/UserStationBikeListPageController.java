@@ -1,6 +1,7 @@
 package com.hust.ebr.components.bikeList.controller;
 
 import com.hust.ebr.beans.Bike;
+import com.hust.ebr.beans.DockingStation;
 import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
@@ -14,6 +15,13 @@ import java.util.List;
 import java.util.Map;
 
 public class UserStationBikeListPageController extends ADataHomePageController<Bike> {
+    private String stationID;
+
+    public UserStationBikeListPageController(String stationID, List<Bike> list) {
+        super(list);
+        this.stationID = stationID;
+    }
+
     @Override
     public ADataSearchPane createSearchPane() {
         return new StationBikeListSearchPane();
@@ -21,6 +29,7 @@ public class UserStationBikeListPageController extends ADataHomePageController<B
 
     @Override
     public List<? extends Bike> search(Map<String, String> searchParams) {
+        searchParams.put("dockingStationId", this.stationID);
         return new BikeApi().getBikes(searchParams);
     }
 

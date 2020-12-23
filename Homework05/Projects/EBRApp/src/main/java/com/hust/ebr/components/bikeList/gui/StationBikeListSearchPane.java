@@ -3,6 +3,8 @@ package com.hust.ebr.components.bikeList.gui;
 import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class StationBikeListSearchPane extends ADataSearchPane {
@@ -13,6 +15,10 @@ public class StationBikeListSearchPane extends ADataSearchPane {
     private JCheckBox singleBikeBox;
     private JCheckBox twinBikeBox;
     private JCheckBox eBikeBox;
+
+    public StationBikeListSearchPane() {
+        super();
+    }
 
     @Override
     public void buildControls() {
@@ -58,15 +64,17 @@ public class StationBikeListSearchPane extends ADataSearchPane {
     @Override
     public Map<String, String> getQueryParams() {
         Map<String, String> res = super.getQueryParams();
+        List<String> types = new ArrayList<String>();
 
-        String type = "";
         if (singleBikeBox.isSelected())
-            type += "NormalBike";
+            types.add("normalBike");
         if (twinBikeBox.isSelected())
-            type += "TwinBike";
+            types.add("twinBike");
         if (eBikeBox.isSelected())
-            type += "eBike";
-        res.put("type", type);
+            types.add("eBike");
+
+        String typeQueryParam = String.join(",", types);
+        res.put("types", typeQueryParam);
 
         if (!nameField.getText().trim().equals("")) {
             res.put("name", nameField.getText().trim());
@@ -78,9 +86,9 @@ public class StationBikeListSearchPane extends ADataSearchPane {
             res.put("license", licenseField.getText().trim());
         }
         if (!codeField.getText().trim().equals("")) {
-            res.put("bikeCode", codeField.getText().trim());
+            res.put("id", codeField.getText().trim());
         }
-
+        System.out.println(res);
         return res;
     }
 }
