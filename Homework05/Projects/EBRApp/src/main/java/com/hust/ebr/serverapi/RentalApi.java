@@ -1,6 +1,5 @@
 package com.hust.ebr.serverapi;
 
-import com.hust.ebr.beans.DockingStation;
 import com.hust.ebr.beans.Rental;
 
 import javax.ws.rs.client.*;

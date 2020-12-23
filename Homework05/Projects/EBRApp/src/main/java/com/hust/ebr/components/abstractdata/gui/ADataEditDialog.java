@@ -4,8 +4,6 @@ import com.hust.ebr.components.abstractdata.controller.IDataManageController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public abstract class ADataEditDialog<T> extends JDialog {
 

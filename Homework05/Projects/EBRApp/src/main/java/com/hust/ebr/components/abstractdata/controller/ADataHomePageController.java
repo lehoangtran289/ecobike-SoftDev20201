@@ -1,5 +1,7 @@
 package com.hust.ebr.components.abstractdata.controller;
 
+import com.hust.ebr.beans.Bike;
+import com.hust.ebr.beans.DockingStation;
 import com.hust.ebr.components.abstractdata.gui.ADataHomePagePane;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
@@ -22,6 +24,19 @@ public abstract class ADataHomePageController<T> {
         });
 
         searchPane.fireSearchEvent();
+
+        homePagePane = new ADataHomePagePane<T>(searchPane, listPane);
+    }
+
+    public ADataHomePageController(List<T> list) {
+        ADataSearchPane searchPane = createSearchPane();
+        ADataListPane<T> listPane = createListPane();
+        listPane.updateData(list);
+
+        searchPane.setSearchController(searchParams -> {
+            List<? extends T> lst = ADataHomePageController.this.search(searchParams);
+            listPane.updateData(lst);
+        });
 
         homePagePane = new ADataHomePagePane<T>(searchPane, listPane);
     }
