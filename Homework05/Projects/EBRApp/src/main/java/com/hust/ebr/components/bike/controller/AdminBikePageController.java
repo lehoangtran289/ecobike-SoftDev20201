@@ -1,7 +1,7 @@
 package com.hust.ebr.components.bike.controller;
 
 import com.hust.ebr.beans.Bike;
-import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
+import com.hust.ebr.components.abstractdata.controller.ADataPageController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
@@ -13,7 +13,7 @@ import com.hust.ebr.serverapi.BikeApi;
 import java.util.List;
 import java.util.Map;
 
-public class AdminBikePageController extends ADataHomePageController<Bike> {
+public class AdminBikePageController extends ADataPageController<Bike> {
 
     public AdminBikePageController() {
         super();
