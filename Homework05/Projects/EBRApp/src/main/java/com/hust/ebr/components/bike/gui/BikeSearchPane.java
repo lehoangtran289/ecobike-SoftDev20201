@@ -22,7 +22,7 @@ public class BikeSearchPane extends ADataSearchPane {
     @Override
     public void buildControls() {
         initItem();
-        addNewField(idField, "ID");
+        addNewField(idField, "Bike ID");
         addNewField(nameField,"Name");
         addNewField(licensePlateField,"License plate");
         addNewField(producerField,"Producer");
@@ -131,7 +131,7 @@ public class BikeSearchPane extends ADataSearchPane {
 
         if (!bikeType.isEmpty()) {
             bikeType = bikeType.replaceAll(",$", "");
-            res.put("type", bikeType);
+            res.put("types", bikeType);
         }
 
         return res;
