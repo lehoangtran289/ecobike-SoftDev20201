@@ -1,15 +1,14 @@
-package com.hust.ebr.app.bikeListScreen;
+package com.hust.ebr.components.dockingstation.stationBikeList.controller;
 
 import com.hust.ebr.beans.Bike;
-import com.hust.ebr.beans.DockingStation;
 import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
-import com.hust.ebr.components.bikeList.controller.UserStationBikeListPageController;
+import com.hust.ebr.components.dockingstation.stationBikeList.controller.UserStationBikeListPageController;
 
 import javax.swing.*;
 import java.util.List;
 
-public class ERBStationBikeListController {
-    public ERBStationBikeListController() {
+public class EBRStationBikeListController {
+    public EBRStationBikeListController() {
 
     }
 

@@ -1,7 +1,7 @@
 package com.hust.ebr.components.dockingstation.gui;
 
-import com.hust.ebr.app.bikeListScreen.ERBStationBikeList;
-import com.hust.ebr.app.bikeListScreen.ERBStationBikeListController;
+import com.hust.ebr.components.dockingstation.stationBikeList.gui.EBRStationBikeList;
+import com.hust.ebr.components.dockingstation.stationBikeList.controller.EBRStationBikeListController;
 import com.hust.ebr.beans.DockingStation;
 import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
@@ -25,7 +25,7 @@ public class UserStationListPane extends ADataListPane<DockingStation> {
         viewDockButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ERBStationBikeList(new ERBStationBikeListController(), singlePane.getData());
+                new EBRStationBikeList(new EBRStationBikeListController(), singlePane.getData());
             }
         });
     }

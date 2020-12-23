@@ -1,4 +1,4 @@
-package com.hust.ebr.components.bikeList.gui;
+package com.hust.ebr.components.dockingstation.stationBikeList.gui;
 
 import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
 
@@ -11,7 +11,7 @@ public class StationBikeListSearchPane extends ADataSearchPane {
     private JTextField nameField;
     private JTextField licenseField;
     private JTextField manufacturerField;
-    private JTextField codeField;
+    private JTextField bikeIdField;
     private JCheckBox singleBikeBox;
     private JCheckBox twinBikeBox;
     private JCheckBox eBikeBox;
@@ -25,19 +25,16 @@ public class StationBikeListSearchPane extends ADataSearchPane {
         nameField = new JTextField(15);
         licenseField = new JTextField(15);
         manufacturerField = new JTextField(15);
-        codeField = new JTextField(15);
+        bikeIdField = new JTextField(15);
         addNewField(nameField, "Name");
         addNewField(licenseField, "License");
         addNewField(manufacturerField, "Manufacturer");
-        addNewField(codeField, "Bike Code");
+        addNewField(bikeIdField, "Bike Id");
 
         int row = getLastRowIndex();
         singleBikeBox = new JCheckBox("Single Bike");
-        singleBikeBox.setBounds(20, 20, 50, 50);
         twinBikeBox = new JCheckBox("Twin Bike");
-        twinBikeBox.setBounds(2, row, 50, 50);
         eBikeBox = new JCheckBox("Electrical Bike");
-        eBikeBox.setBounds(3, row, 50, 50);
         c.gridx = 0;
         c.gridy = row;
         JLabel typeLabel = new JLabel("Type");
@@ -85,8 +82,8 @@ public class StationBikeListSearchPane extends ADataSearchPane {
         if (!licenseField.getText().trim().equals("")) {
             res.put("license", licenseField.getText().trim());
         }
-        if (!codeField.getText().trim().equals("")) {
-            res.put("id", codeField.getText().trim());
+        if (!bikeIdField.getText().trim().equals("")) {
+            res.put("id", bikeIdField.getText().trim());
         }
         System.out.println(res);
         return res;

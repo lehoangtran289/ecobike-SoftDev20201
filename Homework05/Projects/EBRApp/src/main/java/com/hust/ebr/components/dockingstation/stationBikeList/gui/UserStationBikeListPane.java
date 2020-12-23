@@ -1,4 +1,4 @@
-package com.hust.ebr.components.bikeList.gui;
+package com.hust.ebr.components.dockingstation.stationBikeList.gui;
 
 import com.hust.ebr.beans.Bike;
 import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
@@ -9,18 +9,18 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UserStationBikeListPage extends ADataListPane<Bike> {
+public class UserStationBikeListPane extends ADataListPane<Bike> {
 
-    public UserStationBikeListPage(ADataHomePageController<Bike> bikeListController) {
+    public UserStationBikeListPane(ADataHomePageController<Bike> bikeListController) {
         this.homePageController = bikeListController;
     }
 
     @Override
     public void decorateSinglePane(ADataSinglePane<Bike> singlePane) {
-        JButton viewBikeButton = new JButton("View Details");
-        singlePane.addDataHandlingComponent(viewBikeButton);
+        JButton rentButton = new JButton("Rent");
+        singlePane.addDataHandlingComponent(rentButton);
 
-        viewBikeButton.addActionListener(new ActionListener() {
+        rentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
