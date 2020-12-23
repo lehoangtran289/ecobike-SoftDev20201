@@ -6,5 +6,5 @@ import com.hust.ebr.repository.generic.ICrudRepository;
 import java.util.List;
 
 public interface BikeRepository extends ICrudRepository<Bike, String> {
-    List<Bike> search(String type, Bike bike);
+    List<Bike> search(List<String> type, Bike bike);
 }

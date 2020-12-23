@@ -5,12 +5,10 @@ import com.hust.ebr.model.DockingStation;
 import com.hust.ebr.repository.BikeRepository;
 import com.hust.ebr.repository.DockingStationRepository;
 import com.hust.ebr.repository.seed.Seed;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;

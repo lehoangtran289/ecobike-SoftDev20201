@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,28 +37,36 @@ public class BikeRepositoryImpl implements BikeRepository {
     }
 
     @Override
-    public List<Bike> search(String type, Bike bike) {
-        switch (type) {
-            case "normalBike":
-                return bikes.stream()
-                        .filter(b -> b instanceof NormalBike)
-                        .filter(b -> b.match(bike))
-                        .collect(Collectors.toList());
-            case "twinBike":
-                return bikes.stream()
-                        .filter(b -> b instanceof TwinBike)
-                        .filter(b -> b.match(bike))
-                        .collect(Collectors.toList());
-            case "eBike":
-                return bikes.stream()
-                        .filter(b -> b instanceof EBike)
-                        .filter(b -> b.match(bike))
-                        .collect(Collectors.toList());
-            default:
-                return bikes.stream()
-                        .filter(b -> b.match(bike))
-                        .collect(Collectors.toList());
+    public List<Bike> search(List<String> types, Bike bike) {
+        List<Bike> result = new ArrayList<>();
+        for (String type : types) {
+            switch (type) {
+                case "normalBike":
+                    result.addAll(bikes.stream()
+                            .filter(b -> b instanceof NormalBike)
+                            .filter(b -> b.match(bike))
+                            .collect(Collectors.toList()));
+                    break;
+                case "twinBike":
+                    result.addAll(bikes.stream()
+                            .filter(b -> b instanceof TwinBike)
+                            .filter(b -> b.match(bike))
+                            .collect(Collectors.toList()));
+                    break;
+                case "eBike":
+                    result.addAll(bikes.stream()
+                            .filter(b -> b instanceof EBike)
+                            .filter(b -> b.match(bike))
+                            .collect(Collectors.toList()));
+                    break;
+                default:
+                    result.addAll(bikes.stream()
+                            .filter(b -> b.match(bike))
+                            .collect(Collectors.toList()));
+                    break;
+            }
         }
+        return result;
     }
 
     @Override
