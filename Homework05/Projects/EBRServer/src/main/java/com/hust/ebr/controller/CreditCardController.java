@@ -28,7 +28,7 @@ public class CreditCardController {
         return creditCardService.getCreditCards(creditCard);
     }
 
-    @PostMapping("/{cardNumber}")
+    @PostMapping("/credit-cards/{cardNumber}")
     public CreditCard creditCardAction(@PathVariable("cardNumber") String cardNumber,
                                        @RequestBody CreditCardReqDTO req) {
         if (StringUtils.hasText(cardNumber) && Objects.nonNull(req)) {

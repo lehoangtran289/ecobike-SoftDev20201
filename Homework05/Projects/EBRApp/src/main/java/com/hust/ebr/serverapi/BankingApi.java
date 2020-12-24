@@ -3,13 +3,14 @@ package com.hust.ebr.serverapi;
 import com.hust.ebr.beans.CreditCard;
 import com.hust.ebr.beans.DTO.CreditCardReqDTO;
 import com.hust.ebr.beans.DTO.RequestType;
+import sun.rmi.runtime.Log;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 public class BankingApi {
-    public static final String PATH = "http://localhost:8080/api/docking-stations";
+    public static final String PATH = "http://localhost:8080/api/credit-cards";
 
     private final Client client;
 
@@ -23,6 +24,7 @@ public class BankingApi {
         Response response = invocationBuilder.get();
         CreditCard result = response.readEntity(CreditCard.class);
         System.out.println(result);
+        System.out.println(response);
         return result;
     }
 
@@ -41,6 +43,7 @@ public class BankingApi {
         Response response = invocationBuilder.post(Entity.entity(reqDTO, MediaType.APPLICATION_JSON));
         CreditCard result = response.readEntity(CreditCard.class);
         System.out.println(result);
+        System.out.println(response);
         return result;
     }
 }
