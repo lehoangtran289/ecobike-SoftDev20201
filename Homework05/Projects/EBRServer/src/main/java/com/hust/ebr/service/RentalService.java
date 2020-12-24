@@ -17,6 +17,10 @@ public class RentalService {
         return rentalRepository.search(rental);
     }
 
+    public List<Rental> getRentals(List<String> types, Rental rental) {
+        return rentalRepository.search(types, rental);
+    }
+
     public List<Rental> getRentalsByCardNumber(String cardNumber) {
         return rentalRepository.findByCardNumber(cardNumber);
     }
