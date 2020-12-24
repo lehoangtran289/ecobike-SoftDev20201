@@ -32,8 +32,8 @@ public abstract class ADataCreditCardDialog<T> extends JDialog {
         getContentPane().add(confirmButton, c);
 
         pack();
-        setResizable(false);
         setLocationRelativeTo(null);
+        setResizable(false);
         setVisible(true);
     }
 

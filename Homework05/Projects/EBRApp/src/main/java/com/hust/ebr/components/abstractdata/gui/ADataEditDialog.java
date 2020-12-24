@@ -36,6 +36,7 @@ public abstract class ADataEditDialog<T> extends JDialog {
         getContentPane().add(saveButton, c);
 
         pack();
+        setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
     }

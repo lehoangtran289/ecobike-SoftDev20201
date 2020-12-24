@@ -19,9 +19,9 @@ public class EBRUser extends JFrame {
         rootPanel.add(homePage);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setLocationRelativeTo(null);
         setTitle("Eco Bike Rental for USER");
-        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setVisible(true);
     }
 }
