@@ -66,6 +66,8 @@ public class BikeEditDialog extends ADataEditDialog<Bike> {
                 .map(DockingStation::getId)
                 .collect(Collectors.toList());
         stationIds.forEach(id -> dockingStationIdComboBox.addItem(id));
+//        dockingStationIdComboBox.addItem("none");
+//        dockingStationIdComboBox.setSelectedItem(t.getDockingStationId() == null ? "none" : t.getDockingStationId());
         dockingStationIdComboBox.setSelectedItem(t.getDockingStationId());
 
         addNewField(nameField, "Name ");
@@ -151,7 +153,11 @@ public class BikeEditDialog extends ADataEditDialog<Bike> {
             return null;
         }
 
-        t.setDockingStationId(String.valueOf(dockingStationIdComboBox.getSelectedItem()));
+        if (String.valueOf(dockingStationIdComboBox.getSelectedItem()).equals("none")) {
+            t.setDockingStationId(null);
+        } else {
+            t.setDockingStationId(String.valueOf(dockingStationIdComboBox.getSelectedItem()));
+        }
 
         return t;
     }
