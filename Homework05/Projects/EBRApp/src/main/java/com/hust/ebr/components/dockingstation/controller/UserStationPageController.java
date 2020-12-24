@@ -1,7 +1,7 @@
 package com.hust.ebr.components.dockingstation.controller;
 
 import com.hust.ebr.beans.DockingStation;
-import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
+import com.hust.ebr.components.abstractdata.controller.ADataPageController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
@@ -13,7 +13,7 @@ import com.hust.ebr.serverapi.DockingStationApi;
 import java.util.List;
 import java.util.Map;
 
-public class UserStationPageController extends ADataHomePageController<DockingStation> {
+public class UserStationPageController extends ADataPageController<DockingStation> {
     @Override
     public ADataSearchPane createSearchPane() {
         return new DockingStationSearchPane();

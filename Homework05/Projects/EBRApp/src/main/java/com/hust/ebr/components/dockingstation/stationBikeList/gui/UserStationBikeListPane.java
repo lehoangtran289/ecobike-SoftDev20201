@@ -1,7 +1,7 @@
 package com.hust.ebr.components.dockingstation.stationBikeList.gui;
 
 import com.hust.ebr.beans.Bike;
-import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
+import com.hust.ebr.components.abstractdata.controller.ADataPageController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
 
@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class UserStationBikeListPane extends ADataListPane<Bike> {
 
-    public UserStationBikeListPane(ADataHomePageController<Bike> bikeListController) {
+    public UserStationBikeListPane(ADataPageController<Bike> bikeListController) {
         this.homePageController = bikeListController;
     }
 

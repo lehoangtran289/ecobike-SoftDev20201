@@ -1,8 +1,6 @@
 package com.hust.ebr.components.abstractdata.controller;
 
-import com.hust.ebr.beans.Bike;
-import com.hust.ebr.beans.DockingStation;
-import com.hust.ebr.components.abstractdata.gui.ADataHomePagePane;
+import com.hust.ebr.components.abstractdata.gui.ADataPagePane;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
@@ -11,38 +9,38 @@ import javax.swing.*;
 import java.util.List;
 import java.util.Map;
 
-public abstract class ADataHomePageController<T> {
-    private final ADataHomePagePane<T> homePagePane;
+public abstract class ADataPageController<T> {
+    private final ADataPagePane<T> dataPagePane;
 
-    public ADataHomePageController() {
+    public ADataPageController() {
         ADataSearchPane searchPane = createSearchPane();
         ADataListPane<T> listPane = createListPane();
 
         searchPane.setSearchController(searchParams -> {
-            List<? extends T> list = ADataHomePageController.this.search(searchParams);
+            List<? extends T> list = ADataPageController.this.search(searchParams);
             listPane.updateData(list);
         });
 
         searchPane.fireSearchEvent();
 
-        homePagePane = new ADataHomePagePane<T>(searchPane, listPane);
+        dataPagePane = new ADataPagePane<T>(searchPane, listPane);
     }
 
-    public ADataHomePageController(List<T> list) {
+    public ADataPageController(List<T> list) {
         ADataSearchPane searchPane = createSearchPane();
         ADataListPane<T> listPane = createListPane();
         listPane.updateData(list);
 
         searchPane.setSearchController(searchParams -> {
-            List<? extends T> lst = ADataHomePageController.this.search(searchParams);
+            List<? extends T> lst = ADataPageController.this.search(searchParams);
             listPane.updateData(lst);
         });
 
-        homePagePane = new ADataHomePagePane<T>(searchPane, listPane);
+        dataPagePane = new ADataPagePane<T>(searchPane, listPane);
     }
 
-    public JPanel getHomePagePane() {
-        return homePagePane;
+    public JPanel getDataPagePane() {
+        return dataPagePane;
     }
 
     public abstract ADataSearchPane createSearchPane();

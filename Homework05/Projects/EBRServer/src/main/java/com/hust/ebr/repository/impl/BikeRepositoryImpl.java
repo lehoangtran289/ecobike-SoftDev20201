@@ -80,9 +80,11 @@ public class BikeRepositoryImpl implements BikeRepository {
     public Bike update(Bike bike) {
         bikes = bikes.stream()
                 .map(b -> {
-                    if (b.equals(bike) && !b.getDockingStationId().equals(bike.getDockingStationId())) {
-                        updateStationAfterAddingBike(bike);
-                        updateStationAfterRemovingBike(b);
+                    if (b.equals(bike)) {
+                        if (!b.getDockingStationId().equals(bike.getDockingStationId())) {
+                            updateStationAfterAddingBike(bike);
+                            updateStationAfterRemovingBike(b);
+                        }
                         return bike;
                     }
                     return b;

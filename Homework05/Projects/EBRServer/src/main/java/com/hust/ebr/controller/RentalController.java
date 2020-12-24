@@ -15,8 +15,10 @@ public class RentalController {
     private final RentalService rentalService;
 
     @GetMapping("/rentals")
-    public List<Rental> getRentals(Rental rental) {
-        return rentalService.getRentals(rental);
+    public List<Rental> getRentals(@RequestParam(required = false) List<String> types, Rental rental) {
+        return types != null && types.size() > 0 ?
+                rentalService.getRentals(types, rental) :
+                rentalService.getRentals(rental);
     }
 
     @GetMapping("/rentals/{cardNumber}")
