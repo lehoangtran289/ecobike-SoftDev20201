@@ -54,7 +54,7 @@ public class DockingStationApiTest {
         DockingStation station = stationList.get(0);
         String newAddr = "2 Dai Co Viet";
         station.setStationAddress(newAddr);
-        dsAPI.updateStation(null);
+        dsAPI.updateStation(station);
         assertEquals("Error in updateStation API", station.getStationAddress(), newAddr);
     }
 
