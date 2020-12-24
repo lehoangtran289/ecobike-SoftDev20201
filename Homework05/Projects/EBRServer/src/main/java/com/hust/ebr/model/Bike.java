@@ -54,8 +54,9 @@ public class Bike {
         if (bike.cost != 0 && this.cost != bike.cost) {
             return false;
         }
-        if (StringUtils.hasText(bike.dockingStationId) && !this.dockingStationId.equals(bike.dockingStationId)) {
-            return false;
+        if (StringUtils.hasText(bike.dockingStationId)) {
+            if (!StringUtils.hasText(this.dockingStationId) || StringUtils.hasText(this.dockingStationId) && !this.dockingStationId.contains(bike.dockingStationId))
+                return false;
         }
         if (bike.status != null && this.status != bike.status) {
             return false;
