@@ -2,9 +2,9 @@ package com.hust.ebr.components.abstractdata.gui;
 
 import javax.swing.*;
 
-public class ADataHomePagePane<T> extends JPanel {
+public class ADataPagePane<T> extends JPanel {
 
-    public ADataHomePagePane(ADataSearchPane searchPane, ADataListPane<T> listPane) {
+    public ADataPagePane(ADataSearchPane searchPane, ADataListPane<T> listPane) {
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 

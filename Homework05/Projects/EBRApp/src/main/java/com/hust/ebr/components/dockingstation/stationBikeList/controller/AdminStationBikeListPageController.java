@@ -1,22 +1,24 @@
-package com.hust.ebr.components.bike.controller;
+package com.hust.ebr.components.dockingstation.stationBikeList.controller;
 
 import com.hust.ebr.beans.Bike;
 import com.hust.ebr.components.abstractdata.controller.ADataPageController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
-import com.hust.ebr.components.bike.gui.AdminBikeListPane;
 import com.hust.ebr.components.bike.gui.BikeSearchPane;
 import com.hust.ebr.components.bike.gui.BikeSinglePane;
+import com.hust.ebr.components.dockingstation.stationBikeList.gui.AdminStationBikeListPane;
 import com.hust.ebr.serverapi.BikeApi;
 
 import java.util.List;
 import java.util.Map;
 
-public class AdminBikePageController extends ADataPageController<Bike> {
+public class AdminStationBikeListPageController extends ADataPageController<Bike> {
+    private final String stationID;
 
-    public AdminBikePageController() {
-        super();
+    public AdminStationBikeListPageController(String stationID, List<Bike> list) {
+        super(list);
+        this.stationID = stationID;
     }
 
     @Override
@@ -26,6 +28,7 @@ public class AdminBikePageController extends ADataPageController<Bike> {
 
     @Override
     public List<? extends Bike> search(Map<String, String> searchParams) {
+        searchParams.put("dockingStationId", this.stationID);
         return new BikeApi().getBikes(searchParams);
     }
 
@@ -36,10 +39,6 @@ public class AdminBikePageController extends ADataPageController<Bike> {
 
     @Override
     public ADataListPane<Bike> createListPane() {
-        return new AdminBikeListPane(this);
-    }
-
-    public Bike updateBike(Bike bike) {
-        return new BikeApi().updateBike(bike);
+        return new AdminStationBikeListPane(this);
     }
 }

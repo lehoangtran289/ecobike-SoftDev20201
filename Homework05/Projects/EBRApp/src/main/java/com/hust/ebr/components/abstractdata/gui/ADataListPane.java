@@ -1,6 +1,6 @@
 package com.hust.ebr.components.abstractdata.gui;
 
-import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
+import com.hust.ebr.components.abstractdata.controller.ADataPageController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +11,7 @@ public abstract class ADataListPane<T> extends JScrollPane {
     private LayoutManager layout;
     protected JPanel pane;
 
-    protected ADataHomePageController<T> homePageController;
+    protected ADataPageController<T> homePageController;
 
     public ADataListPane() {
         pane = new JPanel();
