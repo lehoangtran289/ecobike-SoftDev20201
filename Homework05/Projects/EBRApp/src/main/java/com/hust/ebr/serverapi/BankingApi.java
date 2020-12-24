@@ -3,7 +3,7 @@ package com.hust.ebr.serverapi;
 import com.hust.ebr.beans.CreditCard;
 import com.hust.ebr.beans.DTO.CreditCardReqDTO;
 import com.hust.ebr.beans.DTO.RequestType;
-import sun.rmi.runtime.Log;
+//import sun.rmi.runtime.Log;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
