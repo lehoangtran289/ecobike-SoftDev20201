@@ -1,7 +1,7 @@
 package com.hust.ebr.components.bike.gui;
 
 import com.hust.ebr.beans.Bike;
-import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
+import com.hust.ebr.components.abstractdata.controller.ADataPageController;
 import com.hust.ebr.components.abstractdata.controller.IDataManageController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
@@ -11,7 +11,7 @@ import javax.swing.*;
 
 public class AdminBikeListPane extends ADataListPane<Bike> {
 
-    public AdminBikeListPane(ADataHomePageController<Bike> controller) {
+    public AdminBikeListPane(ADataPageController<Bike> controller) {
         this.homePageController = controller;
     }
 

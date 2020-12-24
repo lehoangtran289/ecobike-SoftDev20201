@@ -9,6 +9,7 @@ import com.hust.ebr.repository.DockingStationRepository;
 import com.hust.ebr.repository.seed.Seed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -80,9 +81,13 @@ public class BikeRepositoryImpl implements BikeRepository {
     public Bike update(Bike bike) {
         bikes = bikes.stream()
                 .map(b -> {
-                    if (b.equals(bike) && !b.getDockingStationId().equals(bike.getDockingStationId())) {
-                        updateStationAfterAddingBike(bike);
-                        updateStationAfterRemovingBike(b);
+                    if (b.equals(bike)) {
+                        if (StringUtils.hasText(b.getDockingStationId()) &&
+                                StringUtils.hasText(bike.getDockingStationId()) &&
+                                !b.getDockingStationId().equals(bike.getDockingStationId())) {
+                            updateStationAfterAddingBike(bike);
+                            updateStationAfterRemovingBike(b);
+                        }
                         return bike;
                     }
                     return b;

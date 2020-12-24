@@ -1,20 +1,20 @@
 package com.hust.ebr.components.dockingstation.stationBikeList.controller;
 
 import com.hust.ebr.beans.Bike;
-import com.hust.ebr.components.abstractdata.controller.ADataHomePageController;
+import com.hust.ebr.components.abstractdata.controller.ADataPageController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
-import com.hust.ebr.components.dockingstation.stationBikeList.gui.StationBikeListSearchPane;
-import com.hust.ebr.components.dockingstation.stationBikeList.gui.StationBikeListSinglePane;
+import com.hust.ebr.components.bike.gui.BikeSearchPane;
+import com.hust.ebr.components.bike.gui.BikeSinglePane;
 import com.hust.ebr.components.dockingstation.stationBikeList.gui.UserStationBikeListPane;
 import com.hust.ebr.serverapi.BikeApi;
 
 import java.util.List;
 import java.util.Map;
 
-public class UserStationBikeListPageController extends ADataHomePageController<Bike> {
-    private String stationID;
+public class UserStationBikeListPageController extends ADataPageController<Bike> {
+    private final String stationID;
 
     public UserStationBikeListPageController(String stationID, List<Bike> list) {
         super(list);
@@ -23,7 +23,7 @@ public class UserStationBikeListPageController extends ADataHomePageController<B
 
     @Override
     public ADataSearchPane createSearchPane() {
-        return new StationBikeListSearchPane();
+        return new BikeSearchPane();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class UserStationBikeListPageController extends ADataHomePageController<B
 
     @Override
     public ADataSinglePane<Bike> createSinglePane() {
-        return new StationBikeListSinglePane();
+        return new BikeSinglePane();
     }
 
     @Override
