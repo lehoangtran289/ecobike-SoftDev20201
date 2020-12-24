@@ -6,6 +6,7 @@ import javax.ws.rs.client.*;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,9 +47,5 @@ public class RentalApi {
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.post(Entity.entity(rental, MediaType.APPLICATION_JSON));
         return response.getStatus() == 200 ? response.readEntity(Rental.class) : null;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new RentalApi().getRentals(null));
     }
 }
