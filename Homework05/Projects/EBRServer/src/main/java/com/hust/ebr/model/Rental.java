@@ -27,6 +27,9 @@ public class Rental {
         if (rental.bikeType != null && rental.bikeType != this.bikeType) {
             return false;
         }
+        if (StringUtils.hasText(rental.bikeId) && !this.bikeId.contains(rental.bikeId)) {
+            return false;
+        }
         if (StringUtils.hasText(rental.cardNumber) && !this.cardNumber.contains(rental.cardNumber)) {
             return false;
         }
