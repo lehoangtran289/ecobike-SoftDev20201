@@ -33,14 +33,18 @@ public class RentBikeCreditCardDialog extends ADataCreditCardDialog<Bike> {
                         "CREDIT CARD NOT AVAILABLE",
                         JOptionPane.PLAIN_MESSAGE);
             } else {
-                creditCard = bankingApi.requestCreditCard(RequestType.Deduct, cardNumber, getBikeDeposit());
-                if (creditCard == null) {
+                if (creditCard.getBalance() < getBikeDeposit()) {
                     JOptionPane.showMessageDialog(null,
                             "Your credit card does not have enough money to rent bike!",
                             "TRANSACTION FAILED",
                             JOptionPane.PLAIN_MESSAGE);
                 } else {
                     this.dispose();
+                    creditCard = bankingApi.requestCreditCard(RequestType.Deduct, cardNumber, getBikeDeposit());
+                    creditCard.setIsRentingBike(true);
+                    System.out.println("tren" + creditCard.getBalance());
+                    creditCard = bankingApi.updateCreditCard(creditCard);
+                    System.out.println("duoi" + creditCard.getBalance());
                     t.setStatus(Bike.Status.Renting);
                     t = new BikeApi().updateBike(t);
                     new EBRUserRentBike(new EBRUserRentBikeController(), t, creditCard);

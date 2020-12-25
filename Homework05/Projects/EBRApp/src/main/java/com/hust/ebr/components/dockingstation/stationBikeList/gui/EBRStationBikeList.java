@@ -30,7 +30,7 @@ public class EBRStationBikeList extends JDialog {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setLocationRelativeTo(null);
-        setModal(true);
+//        setModal(true);
         setTitle("List of bike in " + station.getStationName());
         setVisible(true);
     }
