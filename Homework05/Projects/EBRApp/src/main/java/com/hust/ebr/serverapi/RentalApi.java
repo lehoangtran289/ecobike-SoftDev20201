@@ -6,7 +6,6 @@ import javax.ws.rs.client.*;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +27,7 @@ public class RentalApi {
         Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
         List<Rental> result = response.readEntity(new GenericType<List<Rental>>() {
         });
+        System.out.println("getRentals: " + response);
         System.out.println(result);
         return result;
     }
@@ -38,6 +38,7 @@ public class RentalApi {
         Response response = invocationBuilder.get();
         List<Rental> result = response.readEntity(new GenericType<List<Rental>>() {
         });
+        System.out.println("getRentalsByCardNumber: " + response);
         System.out.println(result);
         return result;
     }
@@ -46,6 +47,7 @@ public class RentalApi {
         WebTarget webTarget = client.target(PATH);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.post(Entity.entity(rental, MediaType.APPLICATION_JSON));
+        System.out.println("saveNewRental: " + response);
         return response.getStatus() == 200 ? response.readEntity(Rental.class) : null;
     }
 }

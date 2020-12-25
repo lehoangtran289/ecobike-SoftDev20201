@@ -4,6 +4,7 @@ import com.hust.ebr.beans.Bike;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
 
 import javax.swing.*;
+import java.text.SimpleDateFormat;
 
 public class BikeSinglePane extends ADataSinglePane<Bike> {
 
@@ -62,11 +63,11 @@ public class BikeSinglePane extends ADataSinglePane<Bike> {
         if (t != null) {
             labelId.setText("ID: " + t.getId());
             labelName.setText("Name: " + t.getName());
-            labelWeight.setText("Weight: " + t.getWeight());
+            labelWeight.setText("Weight: " + t.getWeight() + " kg");
             labelLicensePlate.setText("License plate: " + t.getLicensePlate());
-            labelManufactureDate.setText("Manufacture date: " + t.getManufacturingDate());
+            labelManufactureDate.setText("Manufacture date: " + new SimpleDateFormat("dd/MM/yyyy").format(t.getManufacturingDate()));
             labelProducer.setText("Producer: " + t.getProducer());
-            labelCost.setText("Cost: " + t.getCost());
+            labelCost.setText("Cost: $" + t.getCost());
             labelStatus.setText("Status: " + t.getStatus());
             labelDockingStationId.setText("Docking station ID: " + t.getDockingStationId());
         }

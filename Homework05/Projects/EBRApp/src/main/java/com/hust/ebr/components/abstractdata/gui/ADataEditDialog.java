@@ -19,14 +19,16 @@ public abstract class ADataEditDialog<T> extends JDialog {
         setContentPane(new JPanel());
         layout = new GridBagLayout();
         getContentPane().setLayout(layout);
-
+        c.fill = GridBagConstraints.HORIZONTAL;
         this.buildControls();
 
         JButton saveButton = new JButton("Save");
         saveButton.addActionListener(e -> {
             T newT = getNewData();
-            controller.update(newT);
-            ADataEditDialog.this.dispose();
+            if (newT != null) {
+                controller.update(newT);
+                ADataEditDialog.this.dispose();
+            }
         });
 
         c.gridx = 1;
@@ -34,6 +36,7 @@ public abstract class ADataEditDialog<T> extends JDialog {
         getContentPane().add(saveButton, c);
 
         pack();
+        setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
     }
