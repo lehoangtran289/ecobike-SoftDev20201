@@ -1,6 +1,7 @@
 package com.hust.ebr.serverapi;
 
 import com.hust.ebr.beans.CreditCard;
+import com.hust.ebr.beans.DTO.BooleanWrapper;
 import com.hust.ebr.beans.DTO.CreditCardReqDTO;
 import com.hust.ebr.beans.DTO.RequestType;
 //import sun.rmi.runtime.Log;
@@ -45,5 +46,21 @@ public class BankingApi {
         System.out.println("requestCreditCard: " + response);
         System.out.println(result);
         return result;
+    }
+
+    public CreditCard updateCreditCard(String cardNumber, Boolean isRenting) {
+        BooleanWrapper reqDTO = new BooleanWrapper();
+        reqDTO.setIsRenting(isRenting);
+        WebTarget webTarget = client.target("http://localhost:8080/api/credit-card").path(cardNumber);
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+        Response response = invocationBuilder.post(Entity.entity(reqDTO, MediaType.APPLICATION_JSON));
+        CreditCard result = response.readEntity(CreditCard.class);
+        System.out.println("updateCreditCard: " + response);
+        System.out.println(result);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new BankingApi().updateCreditCard("201767642017", true));
     }
 }

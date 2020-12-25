@@ -1,6 +1,7 @@
 package com.hust.ebr.controller;
 
 import com.hust.ebr.model.CreditCard;
+import com.hust.ebr.model.dto.request.BooleanWrapper;
 import com.hust.ebr.model.dto.request.CreditCardReqDTO;
 import com.hust.ebr.model.dto.request.RequestType;
 import com.hust.ebr.service.CreditCardService;
@@ -37,6 +38,15 @@ public class CreditCardController {
             } else if (req.getType() == RequestType.Deduct) {
                 return creditCardService.deduct(cardNumber, req.getAmount());
             }
+        }
+        return null;
+    }
+
+    @PostMapping("/credit-card/{cardNumber}")
+    public CreditCard updateCreditCardStatus(@PathVariable("cardNumber") String cardNumber,
+                                       @RequestBody BooleanWrapper isRenting) {
+        if (StringUtils.hasText(cardNumber) && Objects.nonNull(isRenting)) {
+            return creditCardService.updateCreditCardStatus(cardNumber, isRenting.getIsRenting());
         }
         return null;
     }
