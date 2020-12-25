@@ -12,7 +12,7 @@ public class costCalculator {
     }
     public long costCaculator(Bike bike, ZonedDateTime timeRent, ZonedDateTime timeReturn){
         long totalCost = 0;
-        double diff = ChronoUnit.SECONDS.between(timeRent, timeReturn);
+        double diff = ChronoUnit.MINUTES.between(timeRent, timeReturn);
         double v = 10000 + Math.ceil((diff - 30) / 15.0) * 3000;
         if(diff <= 10){
             totalCost = 0;
