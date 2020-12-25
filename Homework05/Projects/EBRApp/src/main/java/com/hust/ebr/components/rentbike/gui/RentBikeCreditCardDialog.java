@@ -41,10 +41,7 @@ public class RentBikeCreditCardDialog extends ADataCreditCardDialog<Bike> {
                 } else {
                     this.dispose();
                     creditCard = bankingApi.requestCreditCard(RequestType.Deduct, cardNumber, getBikeDeposit());
-                    creditCard.setIsRentingBike(true);
-                    System.out.println("tren" + creditCard.getBalance());
-                    creditCard = bankingApi.updateCreditCard(creditCard);
-                    System.out.println("duoi" + creditCard.getBalance());
+                    creditCard = bankingApi.updateCreditCard(creditCard.getCardNumber(), true);
                     t.setStatus(Bike.Status.Renting);
                     t = new BikeApi().updateBike(t);
                     new EBRUserRentBike(new EBRUserRentBikeController(), t, creditCard);

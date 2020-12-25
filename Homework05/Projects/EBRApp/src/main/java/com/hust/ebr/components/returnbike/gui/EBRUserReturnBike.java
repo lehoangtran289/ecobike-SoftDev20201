@@ -112,8 +112,7 @@ public class EBRUserReturnBike extends JFrame {
             BankingApi bankingApi = new BankingApi();
             creditCard = bankingApi.requestCreditCard(RequestType.Refund, creditCard.getCardNumber(), depositCost);
             creditCard = bankingApi.requestCreditCard(RequestType.Deduct, creditCard.getCardNumber(), totalCost);
-            creditCard.setIsRentingBike(false);
-            creditCard = bankingApi.updateCreditCard(creditCard);
+            creditCard = bankingApi.updateCreditCard(creditCard.getCardNumber(), false);
             bike.setStatus(Bike.Status.Available);
             bike.setDockingStationId(currentStationId);
             bike = new BikeApi().updateBike(bike);
