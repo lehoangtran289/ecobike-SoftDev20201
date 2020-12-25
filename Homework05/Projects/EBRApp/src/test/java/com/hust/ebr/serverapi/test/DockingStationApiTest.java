@@ -1,6 +1,8 @@
 package com.hust.ebr.serverapi.test;
 
+import com.hust.ebr.beans.Bike;
 import com.hust.ebr.beans.DockingStation;
+import com.hust.ebr.serverapi.BikeApi;
 import com.hust.ebr.serverapi.DockingStationApi;
 import org.junit.Test;
 
@@ -62,8 +64,10 @@ public class DockingStationApiTest {
     public void testDeleteStation() {
         List<DockingStation> stationList = dsAPI.getStations(null);
         assertEquals("Error in getStation API", stationList.size(), 3);
+        BikeApi bApi = new BikeApi();
 
         DockingStation station = stationList.get(0);
+        List<String> bikeList = station.getBikeIds();
         String deletedStationId = station.getId();
 
         boolean isDeleted = dsAPI.deleteStation(deletedStationId);
@@ -71,11 +75,13 @@ public class DockingStationApiTest {
 
         assertEquals("Error in deleteStation API", isDeleted, true);
         assertEquals("Error in deleteStation API", stationList.size(), 2);
+        assertEquals("Error in deleteStation API", bApi.getBikeById(bikeList.get(0)).getDockingStationId(), null);
     }
 
     @Test
     public void testAddStation() {
         List<String> bikeIds = new ArrayList<>();
+
         DockingStation station = new DockingStation();
         station.setId("ds_test");
         station.setStationName("test station");
