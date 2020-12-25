@@ -6,8 +6,8 @@ import com.hust.ebr.beans.CreditCard;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 
-public class costCalculator {
-    public costCalculator(){
+public class CostCalculator {
+    public CostCalculator(){
 
     }
     public long costCaculator(Bike bike, ZonedDateTime timeRent, ZonedDateTime timeReturn){

@@ -5,7 +5,7 @@ import com.hust.ebr.beans.CreditCard;
 import com.hust.ebr.components.rentbike.controller.EBRUserRentBikeController;
 import com.hust.ebr.components.returnbike.controller.EBRUserReturnBikeController;
 import com.hust.ebr.components.returnbike.gui.EBRUserReturnBike;
-import com.hust.ebr.utils.costCalculator;
+import com.hust.ebr.utils.CostCalculator;
 
 import javax.swing.*;
 import java.time.ZonedDateTime;
@@ -15,7 +15,7 @@ import static com.hust.ebr.utils.Constants.WINDOW_HEIGHT;
 import static com.hust.ebr.utils.Constants.WINDOW_WIDTH;
 
 public class EBRUserRentBike extends JFrame{
-
+    private JFrame rootFrame;
     private JPanel rootPanel;
     private JLabel labelCardOwner;
     private JLabel labelCardNumber;
@@ -41,14 +41,16 @@ public class EBRUserRentBike extends JFrame{
         this.bike = bike;
         this.creditCard = creditCard;
         this.timeBegin = ZonedDateTime.now();
-        costCalculator cal = new costCalculator();
+        CostCalculator cal = new CostCalculator();
         maxTimeRent = cal.maxTimeRenting(bike,creditCard);
-        setTitle("Rent Bike Detail");
-        setContentPane(rootPanel);
-        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        setVisible(true);
+        rootFrame = new JFrame();
+        rootFrame.setTitle("Rent Bike Detail");
+        rootFrame.setContentPane(rootPanel);
+        rootFrame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        rootFrame.setLocationRelativeTo(null);
+        rootFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        rootFrame.setUndecorated(true);
+        rootFrame.setVisible(true);
 
         displayData();
         handleButtonEvent();
@@ -83,7 +85,7 @@ public class EBRUserRentBike extends JFrame{
         buttonReturnBike.addActionListener(e -> {
             // TODO
             new EBRUserReturnBike(new EBRUserReturnBikeController(), bike, creditCard, timeBegin);
-            this.dispose();
+            rootFrame.dispose();
         });
     }
 }
