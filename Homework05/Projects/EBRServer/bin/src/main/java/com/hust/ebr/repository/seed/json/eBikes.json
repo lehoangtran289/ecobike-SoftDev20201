@@ -7,7 +7,7 @@
     "licensePlate": "29E-123456",
     "manufacturingDate" : "10/12/2019",
     "producer" : "producer2",
-    "cost": 700000,
+    "cost": 600.5,
     "dockingStationId" : "ds3",
     "status" : "Available",
     "motor" : {
@@ -25,7 +25,7 @@
     "licensePlate": "29E-123457",
     "manufacturingDate" : "10/1/2019",
     "producer" : "producer2",
-    "cost": 700000,
+    "cost": 700,
     "dockingStationId" : "ds2",
     "status" : "Available",
     "motor" : {
@@ -43,7 +43,7 @@
     "licensePlate": "29E-123458",
     "manufacturingDate" : "10/2/2019",
     "producer" : "producer2",
-    "cost": 700000,
+    "cost": 750,
     "dockingStationId" : "ds3",
     "status" : "Available",
     "motor" : {

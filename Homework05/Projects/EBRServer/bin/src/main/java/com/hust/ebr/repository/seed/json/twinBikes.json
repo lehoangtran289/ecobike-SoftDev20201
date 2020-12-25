@@ -7,7 +7,7 @@
     "licensePlate": "29T-123456",
     "manufacturingDate" : "10/12/2019",
     "producer" : "producer1",
-    "cost": 550000,
+    "cost": 600.5,
     "dockingStationId" : "ds2",
     "status" : "Available"
   },
@@ -19,7 +19,7 @@
     "licensePlate": "29T-123457",
     "manufacturingDate" : "10/1/2019",
     "producer" : "producer1",
-    "cost": 550000,
+    "cost": 700,
     "dockingStationId" : "ds3",
     "status" : "Available"
   },
@@ -31,7 +31,7 @@
     "licensePlate": "29T-123458",
     "manufacturingDate" : "10/2/2019",
     "producer" : "producer1",
-    "cost": 550000,
+    "cost": 750,
     "dockingStationId" : "ds3",
     "status" : "Available"
   }
