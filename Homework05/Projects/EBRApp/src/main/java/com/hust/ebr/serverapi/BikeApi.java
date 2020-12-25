@@ -25,6 +25,7 @@ public class BikeApi {
         Response response = invocationBuilder.get();
         List<Bike> result = response.readEntity(new GenericType<ArrayList<Bike>>() {
         });
+        System.out.println("getAllBikes: " + response);
         System.out.println(result);
         return result;
     }
@@ -34,22 +35,21 @@ public class BikeApi {
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.get();
         Bike result = response.readEntity(Bike.class);
+        System.out.println("getBikeById: " + response);
         System.out.println(result);
         return result;
     }
 
     public List<Bike> getBikes(Map<String, String> params) {
-//        String typesRequestParam = String.join(",", types);
-//        WebTarget webTarget = client.target(PATH).queryParam("types", typesRequestParam);
         WebTarget webTarget = client.target(PATH);
         if (params != null) {
             for (Map.Entry<String, String> param : params.entrySet())
                 webTarget = webTarget.queryParam(param.getKey(), param.getValue());
         }
         Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
-        System.out.println(response);
         List<Bike> result = response.readEntity(new GenericType<List<Bike>>() {
         });
+        System.out.println("getBikes: " + response);
         System.out.println(result);
         return result;
     }
@@ -59,6 +59,7 @@ public class BikeApi {
         WebTarget webTarget = client.target(PATH).path(id);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.put(Entity.entity(bike, MediaType.APPLICATION_JSON));
+        System.out.println("updateBike: " + response);
         return response.getStatus() == 200 ? response.readEntity(Bike.class) : null;
     }
 
@@ -66,6 +67,7 @@ public class BikeApi {
         WebTarget webTarget = client.target(PATH);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.post(Entity.entity(bike, MediaType.APPLICATION_JSON));
+        System.out.println("addBike: " + response);
         return response.getStatus() == 200 ? response.readEntity(Bike.class) : null;
     }
 
@@ -73,6 +75,7 @@ public class BikeApi {
         WebTarget webTarget = client.target(PATH).path(id);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.delete();
+        System.out.println("deleteBike: " + response);
         return response.getStatus() == 200;
     }
 

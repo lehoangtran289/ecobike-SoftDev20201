@@ -27,9 +27,9 @@ public class EBRAdmin extends JFrame {
         tabbedPane.addTab("Renting History", null, historyPage, "Renting History");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setLocationRelativeTo(null);
         setTitle("Eco Bike Rental for ADMINISTRATOR");
-        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setVisible(true);
     }
 

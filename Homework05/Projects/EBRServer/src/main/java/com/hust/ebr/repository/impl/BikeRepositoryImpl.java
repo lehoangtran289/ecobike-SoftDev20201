@@ -1,14 +1,12 @@
 package com.hust.ebr.repository.impl;
 
-import com.hust.ebr.model.Bike;
-import com.hust.ebr.model.EBike;
-import com.hust.ebr.model.NormalBike;
-import com.hust.ebr.model.TwinBike;
+import com.hust.ebr.model.*;
 import com.hust.ebr.repository.BikeRepository;
 import com.hust.ebr.repository.DockingStationRepository;
 import com.hust.ebr.repository.seed.Seed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -81,9 +79,15 @@ public class BikeRepositoryImpl implements BikeRepository {
         bikes = bikes.stream()
                 .map(b -> {
                     if (b.equals(bike)) {
-                        if (!b.getDockingStationId().equals(bike.getDockingStationId())) {
+                        if (StringUtils.hasText(b.getDockingStationId()) &&
+                                StringUtils.hasText(bike.getDockingStationId()) &&
+                                !b.getDockingStationId().equals(bike.getDockingStationId())) {
                             updateStationAfterAddingBike(bike);
                             updateStationAfterRemovingBike(b);
+                        } else if (!StringUtils.hasText(bike.getDockingStationId())) {
+                            updateStationIfBikeDeleted(b);
+                        } else if (!StringUtils.hasText(b.getDockingStationId())) {
+                            updateStationAfterAddingBike(bike);
                         }
                         return bike;
                     }
@@ -124,6 +128,17 @@ public class BikeRepositoryImpl implements BikeRepository {
         String dockingStationId = Optional.ofNullable(removedBike.getDockingStationId()).orElse("");
         dockingStationRepository.findById(dockingStationId)
                 .ifPresent(station -> station.getBikeIds().remove(removedBike.getId()));
+    }
+
+    private void updateStationIfBikeDeleted(Bike b) {
+        DockingStation station = dockingStationRepository.search(null)
+                .stream()
+                .filter(s -> s.getBikeIds().contains(b.getId()))
+                .collect(Collectors.toList())
+                .get(0);
+        System.out.println(station);
+        station.getBikeIds().remove(b.getId());
+        dockingStationRepository.update(station);
     }
 
 }

@@ -27,6 +27,7 @@ public class DockingStationApi {
         Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
         List<DockingStation> result = response.readEntity(new GenericType<List<DockingStation>>() {
         });
+        System.out.println("getStations: " + response);
         System.out.println(result);
         return result;
     }
@@ -36,6 +37,7 @@ public class DockingStationApi {
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.get();
         DockingStation result = response.readEntity(DockingStation.class);
+        System.out.println("getStationById: " + response);
         System.out.println(result);
         return result;
     }
@@ -45,6 +47,7 @@ public class DockingStationApi {
         WebTarget webTarget = client.target(PATH).path(id);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.put(Entity.entity(station, MediaType.APPLICATION_JSON));
+        System.out.println("updateStation: " + response);
         return response.getStatus() == 200 ? response.readEntity(DockingStation.class) : null;
     }
 
@@ -52,6 +55,7 @@ public class DockingStationApi {
         WebTarget webTarget = client.target(PATH);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.post(Entity.entity(station, MediaType.APPLICATION_JSON));
+        System.out.println("addStation: " + response);
         return response.getStatus() == 200 ? response.readEntity(DockingStation.class) : null;
     }
 
@@ -59,6 +63,7 @@ public class DockingStationApi {
         WebTarget webTarget = client.target(PATH).path(id);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.delete();
+        System.out.println("deleteStation: " + response);
         return response.getStatus() == 200;
     }
 }

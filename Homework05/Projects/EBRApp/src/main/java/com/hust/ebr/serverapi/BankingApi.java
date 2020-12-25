@@ -3,7 +3,7 @@ package com.hust.ebr.serverapi;
 import com.hust.ebr.beans.CreditCard;
 import com.hust.ebr.beans.DTO.CreditCardReqDTO;
 import com.hust.ebr.beans.DTO.RequestType;
-import sun.rmi.runtime.Log;
+//import sun.rmi.runtime.Log;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
@@ -23,8 +23,8 @@ public class BankingApi {
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.get();
         CreditCard result = response.readEntity(CreditCard.class);
+        System.out.println("getCreditCardInfo: " + response);
         System.out.println(result);
-        System.out.println(response);
         return result;
     }
 
@@ -42,8 +42,8 @@ public class BankingApi {
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.post(Entity.entity(reqDTO, MediaType.APPLICATION_JSON));
         CreditCard result = response.readEntity(CreditCard.class);
+        System.out.println("requestCreditCard: " + response);
         System.out.println(result);
-        System.out.println(response);
         return result;
     }
 }
