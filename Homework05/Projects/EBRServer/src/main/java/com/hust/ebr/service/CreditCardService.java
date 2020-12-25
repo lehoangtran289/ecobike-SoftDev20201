@@ -22,6 +22,15 @@ public class CreditCardService {
         return creditCardRepository.search(creditCard);
     }
 
+    public CreditCard updateCreditCardStatus(String cardNumber, Boolean isRenting) {
+        return creditCardRepository.findByCardNumber(cardNumber)
+                .map(c -> {
+                    c.setIsRentingBike(isRenting);
+                    return creditCardRepository.update(c);
+                })
+                .orElse(null);
+    }
+
     public CreditCard refund(String cardNumber, double amount) {
         return creditCardRepository.findByCardNumber(cardNumber)
                 .map(c -> {
@@ -53,5 +62,6 @@ public class CreditCardService {
                 .map(CreditCard::getCardNumber)
                 .collect(Collectors.toList());
     }
+
 
 }
