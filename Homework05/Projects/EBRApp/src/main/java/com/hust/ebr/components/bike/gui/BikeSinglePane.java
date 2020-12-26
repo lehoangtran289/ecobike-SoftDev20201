@@ -67,7 +67,7 @@ public class BikeSinglePane extends ADataSinglePane<Bike> {
             labelLicensePlate.setText("License plate: " + t.getLicensePlate());
             labelManufactureDate.setText("Manufacture date: " + new SimpleDateFormat("dd/MM/yyyy").format(t.getManufacturingDate()));
             labelProducer.setText("Producer: " + t.getProducer());
-            labelCost.setText("Cost: $" + t.getCost());
+            labelCost.setText("Cost: " + t.getCost() + "VND");
             labelStatus.setText("Status: " + t.getStatus());
             labelDockingStationId.setText("Docking station ID: " + t.getDockingStationId());
         }

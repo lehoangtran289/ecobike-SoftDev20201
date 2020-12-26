@@ -32,7 +32,7 @@ public class RentalApiTest {
 
         params.replace("bikeId", "wrongId");
         rentalList = rentalApi.getRentals(params);
-        assertEquals("Error in getRentals API", null, rentalList);
+        assertEquals("Error in getRentals API", 0, rentalList.size());
     }
 
     @Test
