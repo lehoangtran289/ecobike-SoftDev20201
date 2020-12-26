@@ -12,8 +12,10 @@ import java.util.Map;
 
 public abstract class ADataPageController<T> {
     private final ADataPagePane<T> dataPagePane;
+    private final IServerApi serverApi;
 
-    public ADataPageController() {
+    public ADataPageController(IServerApi serverApi) {
+        this.serverApi = serverApi;
         ADataSearchPane searchPane = createSearchPane();
         ADataListPane<T> listPane = createListPane();
 
@@ -27,7 +29,8 @@ public abstract class ADataPageController<T> {
         dataPagePane = new ADataPagePane<T>(searchPane, listPane);
     }
 
-    public ADataPageController(List<T> list) {
+    public ADataPageController(IServerApi serverApi, List<T> list) {
+        this.serverApi = serverApi;
         ADataSearchPane searchPane = createSearchPane();
         ADataListPane<T> listPane = createListPane();
         listPane.updateData(list);
@@ -42,6 +45,10 @@ public abstract class ADataPageController<T> {
 
     public JPanel getDataPagePane() {
         return dataPagePane;
+    }
+
+    public IServerApi getServerApi() {
+        return serverApi;
     }
 
     public abstract ADataSearchPane createSearchPane();

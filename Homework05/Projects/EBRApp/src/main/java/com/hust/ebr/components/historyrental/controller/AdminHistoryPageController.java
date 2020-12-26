@@ -9,13 +9,14 @@ import com.hust.ebr.components.historyrental.gui.RentalListPane;
 import com.hust.ebr.components.historyrental.gui.RentalSearchPane;
 import com.hust.ebr.components.historyrental.gui.RentalSinglePane;
 import com.hust.ebr.serverapi.RentalApi;
+import com.hust.ebr.serverapi.abstractdata.IRentalApi;
 
 import java.util.List;
 import java.util.Map;
 
 public class AdminHistoryPageController extends ADataPageController<Rental> {
-    public AdminHistoryPageController() {
-        super();
+    public AdminHistoryPageController(IRentalApi rentalApi) {
+        super(rentalApi);
     }
 
     @Override

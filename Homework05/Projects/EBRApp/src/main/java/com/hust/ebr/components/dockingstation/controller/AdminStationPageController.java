@@ -9,14 +9,15 @@ import com.hust.ebr.components.dockingstation.gui.AdminStationListPane;
 import com.hust.ebr.components.dockingstation.gui.DockingStationSearchPane;
 import com.hust.ebr.components.dockingstation.gui.DockingStationSinglePane;
 import com.hust.ebr.serverapi.DockingStationApi;
+import com.hust.ebr.serverapi.abstractdata.IDockingStationApi;
 
 import java.util.List;
 import java.util.Map;
 
 public class AdminStationPageController extends ADataPageController<DockingStation> {
 
-    public AdminStationPageController() {
-        super();
+    public AdminStationPageController(IDockingStationApi stationApi) {
+        super(stationApi);
     }
 
     @Override

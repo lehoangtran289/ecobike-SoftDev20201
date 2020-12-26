@@ -9,6 +9,7 @@ import com.hust.ebr.components.bike.gui.BikeSinglePane;
 import com.hust.ebr.components.dockingstationbikes.gui.AdminStationBikeListPane;
 import com.hust.ebr.components.dockingstationbikes.gui.StationBikeSearchPane;
 import com.hust.ebr.serverapi.BikeApi;
+import com.hust.ebr.serverapi.abstractdata.IBikeApi;
 
 import java.util.List;
 import java.util.Map;
@@ -16,8 +17,8 @@ import java.util.Map;
 public class AdminStationBikeListPageController extends ADataPageController<Bike> {
     private final String stationID;
 
-    public AdminStationBikeListPageController(String stationID, List<Bike> list) {
-        super(list);
+    public AdminStationBikeListPageController(IBikeApi bikeApi, String stationID, List<Bike> list) {
+        super(bikeApi, list);
         this.stationID = stationID;
     }
 

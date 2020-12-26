@@ -9,14 +9,15 @@ import com.hust.ebr.components.bike.gui.AdminBikeListPane;
 import com.hust.ebr.components.bike.gui.BikeSearchPane;
 import com.hust.ebr.components.bike.gui.BikeSinglePane;
 import com.hust.ebr.serverapi.BikeApi;
+import com.hust.ebr.serverapi.abstractdata.IBikeApi;
 
 import java.util.List;
 import java.util.Map;
 
 public class AdminBikePageController extends ADataPageController<Bike> {
 
-    public AdminBikePageController() {
-        super();
+    public AdminBikePageController(IBikeApi bikeApi) {
+        super(bikeApi);
     }
 
     @Override

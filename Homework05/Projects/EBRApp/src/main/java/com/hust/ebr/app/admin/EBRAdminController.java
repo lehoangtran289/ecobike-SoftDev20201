@@ -7,6 +7,9 @@ import com.hust.ebr.components.abstractdata.controller.ADataPageController;
 import com.hust.ebr.components.bike.controller.AdminBikePageController;
 import com.hust.ebr.components.dockingstation.controller.AdminStationPageController;
 import com.hust.ebr.components.historyrental.controller.AdminHistoryPageController;
+import com.hust.ebr.serverapi.BikeApi;
+import com.hust.ebr.serverapi.DockingStationApi;
+import com.hust.ebr.serverapi.RentalApi;
 
 import javax.swing.*;
 
@@ -17,17 +20,17 @@ public class EBRAdminController {
     }
 
     public JPanel getStationPage() {
-        ADataPageController<DockingStation> controller = new AdminStationPageController();
+        ADataPageController<DockingStation> controller = new AdminStationPageController(new DockingStationApi());
         return controller.getDataPagePane();
     }
 
     public JPanel getBikePage() {
-        ADataPageController<Bike> controller = new AdminBikePageController();
+        ADataPageController<Bike> controller = new AdminBikePageController(new BikeApi());
         return controller.getDataPagePane();
     }
 
     public JPanel getHistoryPage() {
-        ADataPageController<Rental> controller = new AdminHistoryPageController();
+        ADataPageController<Rental> controller = new AdminHistoryPageController(new RentalApi());
         return controller.getDataPagePane();
     }
 }
