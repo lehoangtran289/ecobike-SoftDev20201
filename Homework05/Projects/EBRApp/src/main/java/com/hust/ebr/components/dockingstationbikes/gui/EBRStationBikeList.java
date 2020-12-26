@@ -22,7 +22,7 @@ public class EBRStationBikeList extends JDialog {
         rootPanel.setLayout(layout);
 
         List<Bike> bikes = station.getBikeIds().stream()
-                .map(id -> new BikeApi().getBikeById(id))
+                .map(id -> BikeApi.singleton().getBikeById(id))
                 .collect(Collectors.toList());
         JPanel stationBikeListPage = controller.getBikeListPage(station.getId(), bikes);
         rootPanel.add(stationBikeListPage);

@@ -27,7 +27,7 @@ public class UserStationPageController extends ADataPageController<DockingStatio
 
     @Override
     public List<? extends DockingStation> search(Map<String, String> searchParams) {
-        return new DockingStationApi().getStations(searchParams);
+        return ((IDockingStationApi) getServerApi()).getStations(searchParams);
     }
 
     @Override

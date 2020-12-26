@@ -30,7 +30,7 @@ public class UserStationBikeListPageController extends ADataPageController<Bike>
     @Override
     public List<? extends Bike> search(Map<String, String> searchParams) {
         searchParams.put("dockingStationId", this.stationID);
-        return new BikeApi().getBikes(searchParams);
+        return ((BikeApi) getServerApi()).getBikes(searchParams);
     }
 
     @Override

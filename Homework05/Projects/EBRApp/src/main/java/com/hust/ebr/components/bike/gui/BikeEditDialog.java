@@ -61,7 +61,7 @@ public class BikeEditDialog extends ADataEditDialog<Bike> {
         costField.setText(String.valueOf(t.getCost()));
 
         dockingStationIdComboBox = new JComboBox<>();
-        List<String> stationIds = new DockingStationApi().getStations(null)
+        List<String> stationIds = DockingStationApi.singleton().getStations(null)
                 .stream()
                 .map(DockingStation::getId)
                 .collect(Collectors.toList());

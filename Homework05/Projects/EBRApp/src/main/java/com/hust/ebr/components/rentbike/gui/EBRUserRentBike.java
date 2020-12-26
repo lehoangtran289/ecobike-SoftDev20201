@@ -4,6 +4,9 @@ import com.hust.ebr.beans.Bike;
 import com.hust.ebr.beans.CreditCard;
 import com.hust.ebr.components.returnbike.controller.EBRUserReturnBikeController;
 import com.hust.ebr.components.returnbike.gui.EBRUserReturnBike;
+import com.hust.ebr.serverapi.BankingApi;
+import com.hust.ebr.serverapi.BikeApi;
+import com.hust.ebr.serverapi.RentalApi;
 import com.hust.ebr.utils.CostCalculator;
 
 import javax.swing.*;
@@ -11,7 +14,7 @@ import java.awt.*;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class EBRUserRentBike extends JFrame{
+public class EBRUserRentBike extends JFrame {
     private JDialog rootDialog;
     private JPanel rootPanel;
     private JLabel labelCardOwner;
@@ -34,19 +37,20 @@ public class EBRUserRentBike extends JFrame{
     private Bike bike;
     private ZonedDateTime timeBegin;
     private double maxTimeRent;
+
     public EBRUserRentBike(Bike bike, CreditCard creditCard) {
         this.bike = bike;
         this.creditCard = creditCard;
         this.timeBegin = ZonedDateTime.now();
-        maxTimeRent = CostCalculator.maxTimeRenting(bike,creditCard);
+        maxTimeRent = CostCalculator.maxTimeRenting(bike, creditCard);
         setDisplayLayOut();
     }
 
-    public void setDisplayLayOut(){
+    public void setDisplayLayOut() {
         displayData();
         rootDialog = new JDialog();
         rootPanel = new JPanel();
-        rootPanel.setLayout(new GridLayout(17,1));
+        rootPanel.setLayout(new GridLayout(17, 1));
         rootPanel.add(new JLabel("USER DETAIL", SwingConstants.CENTER));
         rootPanel.add(labelCardOwner);
         rootPanel.add(labelCardNumber);
@@ -93,7 +97,7 @@ public class EBRUserRentBike extends JFrame{
             labelCardOwner.setText("Card owner: " + creditCard.getCardOwner());
             labelCardNumber.setText("Card number: " + creditCard.getCardNumber());
             labelCardBalance.setText(("Card balance: " + creditCard.getBalance()));
-            labelMaxAmountRenting.setText("You can rent this bike for maximum: " +(int) (maxTimeRent/60)+ " hour(s) "+ (int) (maxTimeRent%60) + " minute(s)!");
+            labelMaxAmountRenting.setText("You can rent this bike for maximum: " + (int) (maxTimeRent / 60) + " hour(s) " + (int) (maxTimeRent % 60) + " minute(s)!");
         }
         labelCurrentDate.setText("Current Date: " + formatter.format(timeBegin));
     }
@@ -101,7 +105,8 @@ public class EBRUserRentBike extends JFrame{
     private void handleButtonEvent() {
         buttonReturnBike.addActionListener(e -> {
             // TODO
-            new EBRUserReturnBike(new EBRUserReturnBikeController(bike, creditCard, timeBegin));
+            new EBRUserReturnBike(new EBRUserReturnBikeController(bike, creditCard, timeBegin,
+                    BankingApi.singleton(), BikeApi.singleton(), RentalApi.singleton()));
             rootDialog.dispose();
         });
     }

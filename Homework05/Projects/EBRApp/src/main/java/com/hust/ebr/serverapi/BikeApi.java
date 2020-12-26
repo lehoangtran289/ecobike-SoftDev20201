@@ -13,7 +13,13 @@ import java.util.Map;
 import java.util.Optional;
 
 public class BikeApi implements IBikeApi {
-    public BikeApi() {
+    private static final IBikeApi singleton = new BikeApi();
+
+    private BikeApi() {
+    }
+
+    public static IBikeApi singleton() {
+        return singleton;
     }
 
     @Override

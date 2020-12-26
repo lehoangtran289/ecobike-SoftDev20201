@@ -25,23 +25,7 @@ public class AdminStationListPane extends ADataListPane<DockingStation> {
         JButton button = new JButton("Edit");
         singlePane.addDataHandlingComponent(button);
 
-        IDataUpdateController<DockingStation> controller = new IDataUpdateController<DockingStation>() {
-            @Override
-            public void onAct(DockingStation dockingStation) {
-                if (homePageController instanceof AdminStationPageController) {
-                    DockingStation newDockingStation =
-                            ((AdminStationPageController) homePageController).updateDockingStation(dockingStation);
-                    singlePane.updateData(newDockingStation);
-                }
-            }
-        };
-
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new DockingStationEditDialog(singlePane.getData(), controller);
-            }
-        });
+        ((AdminStationPageController) homePageController).onEdit(singlePane, button);
 
         JButton viewDockButton = new JButton("View Details");
         singlePane.addDataHandlingComponent(viewDockButton);

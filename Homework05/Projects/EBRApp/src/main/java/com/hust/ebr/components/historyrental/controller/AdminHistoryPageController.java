@@ -26,7 +26,7 @@ public class AdminHistoryPageController extends ADataPageController<Rental> {
 
     @Override
     public List<? extends Rental> search(Map<String, String> searchParams) {
-        return new RentalApi().getRentals(searchParams);
+        return ((RentalApi) getServerApi()).getRentals(searchParams);
     }
 
     @Override

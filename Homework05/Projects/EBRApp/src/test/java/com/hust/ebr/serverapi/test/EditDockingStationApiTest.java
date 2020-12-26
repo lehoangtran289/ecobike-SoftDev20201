@@ -3,6 +3,8 @@ package com.hust.ebr.serverapi.test;
 import com.hust.ebr.beans.DockingStation;
 import com.hust.ebr.serverapi.BikeApi;
 import com.hust.ebr.serverapi.DockingStationApi;
+import com.hust.ebr.serverapi.abstractdata.IBikeApi;
+import com.hust.ebr.serverapi.abstractdata.IDockingStationApi;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,7 +13,8 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class EditDockingStationApiTest {
-    DockingStationApi dsAPI = new DockingStationApi();
+    private final IDockingStationApi dsAPI = DockingStationApi.singleton();
+    private final IBikeApi bApi = BikeApi.singleton();
 
     @Test
     public void testUpdateStation() {
@@ -29,7 +32,6 @@ public class EditDockingStationApiTest {
     public void testDeleteStation() {
         List<DockingStation> stationList = dsAPI.getStations(null);
         assertTrue("Error in getStation API", stationList.size() > 0);
-        BikeApi bApi = new BikeApi();
 
         DockingStation station = stationList.get(0);
         List<String> bikeList = station.getBikeIds();

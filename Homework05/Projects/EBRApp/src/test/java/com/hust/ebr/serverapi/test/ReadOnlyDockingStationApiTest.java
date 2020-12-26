@@ -4,6 +4,7 @@ import com.hust.ebr.beans.Bike;
 import com.hust.ebr.beans.DockingStation;
 import com.hust.ebr.serverapi.BikeApi;
 import com.hust.ebr.serverapi.DockingStationApi;
+import com.hust.ebr.serverapi.abstractdata.IDockingStationApi;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ReadOnlyDockingStationApiTest {
 
-    DockingStationApi dsAPI = new DockingStationApi();
+    private final IDockingStationApi dsAPI = DockingStationApi.singleton();
 
     @Test
     public void testGetStations() {

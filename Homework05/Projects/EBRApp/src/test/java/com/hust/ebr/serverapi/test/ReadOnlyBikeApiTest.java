@@ -2,6 +2,7 @@ package com.hust.ebr.serverapi.test;
 
 import com.hust.ebr.beans.Bike;
 import com.hust.ebr.serverapi.BikeApi;
+import com.hust.ebr.serverapi.abstractdata.IBikeApi;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ReadOnlyBikeApiTest {
-    BikeApi bApi = new BikeApi();
+    private final IBikeApi bApi = BikeApi.singleton();
 
     @Test
     public void testGetAllBike() {

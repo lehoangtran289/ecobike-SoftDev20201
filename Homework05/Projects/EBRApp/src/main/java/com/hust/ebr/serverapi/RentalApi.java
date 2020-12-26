@@ -1,6 +1,7 @@
 package com.hust.ebr.serverapi;
 
 import com.hust.ebr.beans.Rental;
+import com.hust.ebr.serverapi.abstractdata.IBikeApi;
 import com.hust.ebr.serverapi.abstractdata.IRentalApi;
 
 import javax.ws.rs.client.*;
@@ -11,7 +12,13 @@ import java.util.List;
 import java.util.Map;
 
 public class RentalApi implements IRentalApi {
-    public RentalApi() {
+    private static final IRentalApi singleton = new RentalApi();
+
+    private RentalApi() {
+    }
+
+    public static IRentalApi singleton() {
+        return singleton;
     }
 
     @Override

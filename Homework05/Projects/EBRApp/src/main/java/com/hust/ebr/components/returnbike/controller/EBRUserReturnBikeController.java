@@ -2,9 +2,9 @@ package com.hust.ebr.components.returnbike.controller;
 
 import com.hust.ebr.beans.*;
 import com.hust.ebr.beans.DTO.RequestType;
-import com.hust.ebr.serverapi.BankingApi;
-import com.hust.ebr.serverapi.BikeApi;
-import com.hust.ebr.serverapi.RentalApi;
+import com.hust.ebr.serverapi.abstractdata.IBankingApi;
+import com.hust.ebr.serverapi.abstractdata.IBikeApi;
+import com.hust.ebr.serverapi.abstractdata.IRentalApi;
 import com.hust.ebr.utils.CostCalculator;
 
 import javax.swing.*;
@@ -13,10 +13,33 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class EBRUserReturnBikeController {
+    private final IBankingApi bankingApi;
+    private final IBikeApi bikeApi;
+    private final IRentalApi rentalApi;
+
     private CreditCard creditCard;
     private Bike bike;
     private Rental rental;
     private ZonedDateTime timeReturn;
+    private ZonedDateTime timeBegin;
+    private String currentStationId;
+    private double totalCost;
+    private double depositCost;
+
+    public EBRUserReturnBikeController(Bike bike, CreditCard creditCard, ZonedDateTime timeBegin,
+                                       IBankingApi bankingApi, IBikeApi bikeApi, IRentalApi rentalApi) {
+        this.bike = bike;
+        this.depositCost = bike.getCost();
+        this.creditCard = creditCard;
+        this.timeReturn = ZonedDateTime.now();
+        this.timeBegin = timeBegin;
+        this.currentStationId = bike.getDockingStationId();
+        totalCost = CostCalculator.calculateRentalFee(bike, timeBegin, timeReturn);
+
+        this.bankingApi = bankingApi;
+        this.bikeApi = bikeApi;
+        this.rentalApi = rentalApi;
+    }
 
     public CreditCard getCreditCard() {
         return creditCard;
@@ -54,28 +77,14 @@ public class EBRUserReturnBikeController {
         return totalCost;
     }
 
-    private ZonedDateTime timeBegin;
-    private String currentStationId;
-    private double totalCost;
-    private double depositCost;
-    public EBRUserReturnBikeController(Bike bike, CreditCard creditCard, ZonedDateTime timeBegin){
-        this.bike = bike;
-        this.depositCost = bike.getCost();
-        this.creditCard = creditCard;
-        this.timeReturn = ZonedDateTime.now();
-        this.timeBegin = timeBegin;
-        this.currentStationId = bike.getDockingStationId();
-        totalCost = CostCalculator.calculateRentalFee(bike, timeBegin, timeReturn);
-    }
-
-    public void handleButtonEvent(JDialog rootDialog, JComboBox stationIdSelectionBox, JButton PAYANDRETURNButton, JLabel labelToDocking) {
+    public void handleButtonEvent(JDialog rootDialog, JComboBox stationIdSelectionBox,
+                                  JButton PAYANDRETURNButton, JLabel labelToDocking) {
         stationIdSelectionBox.addActionListener(e -> {
             currentStationId = (String) stationIdSelectionBox.getSelectedItem();
             labelToDocking.setText("To Docking: " + currentStationId);
         });
         PAYANDRETURNButton.addActionListener(e -> {
             // TODO
-            BankingApi bankingApi = new BankingApi();
             creditCard = bankingApi.requestCreditCard(RequestType.Refund, creditCard.getCardNumber(),
                     depositCost);
             creditCard = bankingApi.requestCreditCard(RequestType.Deduct, creditCard.getCardNumber(),
@@ -84,7 +93,7 @@ public class EBRUserReturnBikeController {
 
             bike.setStatus(Bike.Status.Available);
             bike.setDockingStationId(currentStationId);
-            bike = new BikeApi().updateBike(bike);
+            bike = bikeApi.updateBike(bike);
 
             rental = new Rental();
             rental.setBikeId(bike.getId());
@@ -101,7 +110,7 @@ public class EBRUserReturnBikeController {
             rental.setToStationId(currentStationId);
             rental.setTotalMoney(totalCost);
             rental.setTotalTime(ChronoUnit.SECONDS.between(timeBegin, timeReturn));
-            rental = new RentalApi().saveNewRental(rental);
+            rental = rentalApi.saveNewRental(rental);
             rootDialog.dispose();
         });
     }

@@ -20,18 +20,6 @@ public class AdminBikeListPane extends ADataListPane<Bike> {
         JButton button = new JButton("Edit");
         singlePane.addDataHandlingComponent(button);
 
-        IDataUpdateController<Bike> manageController = new IDataUpdateController<Bike>() {
-            @Override
-            public void onAct(Bike bike) {
-                if (homePageController instanceof AdminBikePageController) {
-                    Bike newBike = ((AdminBikePageController) homePageController).updateBike(bike);
-                    singlePane.updateData(newBike);
-                }
-            }
-        };
-
-        button.addActionListener(e -> {
-            new BikeEditDialog(singlePane.getData(), manageController);
-        });
+        ((AdminBikePageController) homePageController).onEdit(singlePane, button);
     }
 }

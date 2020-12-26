@@ -3,12 +3,13 @@ package com.hust.ebr.serverapi.test;
 import com.hust.ebr.beans.CreditCard;
 import com.hust.ebr.beans.DTO.RequestType;
 import com.hust.ebr.serverapi.BankingApi;
+import com.hust.ebr.serverapi.abstractdata.IBankingApi;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class BankingApiTest {
-    BankingApi bankingApi = new BankingApi();
+    private final IBankingApi bankingApi = BankingApi.singleton();
 
     @Test
     public void testGetCreditCardInfo() {

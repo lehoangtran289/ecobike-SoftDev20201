@@ -5,6 +5,7 @@ import com.hust.ebr.beans.DTO.BooleanWrapper;
 import com.hust.ebr.beans.DTO.CreditCardReqDTO;
 import com.hust.ebr.beans.DTO.RequestType;
 import com.hust.ebr.serverapi.abstractdata.IBankingApi;
+import com.hust.ebr.serverapi.abstractdata.IBikeApi;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
@@ -13,7 +14,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 public class BankingApi implements IBankingApi {
-    public BankingApi() {
+    private static final IBankingApi singleton = new BankingApi();
+
+    private BankingApi() {
+    }
+
+    public static IBankingApi singleton() {
+        return singleton;
     }
 
     @Override

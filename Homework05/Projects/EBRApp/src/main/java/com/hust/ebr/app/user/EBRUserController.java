@@ -14,7 +14,7 @@ public class EBRUserController {
     }
 
     public JPanel getHomePage() {
-        ADataPageController<DockingStation> controller = new UserStationPageController(new DockingStationApi());
+        ADataPageController<DockingStation> controller = new UserStationPageController(DockingStationApi.singleton());
         return controller.getDataPagePane();
     }
 }
