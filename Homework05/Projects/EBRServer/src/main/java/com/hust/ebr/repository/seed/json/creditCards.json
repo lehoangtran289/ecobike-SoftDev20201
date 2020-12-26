@@ -9,7 +9,7 @@
     "cardNumber": "201768612017",
     "cardOwner": "hoangtl2",
     "balance": 1500000,
-    "isRentingBike" : true
+    "isRentingBike" : false
   },
   {
     "cardNumber": "201702242017",

@@ -14,6 +14,7 @@ public class RentBikeCreditCardDialog extends ADataCreditCardDialog<Bike> {
 
     public RentBikeCreditCardDialog(Bike bike) {
         super(bike);
+        setModal(true);
     }
 
     @Override

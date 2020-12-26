@@ -26,6 +26,7 @@ public class UserStationBikeListPane extends ADataListPane<Bike> {
             public void actionPerformed(ActionEvent e) {
                 Bike bike = singlePane.getData();
                 if (bike.getStatus() == Bike.Status.Available) {
+//                    homePageController.
                     new RentBikeCreditCardDialog(bike);
                 } else {
                     JOptionPane.showMessageDialog(null,
