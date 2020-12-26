@@ -2,7 +2,6 @@ package com.hust.ebr.components.rentbike.gui;
 
 import com.hust.ebr.beans.Bike;
 import com.hust.ebr.beans.CreditCard;
-import com.hust.ebr.components.rentbike.controller.EBRUserRentBikeController;
 import com.hust.ebr.components.returnbike.controller.EBRUserReturnBikeController;
 import com.hust.ebr.components.returnbike.gui.EBRUserReturnBike;
 import com.hust.ebr.utils.CostCalculator;
@@ -102,7 +101,7 @@ public class EBRUserRentBike extends JFrame{
     private void handleButtonEvent() {
         buttonReturnBike.addActionListener(e -> {
             // TODO
-            new EBRUserReturnBike(new EBRUserReturnBikeController(), bike, creditCard, timeBegin);
+            new EBRUserReturnBike(new EBRUserReturnBikeController(bike, creditCard, timeBegin));
             rootDialog.dispose();
         });
     }
