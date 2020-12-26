@@ -4,6 +4,7 @@ import com.hust.ebr.components.abstractdata.gui.ADataPagePane;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
+import com.hust.ebr.serverapi.abstractdata.IServerApi;
 
 import javax.swing.*;
 import java.util.List;

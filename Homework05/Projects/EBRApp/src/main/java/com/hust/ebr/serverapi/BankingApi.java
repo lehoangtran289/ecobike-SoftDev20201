@@ -4,21 +4,19 @@ import com.hust.ebr.beans.CreditCard;
 import com.hust.ebr.beans.DTO.BooleanWrapper;
 import com.hust.ebr.beans.DTO.CreditCardReqDTO;
 import com.hust.ebr.beans.DTO.RequestType;
-//import sun.rmi.runtime.Log;
+import com.hust.ebr.serverapi.abstractdata.IBankingApi;
 
-import javax.ws.rs.client.*;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-public class BankingApi {
-    public static final String PATH = "http://localhost:8080/api/credit-cards";
-
-    private final Client client;
-
+public class BankingApi implements IBankingApi {
     public BankingApi() {
-        client = ClientBuilder.newClient();
     }
 
+    @Override
     public CreditCard getCreditCardInfo(String cardNumber) {
         WebTarget webTarget = client.target(PATH).path(cardNumber);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -37,6 +35,7 @@ public class BankingApi {
      * @param amount
      * @return CreditCard if success, else null (if cardNumber not available or amount is not enough to deduct)
      */
+    @Override
     public CreditCard requestCreditCard(RequestType type, String cardNumber, double amount) {
         CreditCardReqDTO reqDTO = new CreditCardReqDTO(type, amount);
         WebTarget webTarget = client.target(PATH).path(cardNumber);
@@ -48,6 +47,7 @@ public class BankingApi {
         return result;
     }
 
+    @Override
     public CreditCard updateCreditCard(String cardNumber, Boolean isRenting) {
         BooleanWrapper reqDTO = new BooleanWrapper();
         reqDTO.setIsRenting(isRenting);
@@ -58,9 +58,5 @@ public class BankingApi {
         System.out.println("updateCreditCard: " + response);
         System.out.println(result);
         return result;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new BankingApi().updateCreditCard("201767642017", true));
     }
 }
