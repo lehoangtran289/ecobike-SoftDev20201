@@ -11,7 +11,7 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class RentalApiTest {
+public class ReadOnlyRentalApiTest {
     RentalApi rentalApi = new RentalApi();
 
     @Test
@@ -44,16 +44,5 @@ public class RentalApiTest {
         cardNumber = "201702242017";
         rentalList = rentalApi.getRentalsByCardNumber(cardNumber);
         assertEquals("Error in getRentalByCardNumber API", cardNumber,rentalList.get(0).getCardNumber());
-    }
-
-    @Test
-    public void testSaveNewRental() {
-        Rental rental = new Rental();
-        rental.setCardOwner("hoangtl3");
-        rental.setCardNumber("201702242017");
-
-        rentalApi.saveNewRental(rental);
-        List<Rental> rentalList = rentalApi.getRentals(null);
-        assertTrue("Error in saveNewRental API", rentalList.contains(rental));
     }
 }
