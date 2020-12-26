@@ -25,7 +25,7 @@ public class Bike {
     private String licensePlate;
     private Date manufacturingDate;
     private String producer;
-    private float cost;
+    private long cost;
     private Status status;
     private String dockingStationId;
 
