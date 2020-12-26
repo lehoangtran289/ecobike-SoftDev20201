@@ -60,7 +60,7 @@ public class EBRUserReturnBike extends JFrame {
         this.timeBegin = timeBegin;
         this.currentStationId = bike.getDockingStationId();
         CostCalculator cal = new CostCalculator();
-        totalCost = cal.costCaculator(bike, timeBegin, timeReturn);
+        totalCost = cal.calculateRentalFee(bike, timeBegin, timeReturn);
         stationIdSelectionBox.addItem("ds1");
         stationIdSelectionBox.addItem("ds2");
         stationIdSelectionBox.addItem("ds3");
