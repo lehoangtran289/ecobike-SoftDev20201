@@ -23,7 +23,7 @@ import java.util.List;
 public class Seed {
 //    src/main/java/com/hust/ebr/repository/seed/json/
 //    F:/Hoc Tap/20201/Sofware Design and Construction/Lab01/ict1.k62s.20201-09/Homework05/Projects/EBRServer/src/main/java/com/hust/ebr/repository/seed/json/
-    private static final String ROOT_PATH = "F:/Hoc Tap/20201/Software Design and Construction/Lab01/ict1.k62s.20201-09/Homework05/Projects/EBRServer/src/main/java/com/hust/ebr/repository/seed/json/";
+    private static final String ROOT_PATH = "src/main/java/com/hust/ebr/repository/seed/json/";
     private final ObjectMapper mapper;
     private List<Bike> bikes;
     private List<DockingStation> dockingStations;
