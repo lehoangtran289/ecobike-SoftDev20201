@@ -9,6 +9,7 @@ import com.hust.ebr.serverapi.RentalApi;
 import com.hust.ebr.utils.CostCalculator;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.ZonedDateTime;
@@ -17,7 +18,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class EBRUserReturnBike extends JFrame {
-    private JFrame rootFrame;
+    private JDialog rootDialog;
     private JPanel rootPanel;
     private JLabel labelCardOwner;
     private JLabel labelCardNumber;
@@ -49,32 +50,57 @@ public class EBRUserReturnBike extends JFrame {
     private double depositCost;
     public EBRUserReturnBike(EBRUserReturnBikeController controller, Bike bike, CreditCard creditCard, ZonedDateTime timeBegin ) {
         this.bike = bike;
-        if(bike instanceof NormalBike)
-            depositCost = 400000;
-        else if(bike instanceof EBike)
-            depositCost = 700000;
-        else
-            depositCost = 550000;
+        this.depositCost = bike.getCost();
         this.creditCard = creditCard;
         this.timeReturn = ZonedDateTime.now();
         this.timeBegin = timeBegin;
         this.currentStationId = bike.getDockingStationId();
         CostCalculator cal = new CostCalculator();
         totalCost = cal.calculateRentalFee(bike, timeBegin, timeReturn);
+//        totalCost = cal.rentingCost24h(timeBegin, timeReturn);
+        setDisplayLayOut();
+    }
+
+    public void setDisplayLayOut(){
+        displayData();
+        rootDialog = new JDialog();
+        rootPanel = new JPanel();
+        rootPanel.setLayout(new GridLayout(21,1));
+        rootPanel.add(new JLabel("USER DETAILS", SwingConstants.CENTER));
+        rootPanel.add(labelCardOwner);
+        rootPanel.add(labelCardNumber);
+        rootPanel.add(labelCurrentDate);
+        rootPanel.add(new JLabel("BIKE DETAILS", SwingConstants.CENTER));
+        rootPanel.add(labelId);
+        rootPanel.add(labelName);
+        rootPanel.add(labelWeight);
+        rootPanel.add(labelLicensePlate);
+        rootPanel.add(labelManufactureDate);
+        rootPanel.add(labelStatus);
+        rootPanel.add(labelProducer);
+        rootPanel.add(labelFromDocking);
+        rootPanel.add(labelToDocking);
+        rootPanel.add(stationIdSelectionBox);
         stationIdSelectionBox.addItem("ds1");
         stationIdSelectionBox.addItem("ds2");
         stationIdSelectionBox.addItem("ds3");
         stationIdSelectionBox.setBounds(90, 85, 245, 31);
-        rootFrame = new JFrame();
-        rootFrame.setTitle("Rental Detail");
-        rootFrame.setContentPane(rootPanel);
-        rootFrame.setSize(550, 500);
-        rootFrame.setLocationRelativeTo(null);
-        rootFrame.setUndecorated(true);
-//        rootFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        rootFrame.setVisible(true);
-        displayData();
         handleButtonEvent();
+        rootPanel.add(new JLabel("RENTAL DETAILS", SwingConstants.CENTER));
+        rootPanel.add(labelRentStartTime);
+        rootPanel.add(labelRentReturnTime);
+        rootPanel.add(labelDepositCost);
+        rootPanel.add(labelTotalCost);
+        rootPanel.add(PAYANDRETURNButton);
+        handleButtonEvent();
+        rootDialog.setTitle("Rental Detail");
+        rootDialog.setContentPane(rootPanel);
+        rootDialog.setSize(600, 500);
+        rootDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        rootDialog.setVisible(true);
+        rootDialog.setLocationRelativeTo(null);
+        rootDialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+
     }
 
     public void displayData(){
@@ -84,7 +110,7 @@ public class EBRUserReturnBike extends JFrame {
             labelName.setText("Name: " + bike.getName());
             labelWeight.setText("Weight: " + bike.getWeight());
             labelLicensePlate.setText("License plate: " + bike.getLicensePlate());
-            labelCurrentDate.setText(customFormatter.format(ZonedDateTime.now()));
+            labelCurrentDate.setText("Current Date: " + customFormatter.format(ZonedDateTime.now()));
             labelManufactureDate.setText("Manufacture date: " + bike.getManufacturingDate());
             labelProducer.setText("Producer: " + bike.getProducer());
             labelDepositCost.setText("Deposit Cost: " + bike.getCost());
@@ -135,7 +161,7 @@ public class EBRUserReturnBike extends JFrame {
             rental.setTotalMoney(totalCost);
             rental.setTotalTime(ChronoUnit.MINUTES.between(timeBegin, timeReturn));
             rental = rentalApi.saveNewRental(rental);
-            rootFrame.dispose();
+            rootDialog.dispose();
         });
     }
 

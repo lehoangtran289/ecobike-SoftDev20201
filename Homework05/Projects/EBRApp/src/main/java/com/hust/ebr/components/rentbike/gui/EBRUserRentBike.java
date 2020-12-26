@@ -8,14 +8,12 @@ import com.hust.ebr.components.returnbike.gui.EBRUserReturnBike;
 import com.hust.ebr.utils.CostCalculator;
 
 import javax.swing.*;
+import java.awt.*;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static com.hust.ebr.utils.Constants.WINDOW_HEIGHT;
-import static com.hust.ebr.utils.Constants.WINDOW_WIDTH;
-
 public class EBRUserRentBike extends JFrame{
-    private JFrame rootFrame;
+    private JDialog rootDialog;
     private JPanel rootPanel;
     private JLabel labelCardOwner;
     private JLabel labelCardNumber;
@@ -43,20 +41,41 @@ public class EBRUserRentBike extends JFrame{
         this.timeBegin = ZonedDateTime.now();
         CostCalculator cal = new CostCalculator();
         maxTimeRent = cal.maxTimeRenting(bike,creditCard);
-        rootFrame = new JFrame();
-        rootFrame.setTitle("Rent Bike Detail");
-        rootFrame.setContentPane(rootPanel);
-        rootFrame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        rootFrame.setLocationRelativeTo(null);
-        rootFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        rootFrame.setUndecorated(true);
-        rootFrame.setVisible(true);
-
-        displayData();
-        handleButtonEvent();
+        setDisplayLayOut();
     }
 
+    public void setDisplayLayOut(){
+        displayData();
+        rootDialog = new JDialog();
+        rootPanel = new JPanel();
+        rootPanel.setLayout(new GridLayout(17,1));
+        rootPanel.add(new JLabel("USER DETAIL", SwingConstants.CENTER));
+        rootPanel.add(labelCardOwner);
+        rootPanel.add(labelCardNumber);
+        rootPanel.add(labelCardBalance);
+        rootPanel.add(labelMaxAmountRenting);
+        rootPanel.add(labelCurrentDate);
+        rootPanel.add(new JLabel("BIKE DETAIL", SwingConstants.CENTER));
+        rootPanel.add(labelId);
+        rootPanel.add(labelName);
+        rootPanel.add(labelWeight);
+        rootPanel.add(labelLicensePlate);
+        rootPanel.add(labelManufactureDate);
+        rootPanel.add(labelProducer);
+        rootPanel.add(labelCost);
+        rootPanel.add(labelStatus);
+        rootPanel.add(labelFromDocking);
+        rootPanel.add(buttonReturnBike);
+        handleButtonEvent();
+        rootDialog.setTitle("Rent Bike Detail");
+        rootDialog.setContentPane(rootPanel);
+        rootDialog.setSize(600, 500);
+        rootDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        rootDialog.setVisible(true);
+        rootDialog.setLocationRelativeTo(null);
+        rootDialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
+    }
 
     public void displayData() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy 'at' hh:mm a z");
@@ -67,7 +86,7 @@ public class EBRUserRentBike extends JFrame{
             labelLicensePlate.setText("License plate: " + bike.getLicensePlate());
             labelManufactureDate.setText("Manufacture date: " + bike.getManufacturingDate());
             labelProducer.setText("Producer: " + bike.getProducer());
-            labelCost.setText("Cost: " + bike.getCost());
+            labelCost.setText("Deposit Cost: " + bike.getCost());
             labelStatus.setText("Status: " + bike.getStatus());
             labelFromDocking.setText("From docking: " + bike.getDockingStationId());
         }
@@ -78,14 +97,17 @@ public class EBRUserRentBike extends JFrame{
             labelCardBalance.setText(("Card balance: " + creditCard.getBalance()));
             labelMaxAmountRenting.setText("You can rent this bike for maximum: " +(int) (maxTimeRent/60)+ " hour(s) "+ (int) (maxTimeRent%60) + " minute(s)!");
         }
-        labelCurrentDate.setText(formatter.format(timeBegin));
+        labelCurrentDate.setText("Current Date: " + formatter.format(timeBegin));
     }
 
     private void handleButtonEvent() {
         buttonReturnBike.addActionListener(e -> {
             // TODO
             new EBRUserReturnBike(new EBRUserReturnBikeController(), bike, creditCard, timeBegin);
-            rootFrame.dispose();
+            rootDialog.dispose();
         });
     }
+//    private void handleButtonEvent() {
+//        buttonReturnBike.setOnClickListener
+//    }
 }
