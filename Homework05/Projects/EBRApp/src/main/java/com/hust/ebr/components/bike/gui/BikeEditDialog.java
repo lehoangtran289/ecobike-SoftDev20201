@@ -144,7 +144,7 @@ public class BikeEditDialog extends ADataEditDialog<Bike> {
         }
 
         try {
-            t.setCost(Float.parseFloat(costField.getText()));
+            t.setCost(Long.parseLong(costField.getText()));
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null,
                     "Invalid Cost, please try again!",

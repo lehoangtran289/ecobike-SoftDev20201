@@ -3,11 +3,12 @@ package com.hust.ebr.components.dockingstation.gui;
 import com.hust.ebr.beans.DockingStation;
 import com.hust.ebr.components.abstractdata.controller.ADataPageController;
 import com.hust.ebr.components.abstractdata.controller.IDataManageController;
+import com.hust.ebr.components.abstractdata.controller.IDataUpdateController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
 import com.hust.ebr.components.dockingstation.controller.AdminStationPageController;
-import com.hust.ebr.components.dockingstation.stationBikeList.controller.EBRAdminStationBikeListController;
-import com.hust.ebr.components.dockingstation.stationBikeList.gui.EBRStationBikeList;
+import com.hust.ebr.components.dockingstationbikes.controller.EBRAdminStationBikeListController;
+import com.hust.ebr.components.dockingstationbikes.gui.EBRStationBikeList;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,24 +25,9 @@ public class AdminStationListPane extends ADataListPane<DockingStation> {
         JButton button = new JButton("Edit");
         singlePane.addDataHandlingComponent(button);
 
-        IDataManageController<DockingStation> controller = new IDataManageController<DockingStation>() {
+        IDataUpdateController<DockingStation> controller = new IDataUpdateController<DockingStation>() {
             @Override
-            public void create(DockingStation dockingStation) {
-
-            }
-
-            @Override
-            public void read(DockingStation dockingStation) {
-
-            }
-
-            @Override
-            public void delete(DockingStation dockingStation) {
-
-            }
-
-            @Override
-            public void update(DockingStation dockingStation) {
+            public void onAct(DockingStation dockingStation) {
                 if (homePageController instanceof AdminStationPageController) {
                     DockingStation newDockingStation =
                             ((AdminStationPageController) homePageController).updateDockingStation(dockingStation);

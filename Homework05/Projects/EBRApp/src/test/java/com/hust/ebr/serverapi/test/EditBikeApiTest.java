@@ -20,7 +20,7 @@ public class EditBikeApiTest {
         assertTrue("Error in getAllBike API", bikeList.size() > 0);
 
         Bike bike = bikeList.get(0);
-        float cost = 511.25f;
+        long cost = 511;
         bike.setCost(cost);
         bApi.updateBike(bike);
         System.out.println(cost == bike.getCost());

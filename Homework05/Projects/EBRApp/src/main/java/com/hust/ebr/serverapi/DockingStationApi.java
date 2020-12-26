@@ -1,8 +1,11 @@
 package com.hust.ebr.serverapi;
 
 import com.hust.ebr.beans.DockingStation;
+import com.hust.ebr.serverapi.abstractdata.IDockingStationApi;
 
-import javax.ws.rs.client.*;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -10,14 +13,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class DockingStationApi {
-    public static final String PATH = "http://localhost:8080/api/docking-stations";
-    private final Client client;
-
+public class DockingStationApi implements IDockingStationApi {
     public DockingStationApi() {
-        client = ClientBuilder.newClient();
     }
 
+    @Override
     public List<DockingStation> getStations(Map<String, String> params) {
         WebTarget webTarget = client.target(PATH);
         if (params != null) {
@@ -32,6 +32,7 @@ public class DockingStationApi {
         return result;
     }
 
+    @Override
     public DockingStation getStationById(String id) {
         WebTarget webTarget = client.target(PATH).path(id);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -42,6 +43,7 @@ public class DockingStationApi {
         return result;
     }
 
+    @Override
     public DockingStation updateStation(DockingStation station) {
         String id = Optional.ofNullable(station.getId()).orElse("");
         WebTarget webTarget = client.target(PATH).path(id);
@@ -51,6 +53,7 @@ public class DockingStationApi {
         return response.getStatus() == 200 ? response.readEntity(DockingStation.class) : null;
     }
 
+    @Override
     public DockingStation addStation(DockingStation station) {
         WebTarget webTarget = client.target(PATH);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -59,6 +62,7 @@ public class DockingStationApi {
         return response.getStatus() == 200 ? response.readEntity(DockingStation.class) : null;
     }
 
+    @Override
     public boolean deleteStation(String id) {
         WebTarget webTarget = client.target(PATH).path(id);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);

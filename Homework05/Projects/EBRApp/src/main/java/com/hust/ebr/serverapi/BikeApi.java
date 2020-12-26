@@ -1,6 +1,7 @@
 package com.hust.ebr.serverapi;
 
 import com.hust.ebr.beans.Bike;
+import com.hust.ebr.serverapi.abstractdata.IBikeApi;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.GenericType;
@@ -11,14 +12,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class BikeApi {
-    public static final String PATH = "http://localhost:8080/api/bikes";
-    private final Client client;
-
+public class BikeApi implements IBikeApi {
     public BikeApi() {
-        client = ClientBuilder.newClient();
     }
 
+    @Override
     public List<Bike> getAllBikes() {
         WebTarget webTarget = client.target(PATH);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -30,6 +28,7 @@ public class BikeApi {
         return result;
     }
 
+    @Override
     public Bike getBikeById(String id) {
         WebTarget webTarget = client.target(PATH).path(id);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -40,6 +39,7 @@ public class BikeApi {
         return result;
     }
 
+    @Override
     public List<Bike> getBikes(Map<String, String> params) {
         WebTarget webTarget = client.target(PATH);
         if (params != null) {
@@ -54,6 +54,7 @@ public class BikeApi {
         return result;
     }
 
+    @Override
     public Bike updateBike(Bike bike) {
         String id = Optional.ofNullable(bike.getId()).orElse("");
         WebTarget webTarget = client.target(PATH).path(id);
@@ -63,6 +64,7 @@ public class BikeApi {
         return response.getStatus() == 200 ? response.readEntity(Bike.class) : null;
     }
 
+    @Override
     public Bike addBike(Bike bike) {
         WebTarget webTarget = client.target(PATH);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -71,6 +73,7 @@ public class BikeApi {
         return response.getStatus() == 200 ? response.readEntity(Bike.class) : null;
     }
 
+    @Override
     public boolean deleteBike(String id) {
         WebTarget webTarget = client.target(PATH).path(id);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);

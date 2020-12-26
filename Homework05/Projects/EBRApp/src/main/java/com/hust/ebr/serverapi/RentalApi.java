@@ -1,6 +1,7 @@
 package com.hust.ebr.serverapi;
 
 import com.hust.ebr.beans.Rental;
+import com.hust.ebr.serverapi.abstractdata.IRentalApi;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.GenericType;
@@ -9,15 +10,11 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Map;
 
-public class RentalApi {
-    public static final String PATH = "http://localhost:8080/api/rentals";
-
-    private final Client client;
-
+public class RentalApi implements IRentalApi {
     public RentalApi() {
-        client = ClientBuilder.newClient();
     }
 
+    @Override
     public List<Rental> getRentals(Map<String, String> params) {
         WebTarget webTarget = client.target(PATH);
         if (params != null) {
@@ -32,6 +29,7 @@ public class RentalApi {
         return result;
     }
 
+    @Override
     public List<Rental> getRentalsByCardNumber(String cardNumber) {
         WebTarget webTarget = client.target(PATH).path(cardNumber);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -43,6 +41,7 @@ public class RentalApi {
         return result;
     }
 
+    @Override
     public Rental saveNewRental(Rental rental) {
         WebTarget webTarget = client.target(PATH);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);

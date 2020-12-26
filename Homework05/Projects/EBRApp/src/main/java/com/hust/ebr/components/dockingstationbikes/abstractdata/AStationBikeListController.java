@@ -1,4 +1,4 @@
-package com.hust.ebr.components.dockingstation.stationBikeList.abstractdata;
+package com.hust.ebr.components.dockingstationbikes.abstractdata;
 
 import com.hust.ebr.beans.Bike;
 
