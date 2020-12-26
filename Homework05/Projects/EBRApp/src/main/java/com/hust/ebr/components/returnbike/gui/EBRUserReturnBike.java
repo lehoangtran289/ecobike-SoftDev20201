@@ -1,21 +1,11 @@
 package com.hust.ebr.components.returnbike.gui;
 
-import com.hust.ebr.beans.*;
-import com.hust.ebr.beans.DTO.RequestType;
 import com.hust.ebr.components.returnbike.controller.EBRUserReturnBikeController;
-import com.hust.ebr.serverapi.BankingApi;
-import com.hust.ebr.serverapi.BikeApi;
-import com.hust.ebr.serverapi.RentalApi;
-import com.hust.ebr.utils.CostCalculator;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 public class EBRUserReturnBike extends JFrame {
     private JDialog rootDialog;
@@ -39,30 +29,29 @@ public class EBRUserReturnBike extends JFrame {
     private JComboBox<String> stationIdSelectionBox;
     private JLabel labelToDocking;
 
-    private CreditCard creditCard;
-    private Bike bike;
-    private Rental rental;
-    private ZonedDateTime timeReturn;
-    private ZonedDateTime timeBegin;
-    private String currentStationId;
-    private double totalCost;
-    private double depositCost;
+    public EBRUserReturnBike(EBRUserReturnBikeController controller) {
+        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy 'at' hh:mma z");
+        if (controller.getBike() != null) {
+            labelId.setText("ID: " + controller.getBike().getId());
+            labelName.setText("Name: " + controller.getBike().getName());
+            labelWeight.setText("Weight: " + controller.getBike().getWeight());
+            labelLicensePlate.setText("License plate: " + controller.getBike().getLicensePlate());
+            labelCurrentDate.setText("Current Date: " + customFormatter.format(ZonedDateTime.now()));
+            labelManufactureDate.setText("Manufacture date: " + controller.getBike().getManufacturingDate());
+            labelProducer.setText("Producer: " + controller.getBike().getProducer());
+            labelDepositCost.setText("Deposit Cost: " + controller.getBike().getCost());
+            labelTotalCost.setText("Total Cost: " + controller.getTotalCost());
+            labelStatus.setText("Status: " + controller.getBike().getStatus());
+            labelFromDocking.setText("From docking: " + controller.getBike().getDockingStationId());
+            labelToDocking.setText("To Docking: " + controller.getCurrentStationId());
+        }
+        if (controller.getCreditCard() != null) {
+            labelCardOwner.setText("Card owner: " + controller.getCreditCard().getCardOwner());
+            labelCardNumber.setText("Card number: " + controller.getCreditCard().getCardNumber());
+        }
+        labelRentReturnTime.setText("Return Time: " + customFormatter.format(controller.getTimeReturn()));
+        labelRentStartTime.setText("Rent Time: " + customFormatter.format(controller.getTimeBegin()));
 
-    public EBRUserReturnBike(EBRUserReturnBikeController controller, Bike bike, CreditCard creditCard,
-                             ZonedDateTime timeBegin) {
-        this.bike = bike;
-        this.depositCost = bike.getCost();
-        this.creditCard = creditCard;
-        this.timeReturn = ZonedDateTime.now();
-        this.timeBegin = timeBegin;
-        this.currentStationId = bike.getDockingStationId();
-        totalCost = CostCalculator.calculateRentalFee(bike, timeBegin, timeReturn);
-//        totalCost = cal.rentingCost24h(timeBegin, timeReturn);
-        setDisplayLayOut();
-    }
-
-    public void setDisplayLayOut() {
-        displayData();
         rootDialog = new JDialog();
         rootPanel = new JPanel();
         rootPanel.setLayout(new GridLayout(21, 1));
@@ -85,14 +74,13 @@ public class EBRUserReturnBike extends JFrame {
         stationIdSelectionBox.addItem("ds2");
         stationIdSelectionBox.addItem("ds3");
         stationIdSelectionBox.setBounds(90, 85, 245, 31);
-        handleButtonEvent();
+        controller.handleButtonEvent(rootDialog, stationIdSelectionBox, PAYANDRETURNButton, labelToDocking);
         rootPanel.add(new JLabel("RENTAL DETAILS", SwingConstants.CENTER));
         rootPanel.add(labelRentStartTime);
         rootPanel.add(labelRentReturnTime);
         rootPanel.add(labelDepositCost);
         rootPanel.add(labelTotalCost);
         rootPanel.add(PAYANDRETURNButton);
-//        handleButtonEvent();
         rootDialog.setTitle("Rental Detail");
         rootDialog.setContentPane(rootPanel);
         rootDialog.setSize(600, 500);
@@ -102,70 +90,4 @@ public class EBRUserReturnBike extends JFrame {
         rootDialog.setVisible(true);
 
     }
-
-    public void displayData() {
-        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy 'at' hh:mma z");
-        if (bike != null) {
-            labelId.setText("ID: " + bike.getId());
-            labelName.setText("Name: " + bike.getName());
-            labelWeight.setText("Weight: " + bike.getWeight());
-            labelLicensePlate.setText("License plate: " + bike.getLicensePlate());
-            labelCurrentDate.setText("Current Date: " + customFormatter.format(ZonedDateTime.now()));
-            labelManufactureDate.setText("Manufacture date: " + bike.getManufacturingDate());
-            labelProducer.setText("Producer: " + bike.getProducer());
-            labelDepositCost.setText("Deposit Cost: " + bike.getCost());
-            labelTotalCost.setText("Total Cost: " + totalCost);
-            labelStatus.setText("Status: " + bike.getStatus());
-            labelFromDocking.setText("From docking: " + bike.getDockingStationId());
-            labelToDocking.setText("To Docking: " + currentStationId);
-        }
-        if (creditCard != null) {
-            labelCardOwner.setText("Card owner: " + creditCard.getCardOwner());
-            labelCardNumber.setText("Card number: " + creditCard.getCardNumber());
-        }
-        labelRentReturnTime.setText("Return Time: " + customFormatter.format(timeReturn));
-        labelRentStartTime.setText("Rent Time: " + customFormatter.format(timeBegin));
-    }
-
-    private void handleButtonEvent() {
-        stationIdSelectionBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                currentStationId = (String) stationIdSelectionBox.getSelectedItem();
-                labelToDocking.setText("To Docking: " + currentStationId);
-            }
-        });
-        PAYANDRETURNButton.addActionListener(e -> {
-            // TODO
-            BankingApi bankingApi = new BankingApi();
-            creditCard = bankingApi.requestCreditCard(RequestType.Refund, creditCard.getCardNumber(),
-                    depositCost);
-            creditCard = bankingApi.requestCreditCard(RequestType.Deduct, creditCard.getCardNumber(),
-                    totalCost);
-            creditCard = bankingApi.updateCreditCard(creditCard.getCardNumber(), false);
-
-            bike.setStatus(Bike.Status.Available);
-            bike.setDockingStationId(currentStationId);
-            bike = new BikeApi().updateBike(bike);
-
-            rental = new Rental();
-            rental.setBikeId(bike.getId());
-            rental.setRentalDate(Date.from(timeBegin.toInstant()));
-            if (bike instanceof NormalBike)
-                rental.setBikeType(Rental.Type.NormalBike);
-            else if (bike instanceof EBike)
-                rental.setBikeType(Rental.Type.EBike);
-            else
-                rental.setBikeType(Rental.Type.TwinBike);
-            rental.setCardNumber(creditCard.getCardNumber());
-            rental.setCardOwner(creditCard.getCardOwner());
-            rental.setFromStationId(bike.getDockingStationId());
-            rental.setToStationId(currentStationId);
-            rental.setTotalMoney(totalCost);
-            rental.setTotalTime(ChronoUnit.SECONDS.between(timeBegin, timeReturn));
-            rental = new RentalApi().saveNewRental(rental);
-            rootDialog.dispose();
-        });
-    }
-
 }
