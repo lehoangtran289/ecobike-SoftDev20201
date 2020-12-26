@@ -1,8 +1,8 @@
-package com.hust.ebr.components.dockingstation.stationBikeList.gui;
+package com.hust.ebr.components.dockingstationbikes.gui;
 
 import com.hust.ebr.beans.Bike;
 import com.hust.ebr.beans.DockingStation;
-import com.hust.ebr.components.dockingstation.stationBikeList.abstractdata.AStationBikeListController;
+import com.hust.ebr.components.dockingstationbikes.abstractdata.AStationBikeListController;
 import com.hust.ebr.serverapi.BikeApi;
 
 import javax.swing.*;

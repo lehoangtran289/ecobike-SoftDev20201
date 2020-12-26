@@ -1,7 +1,7 @@
 package com.hust.ebr.components.dockingstation.gui;
 
-import com.hust.ebr.components.dockingstation.stationBikeList.gui.EBRStationBikeList;
-import com.hust.ebr.components.dockingstation.stationBikeList.controller.EBRUserStationBikeListController;
+import com.hust.ebr.components.dockingstationbikes.gui.EBRStationBikeList;
+import com.hust.ebr.components.dockingstationbikes.controller.EBRUserStationBikeListController;
 import com.hust.ebr.beans.DockingStation;
 import com.hust.ebr.components.abstractdata.controller.ADataPageController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;

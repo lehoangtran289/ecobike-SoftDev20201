@@ -2,7 +2,7 @@ package com.hust.ebr.components.bike.gui;
 
 import com.hust.ebr.beans.Bike;
 import com.hust.ebr.components.abstractdata.controller.ADataPageController;
-import com.hust.ebr.components.abstractdata.controller.IDataManageController;
+import com.hust.ebr.components.abstractdata.controller.IDataUpdateController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
 import com.hust.ebr.components.bike.controller.AdminBikePageController;
@@ -20,24 +20,9 @@ public class AdminBikeListPane extends ADataListPane<Bike> {
         JButton button = new JButton("Edit");
         singlePane.addDataHandlingComponent(button);
 
-        IDataManageController<Bike> manageController = new IDataManageController<Bike>() {
+        IDataUpdateController<Bike> manageController = new IDataUpdateController<Bike>() {
             @Override
-            public void create(Bike bike) {
-
-            }
-
-            @Override
-            public void read(Bike bike) {
-
-            }
-
-            @Override
-            public void delete(Bike bike) {
-
-            }
-
-            @Override
-            public void update(Bike bike) {
+            public void onAct(Bike bike) {
                 if (homePageController instanceof AdminBikePageController) {
                     Bike newBike = ((AdminBikePageController) homePageController).updateBike(bike);
                     singlePane.updateData(newBike);

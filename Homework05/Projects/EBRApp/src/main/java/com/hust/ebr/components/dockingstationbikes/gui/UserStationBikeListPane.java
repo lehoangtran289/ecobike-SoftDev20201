@@ -1,4 +1,4 @@
-package com.hust.ebr.components.dockingstation.stationBikeList.gui;
+package com.hust.ebr.components.dockingstationbikes.gui;
 
 import com.hust.ebr.beans.Bike;
 import com.hust.ebr.components.abstractdata.controller.ADataPageController;

@@ -1,6 +1,5 @@
-package com.hust.ebr.components.history.gui;
+package com.hust.ebr.components.historyrental.gui;
 
-import com.hust.ebr.beans.Bike;
 import com.hust.ebr.beans.Rental;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
 

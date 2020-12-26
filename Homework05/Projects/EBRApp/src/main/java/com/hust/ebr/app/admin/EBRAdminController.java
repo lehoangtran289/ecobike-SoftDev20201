@@ -6,7 +6,7 @@ import com.hust.ebr.beans.Rental;
 import com.hust.ebr.components.abstractdata.controller.ADataPageController;
 import com.hust.ebr.components.bike.controller.AdminBikePageController;
 import com.hust.ebr.components.dockingstation.controller.AdminStationPageController;
-import com.hust.ebr.components.history.controller.AdminHistoryPageController;
+import com.hust.ebr.components.historyrental.controller.AdminHistoryPageController;
 
 import javax.swing.*;
 

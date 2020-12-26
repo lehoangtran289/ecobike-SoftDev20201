@@ -1,13 +1,13 @@
-package com.hust.ebr.components.history.controller;
+package com.hust.ebr.components.historyrental.controller;
 
 import com.hust.ebr.beans.Rental;
 import com.hust.ebr.components.abstractdata.controller.ADataPageController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
-import com.hust.ebr.components.history.gui.RentalListPane;
-import com.hust.ebr.components.history.gui.RentalSearchPane;
-import com.hust.ebr.components.history.gui.RentalSinglePane;
+import com.hust.ebr.components.historyrental.gui.RentalListPane;
+import com.hust.ebr.components.historyrental.gui.RentalSearchPane;
+import com.hust.ebr.components.historyrental.gui.RentalSinglePane;
 import com.hust.ebr.serverapi.RentalApi;
 
 import java.util.List;

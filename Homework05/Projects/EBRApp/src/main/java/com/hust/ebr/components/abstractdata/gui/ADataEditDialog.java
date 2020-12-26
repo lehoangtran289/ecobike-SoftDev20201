@@ -26,7 +26,7 @@ public abstract class ADataEditDialog<T> extends JDialog {
         saveButton.addActionListener(e -> {
             T newT = getNewData();
             if (newT != null) {
-                controller.update(newT);
+                controller.onAct(newT);
                 ADataEditDialog.this.dispose();
             }
         });
