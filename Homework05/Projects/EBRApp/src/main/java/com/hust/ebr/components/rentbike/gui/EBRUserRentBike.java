@@ -35,7 +35,7 @@ public class EBRUserRentBike extends JFrame{
     private Bike bike;
     private ZonedDateTime timeBegin;
     private double maxTimeRent;
-    public EBRUserRentBike(EBRUserRentBikeController controller, Bike bike, CreditCard creditCard) {
+    public EBRUserRentBike(Bike bike, CreditCard creditCard) {
         this.bike = bike;
         this.creditCard = creditCard;
         this.timeBegin = ZonedDateTime.now();
