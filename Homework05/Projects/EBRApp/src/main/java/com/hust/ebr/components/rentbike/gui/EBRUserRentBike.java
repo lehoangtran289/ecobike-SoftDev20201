@@ -39,8 +39,7 @@ public class EBRUserRentBike extends JFrame{
         this.bike = bike;
         this.creditCard = creditCard;
         this.timeBegin = ZonedDateTime.now();
-        CostCalculator cal = new CostCalculator();
-        maxTimeRent = cal.maxTimeRenting(bike,creditCard);
+        maxTimeRent = CostCalculator.maxTimeRenting(bike,creditCard);
         setDisplayLayOut();
     }
 
@@ -71,9 +70,9 @@ public class EBRUserRentBike extends JFrame{
         rootDialog.setContentPane(rootPanel);
         rootDialog.setSize(600, 500);
         rootDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        rootDialog.setVisible(true);
         rootDialog.setLocationRelativeTo(null);
         rootDialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        rootDialog.setVisible(true);
 
     }
 
