@@ -4,6 +4,8 @@ import com.hust.ebr.beans.Bike;
 import com.hust.ebr.beans.DockingStation;
 import com.hust.ebr.serverapi.BikeApi;
 import com.hust.ebr.serverapi.DockingStationApi;
+import com.hust.ebr.serverapi.abstractdata.IBikeApi;
+import com.hust.ebr.serverapi.abstractdata.IDockingStationApi;
 import org.junit.Test;
 
 import java.util.List;
@@ -12,7 +14,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class EditBikeApiTest {
-    BikeApi bApi = new BikeApi();
+    private final IBikeApi bApi = BikeApi.singleton();
+    private final IDockingStationApi dApi = DockingStationApi.singleton();
 
     @Test
     public void testUpdateBike() {
@@ -35,7 +38,7 @@ public class EditBikeApiTest {
     @Test
     public void testAddBike() throws InterruptedException {
         String stationId = "ds1";
-        DockingStation station = new DockingStationApi().getStationById(stationId);
+        DockingStation station = dApi.getStationById(stationId);
         Bike bike = new Bike();
         String bikeId = "test_bike";
 
@@ -44,7 +47,7 @@ public class EditBikeApiTest {
         bApi.addBike(bike);
         assertEquals("Error in addBike API", station.getId(), bike.getDockingStationId());
 
-        station = new DockingStationApi().getStationById(stationId);
+        station = dApi.getStationById(stationId);
         assertEquals("Error in addBike API", true, station.getBikeIds().contains(bike.getId()));
     }
 
@@ -52,7 +55,7 @@ public class EditBikeApiTest {
     public void testDeleteBike() {
 
         String stationId = "ds1";
-        DockingStation station = new DockingStationApi().getStationById(stationId);
+        DockingStation station = dApi.getStationById(stationId);
         Bike bike = bApi.getBikeById("nb1"); //station.getBikeIds().get(0));
 
         List<Bike> bikeList = bApi.getAllBikes();
@@ -63,7 +66,7 @@ public class EditBikeApiTest {
         bikeList = bApi.getAllBikes();
         assertEquals("Error in deleteBike API", beforeDeleteSize - 1, bikeList.size());
 
-        station = new DockingStationApi().getStationById(stationId);
+        station = dApi.getStationById(stationId);
         assertEquals("Error in deleteBike API", false, station.getBikeIds().contains(bike.getId()));
     }
 }

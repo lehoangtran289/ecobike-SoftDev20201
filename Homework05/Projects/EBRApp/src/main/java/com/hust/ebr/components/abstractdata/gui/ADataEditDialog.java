@@ -1,6 +1,7 @@
 package com.hust.ebr.components.abstractdata.gui;
 
 import com.hust.ebr.components.abstractdata.controller.IDataManageController;
+import com.hust.ebr.serverapi.abstractdata.IServerApi;
 
 import javax.swing.*;
 import java.awt.*;

@@ -6,6 +6,8 @@ import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
 import com.hust.ebr.components.rentbike.controller.EBRUserRentBikeController;
 import com.hust.ebr.components.rentbike.gui.RentBikeCreditCardDialog;
+import com.hust.ebr.serverapi.BankingApi;
+import com.hust.ebr.serverapi.BikeApi;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -28,7 +30,7 @@ public class UserStationBikeListPane extends ADataListPane<Bike> {
                 Bike bike = singlePane.getData();
                 if (bike.getStatus() == Bike.Status.Available) {
 //                    homePageController.
-                    new RentBikeCreditCardDialog(new EBRUserRentBikeController(), bike);
+                    new RentBikeCreditCardDialog(new EBRUserRentBikeController(BankingApi.singleton(), BikeApi.singleton()), bike);
                 } else {
                     JOptionPane.showMessageDialog(null,
                             "Someone is renting this bike!",

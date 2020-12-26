@@ -2,6 +2,7 @@ package com.hust.ebr.serverapi.test;
 
 import com.hust.ebr.beans.Rental;
 import com.hust.ebr.serverapi.RentalApi;
+import com.hust.ebr.serverapi.abstractdata.IRentalApi;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ReadOnlyRentalApiTest {
-    RentalApi rentalApi = new RentalApi();
+    private final IRentalApi rentalApi = RentalApi.singleton();
 
     @Test
     public void testGetRentals() {

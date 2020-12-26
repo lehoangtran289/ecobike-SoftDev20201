@@ -20,17 +20,17 @@ public class EBRAdminController {
     }
 
     public JPanel getStationPage() {
-        ADataPageController<DockingStation> controller = new AdminStationPageController(new DockingStationApi());
+        ADataPageController<DockingStation> controller = new AdminStationPageController(DockingStationApi.singleton());
         return controller.getDataPagePane();
     }
 
     public JPanel getBikePage() {
-        ADataPageController<Bike> controller = new AdminBikePageController(new BikeApi());
+        ADataPageController<Bike> controller = new AdminBikePageController(BikeApi.singleton());
         return controller.getDataPagePane();
     }
 
     public JPanel getHistoryPage() {
-        ADataPageController<Rental> controller = new AdminHistoryPageController(new RentalApi());
+        ADataPageController<Rental> controller = new AdminHistoryPageController(RentalApi.singleton());
         return controller.getDataPagePane();
     }
 }

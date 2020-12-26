@@ -1,6 +1,7 @@
 package com.hust.ebr.serverapi;
 
 import com.hust.ebr.beans.DockingStation;
+import com.hust.ebr.serverapi.abstractdata.IBikeApi;
 import com.hust.ebr.serverapi.abstractdata.IDockingStationApi;
 
 import javax.ws.rs.client.Entity;
@@ -14,7 +15,13 @@ import java.util.Map;
 import java.util.Optional;
 
 public class DockingStationApi implements IDockingStationApi {
-    public DockingStationApi() {
+    private static final IDockingStationApi singleton = new DockingStationApi();
+
+    private DockingStationApi() {
+    }
+
+    public static IDockingStationApi singleton() {
+        return singleton;
     }
 
     @Override

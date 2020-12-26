@@ -16,7 +16,7 @@ public class EBRAdminStationBikeListController extends AStationBikeListControlle
 
     @Override
     public JPanel getBikeListPage(String stationID, List<Bike> bikeList) {
-        ADataPageController<Bike> controller = new AdminStationBikeListPageController(new BikeApi(), stationID, bikeList);
+        ADataPageController<Bike> controller = new AdminStationBikeListPageController(BikeApi.singleton(), stationID, bikeList);
         return controller.getDataPagePane();
     }
 }
