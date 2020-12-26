@@ -1,7 +1,12 @@
 package com.hust.ebr.components.abstractdata.gui;
 
+import com.hust.ebr.beans.Bike;
+import com.hust.ebr.components.rentbike.controller.EBRUserRentBikeController;
+
 import javax.swing.*;
 import java.awt.*;
+
+import static com.hust.ebr.components.rentbike.controller.EBRUserRentBikeController.CARD_ACCEPTED;
 
 public abstract class ADataCreditCardDialog<T> extends JDialog {
 
@@ -10,7 +15,9 @@ public abstract class ADataCreditCardDialog<T> extends JDialog {
     protected GridBagConstraints c = new GridBagConstraints();
     protected JTextField creditCardField;
 
-    public ADataCreditCardDialog(T t) {
+    protected String cardNumber;
+
+    public ADataCreditCardDialog(EBRUserRentBikeController controller, T t) {
         super((Frame) null, "CREDIT CARD INFORMATION", true);
         this.t = t;
 
@@ -23,8 +30,11 @@ public abstract class ADataCreditCardDialog<T> extends JDialog {
 
         JButton confirmButton = new JButton("Confirm");
         confirmButton.addActionListener(e -> {
-            String cardNumber = creditCardField.getText();
-            checkCreditCard(cardNumber);
+            cardNumber = creditCardField.getText();
+            int cardStatus = controller.checkCreditCard(cardNumber, (Bike) t);
+            if (cardStatus == CARD_ACCEPTED) {
+                performNextState(controller);
+            }
         });
 
         c.gridx = 1;
@@ -36,8 +46,6 @@ public abstract class ADataCreditCardDialog<T> extends JDialog {
         setResizable(false);
         setVisible(true);
     }
-
-    public abstract void checkCreditCard(String cardNumber);
 
     private void addNewField(JTextField textField, String label) {
         int row = getLastRowIndex();
@@ -56,4 +64,6 @@ public abstract class ADataCreditCardDialog<T> extends JDialog {
         int rows = dim[1].length;
         return rows;
     }
+
+    public abstract void performNextState(EBRUserRentBikeController controller);
 }
