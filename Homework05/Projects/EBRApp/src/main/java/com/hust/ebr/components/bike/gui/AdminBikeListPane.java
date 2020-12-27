@@ -16,9 +16,13 @@ public class AdminBikeListPane extends ADataListPane<Bike> {
 
     @Override
     public void decorateSinglePane(ADataSinglePane<Bike> singlePane) {
-        JButton button = new JButton("Edit");
-        singlePane.addDataHandlingComponent(button);
+        JButton editButton = new JButton("Edit");
+        singlePane.addDataHandlingComponent(editButton);
 
-        ((AdminBikePageController) dataPageController).onEdit(singlePane, button);
+        JButton deleteButton = new JButton("Delete");
+        singlePane.addDataHandlingComponent(deleteButton);
+
+        ((AdminBikePageController) dataPageController).onEdit(singlePane, editButton);
+        ((AdminBikePageController) dataPageController).onDelete(singlePane, deleteButton);
     }
 }

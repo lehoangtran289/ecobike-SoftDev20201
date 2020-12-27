@@ -43,7 +43,7 @@ public abstract class ADataPageController<T> {
         dataPagePane = new ADataPagePane<T>(searchPane, listPane);
     }
 
-    public JPanel getDataPagePane() {
+    public ADataPagePane<T> getDataPagePane() {
         return dataPagePane;
     }
 
