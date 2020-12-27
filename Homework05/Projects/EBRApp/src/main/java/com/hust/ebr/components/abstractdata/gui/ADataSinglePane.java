@@ -44,6 +44,10 @@ public abstract class ADataSinglePane<T> extends JPanel {
         panel.add(component);
     }
 
+    public void removeDataHandlingComponent() {
+        panel.removeAll();
+    }
+
     public void updateData(T t) {
         this.t = t;
         displayData();
