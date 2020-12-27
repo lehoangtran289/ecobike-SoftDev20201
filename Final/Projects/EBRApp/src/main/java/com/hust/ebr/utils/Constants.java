@@ -2,9 +2,8 @@ package com.hust.ebr.utils;
 
 public class Constants {
 
-
-    public static final int WINDOW_WIDTH = 1000;
-    public static final int WINDOW_HEIGHT = 500;
+    public static final int WINDOW_WIDTH = 650;
+    public static final int WINDOW_HEIGHT = 550;
 
     public static final double NORMAL_BIKE_DEPOSIT = 400000;
     public static final double EBIKE_DEPOSIT = 700000;
