@@ -116,19 +116,13 @@ public class BikeEditDialog extends ADataEditDialog<Bike> {
             Date manufacturingDate = new SimpleDateFormat("dd/MM/yyyy").parse(manufactureDateField.getText());
             if (!manufactureDateField.getText().matches("([0-9]{2})/([0-9]{2})/([0-9]{4})"))
                 throw new NumberFormatException();
-            if (manufacturingDate.after(new Date()))
+            if (manufacturingDate.after(new Date()) || !DateUtils.isDateValid(manufactureDateField.getText()))
                 throw new DateTimeException("invalid date");
             t.setManufacturingDate(DateUtils.newDateToSave(manufacturingDate));
-        } catch (ParseException | NumberFormatException e) {
+        } catch (ParseException | NumberFormatException | DateTimeException e) {
             JOptionPane.showMessageDialog(null,
                     "Invalid Date, please try again!",
                     "WRONG DATE FORMAT",
-                    JOptionPane.PLAIN_MESSAGE);
-            return null;
-        } catch (DateTimeException e) {
-            JOptionPane.showMessageDialog(null,
-                    "Date is in future, please try again!",
-                    "INVALID DATE",
                     JOptionPane.PLAIN_MESSAGE);
             return null;
         }
