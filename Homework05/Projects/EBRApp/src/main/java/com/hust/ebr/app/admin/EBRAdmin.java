@@ -17,13 +17,21 @@ public class EBRAdmin extends JFrame {
         JTabbedPane tabbedPane = new JTabbedPane();
         rootPanel.add(tabbedPane, BorderLayout.CENTER);
 
-        JPanel stationPage = controller.getStationPage();
+        try {
+            Class.forName("com.hust.ebr.components.dockingstation.controller.AdminStationPageController");
+            Class.forName("com.hust.ebr.components.bike.controller.AdminBikePageController");
+            Class.forName("com.hust.ebr.components.historyrental.controller.AdminHistoryPageController");
+        }catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        JPanel stationPage = controller.getPage("adminStationPage");
         tabbedPane.addTab("Stations", null, stationPage, "Stations");
 
-        JPanel bikePage = controller.getBikePage();
+        JPanel bikePage = controller.getPage("adminBikePage");
         tabbedPane.addTab("Bikes", null, bikePage, "Bikes");
 
-        JPanel historyPage = controller.getHistoryPage();
+        JPanel historyPage = controller.getPage("adminHistoryPage");
         tabbedPane.addTab("Renting History", null, historyPage, "Renting History");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

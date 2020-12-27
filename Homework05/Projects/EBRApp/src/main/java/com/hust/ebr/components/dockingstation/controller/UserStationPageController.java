@@ -8,14 +8,23 @@ import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
 import com.hust.ebr.components.dockingstation.gui.DockingStationSearchPane;
 import com.hust.ebr.components.dockingstation.gui.DockingStationSinglePane;
 import com.hust.ebr.components.dockingstation.gui.UserStationListPane;
+import com.hust.ebr.factory.UserPageFactory;
 import com.hust.ebr.serverapi.DockingStationApi;
 import com.hust.ebr.serverapi.abstractdata.IDockingStationApi;
-import com.hust.ebr.serverapi.abstractdata.IServerApi;
 
 import java.util.List;
 import java.util.Map;
 
 public class UserStationPageController extends ADataPageController<DockingStation> {
+    static {
+        UserPageFactory.singleton().registerPage("userStationPage", new UserStationPageController(DockingStationApi.singleton()));
+    }
+
+    @Override
+    public UserStationPageController createPageController() {
+        return new UserStationPageController(DockingStationApi.singleton());
+    }
+
     public UserStationPageController(IDockingStationApi stationApi) {
         super(stationApi);
     }

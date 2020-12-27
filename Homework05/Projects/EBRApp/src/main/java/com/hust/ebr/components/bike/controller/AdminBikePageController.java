@@ -10,8 +10,9 @@ import com.hust.ebr.components.bike.gui.AdminBikeListPane;
 import com.hust.ebr.components.bike.gui.BikeEditDialog;
 import com.hust.ebr.components.bike.gui.BikeSearchPane;
 import com.hust.ebr.components.bike.gui.BikeSinglePane;
+import com.hust.ebr.factory.AdminPageFactory;
+import com.hust.ebr.factory.UserPageFactory;
 import com.hust.ebr.serverapi.BikeApi;
-import com.hust.ebr.serverapi.DockingStationApi;
 import com.hust.ebr.serverapi.abstractdata.IBikeApi;
 
 import javax.swing.*;
@@ -19,6 +20,14 @@ import java.util.List;
 import java.util.Map;
 
 public class AdminBikePageController extends ADataPageController<Bike> {
+    static {
+        AdminPageFactory.singleton().registerPage("adminBikePage", new AdminBikePageController(BikeApi.singleton()));
+    }
+
+    @Override
+    public AdminBikePageController createPageController() {
+        return new AdminBikePageController(BikeApi.singleton());
+    }
 
     public AdminBikePageController(IBikeApi bikeApi) {
         super(bikeApi);
