@@ -62,6 +62,14 @@ public class DockingStationSinglePane extends ADataSinglePane<DockingStation> {
             labelNormalBike.setText("Normal bikes: " + t.getNormalBikeCount());
             labelTwinBike.setText("Twin bikes: " + t.getTwinBikeCount());
             labelEBike.setText("EBikes: " + t.getEBikeCount());
+        } else {
+            labelID.setText(null);
+            labelName.setText(null);
+            labelAddress.setText(null);
+            labelEmptyDock.setText(null);
+            labelNormalBike.setText(null);
+            labelTwinBike.setText(null);
+            labelEBike.setText(null);
         }
 
     }
