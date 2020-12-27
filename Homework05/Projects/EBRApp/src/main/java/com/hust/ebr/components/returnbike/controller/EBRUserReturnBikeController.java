@@ -2,6 +2,7 @@ package com.hust.ebr.components.returnbike.controller;
 
 import com.hust.ebr.beans.*;
 import com.hust.ebr.beans.DTO.RequestType;
+import com.hust.ebr.serverapi.DockingStationApi;
 import com.hust.ebr.serverapi.abstractdata.IBankingApi;
 import com.hust.ebr.serverapi.abstractdata.IBikeApi;
 import com.hust.ebr.serverapi.abstractdata.IRentalApi;
@@ -13,6 +14,13 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class EBRUserReturnBikeController {
+
+    public static final int STATION_INVALID = 0;
+    public static final int STATION_FULL = 1;
+    public static final int STATION_AVAILABLE = 2;
+    public static final int CARD_OUT_OF_MONEY = 3;
+    public static final int CARD_HAS_MONEY = 4;
+
     private final IBankingApi bankingApi;
     private final IBikeApi bikeApi;
     private final IRentalApi rentalApi;
@@ -85,34 +93,77 @@ public class EBRUserReturnBikeController {
         });
         PAYANDRETURNButton.addActionListener(e -> {
             // TODO
-            creditCard = bankingApi.requestCreditCard(RequestType.Refund, creditCard.getCardNumber(),
-                    depositCost);
-            creditCard = bankingApi.requestCreditCard(RequestType.Deduct, creditCard.getCardNumber(),
-                    totalCost);
-            creditCard = bankingApi.updateCreditCard(creditCard.getCardNumber(), false);
+            int station_status = checkDockingStation(currentStationId);
+            if (station_status == STATION_INVALID) {
+                JOptionPane.showMessageDialog(null,
+                        "Please select station to return bike!",
+                        "INVALID STATION",
+                        JOptionPane.PLAIN_MESSAGE);
+            } else if (station_status == STATION_FULL) {
+                JOptionPane.showMessageDialog(null,
+                        "Sorry, this station has no empty dock left!",
+                        "STATION FULL",
+                        JOptionPane.PLAIN_MESSAGE);
+            } else {
+                creditCard = bankingApi.requestCreditCard(RequestType.Refund, creditCard.getCardNumber(),
+                        depositCost);
+                creditCard = bankingApi.requestCreditCard(RequestType.Deduct, creditCard.getCardNumber(),
+                        totalCost);
+                creditCard = bankingApi.updateCreditCard(creditCard.getCardNumber(), false);
+                int card_status = checkCreditCardBalance(creditCard);
+                if (card_status == CARD_OUT_OF_MONEY) {
+                    JOptionPane.showMessageDialog(null,
+                            "Credit card is out of money, but we will let you pay the debit later!",
+                            "CREDIT CARD OUT OF MONEY",
+                            JOptionPane.PLAIN_MESSAGE);
+                }
 
-            bike.setStatus(Bike.Status.Available);
-            bike.setDockingStationId(currentStationId);
-            bike = bikeApi.updateBike(bike);
+                bike.setStatus(Bike.Status.Available);
+                bike.setDockingStationId(currentStationId);
+                bike = bikeApi.updateBike(bike);
 
-            rental = new Rental();
-            rental.setBikeId(bike.getId());
-            rental.setRentalDate(Date.from(timeBegin.toInstant()));
-            if (bike instanceof NormalBike)
-                rental.setBikeType(Rental.Type.NormalBike);
-            else if (bike instanceof EBike)
-                rental.setBikeType(Rental.Type.EBike);
-            else
-                rental.setBikeType(Rental.Type.TwinBike);
-            rental.setCardNumber(creditCard.getCardNumber());
-            rental.setCardOwner(creditCard.getCardOwner());
-            rental.setFromStationId(bike.getDockingStationId());
-            rental.setToStationId(currentStationId);
-            rental.setTotalMoney(totalCost);
-            rental.setTotalTime(ChronoUnit.SECONDS.between(timeBegin, timeReturn));
-            rental = rentalApi.saveNewRental(rental);
-            rootDialog.dispose();
+                rental = new Rental();
+                rental.setBikeId(bike.getId());
+                rental.setRentalDate(Date.from(timeBegin.toInstant()));
+                if (bike instanceof NormalBike)
+                    rental.setBikeType(Rental.Type.NormalBike);
+                else if (bike instanceof EBike)
+                    rental.setBikeType(Rental.Type.EBike);
+                else
+                    rental.setBikeType(Rental.Type.TwinBike);
+                rental.setCardNumber(creditCard.getCardNumber());
+                rental.setCardOwner(creditCard.getCardOwner());
+                rental.setFromStationId(bike.getDockingStationId());
+                rental.setToStationId(currentStationId);
+                rental.setTotalMoney(totalCost);
+                rental.setTotalTime(ChronoUnit.SECONDS.between(timeBegin, timeReturn));
+                rental = rentalApi.saveNewRental(rental);
+                rootDialog.dispose();
+            }
         });
+    }
+
+    public int checkDockingStation(String stationId) {
+        DockingStationApi dockingStationApi = (DockingStationApi) DockingStationApi.singleton();
+        DockingStation dockingStation = dockingStationApi.getStationById(stationId);
+
+        if (dockingStation == null) {
+            return STATION_INVALID;
+        } else {
+            if (dockingStation.getEmptyDockCount() <= 0) {
+                return STATION_FULL;
+            } else {
+                return STATION_AVAILABLE;
+            }
+        }
+    }
+
+    public int checkCreditCardBalance(CreditCard creditCard) {
+        if (creditCard.getBalance() <= 0) {
+            return CARD_OUT_OF_MONEY;
+        } else {
+            return CARD_HAS_MONEY;
+        }
     }
 
 }

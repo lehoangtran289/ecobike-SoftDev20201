@@ -1,11 +1,15 @@
 package com.hust.ebr.components.returnbike.gui;
 
+import com.hust.ebr.beans.DockingStation;
 import com.hust.ebr.components.returnbike.controller.EBRUserReturnBikeController;
+import com.hust.ebr.serverapi.DockingStationApi;
 
 import javax.swing.*;
 import java.awt.*;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class EBRUserReturnBike extends JFrame {
     private JDialog rootDialog;
@@ -70,10 +74,13 @@ public class EBRUserReturnBike extends JFrame {
         rootPanel.add(labelFromDocking);
         rootPanel.add(labelToDocking);
         rootPanel.add(stationIdSelectionBox);
-        stationIdSelectionBox.addItem("ds1");
-        stationIdSelectionBox.addItem("ds2");
-        stationIdSelectionBox.addItem("ds3");
+
+        ArrayList<DockingStation> dockingStationList = (ArrayList<DockingStation>) DockingStationApi.singleton().getStations(null);
+        for (DockingStation dockingStation : dockingStationList) {
+            stationIdSelectionBox.addItem(dockingStation.getId());
+        }
         stationIdSelectionBox.setBounds(90, 85, 245, 31);
+
         controller.handleButtonEvent(rootDialog, stationIdSelectionBox, PAYANDRETURNButton, labelToDocking);
         rootPanel.add(new JLabel("RENTAL DETAILS", SwingConstants.CENTER));
         rootPanel.add(labelRentStartTime);
