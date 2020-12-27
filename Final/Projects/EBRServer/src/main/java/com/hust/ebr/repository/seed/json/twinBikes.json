@@ -1,0 +1,38 @@
+[
+  {
+    "type": "twinBike",
+    "id": "tb1",
+    "name": "Twin Bike 1",
+    "weight": 15.2,
+    "licensePlate": "29T-123456",
+    "manufacturingDate" : "10/12/2019",
+    "producer" : "producer1",
+    "cost": 550000,
+    "dockingStationId" : "ds2",
+    "status" : "Available"
+  },
+  {
+    "type": "twinBike",
+    "id": "tb2",
+    "name": "Twin Bike 2",
+    "weight": 16.2,
+    "licensePlate": "29T-123457",
+    "manufacturingDate" : "10/1/2019",
+    "producer" : "producer1",
+    "cost": 550000,
+    "dockingStationId" : "ds3",
+    "status" : "Available"
+  },
+  {
+    "type": "twinBike",
+    "id": "tb3",
+    "name": "Twin Bike 3",
+    "weight": 15.6,
+    "licensePlate": "29T-123458",
+    "manufacturingDate" : "10/2/2019",
+    "producer" : "producer1",
+    "cost": 550000,
+    "dockingStationId" : "ds3",
+    "status" : "Available"
+  }
+]

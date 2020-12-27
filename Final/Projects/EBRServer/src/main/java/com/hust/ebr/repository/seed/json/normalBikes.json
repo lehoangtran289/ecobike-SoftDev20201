@@ -1,0 +1,38 @@
+[
+  {
+    "type": "normalBike",
+    "id": "nb1",
+    "name": "normalBike1",
+    "weight": 10.2,
+    "licensePlate": "29B-123456",
+    "manufacturingDate" : "10/12/2019",
+    "producer" : "producer1",
+    "cost": 400000,
+    "dockingStationId" : "ds1",
+    "status" : "Available"
+  },
+  {
+    "type": "normalBike",
+    "id": "nb2",
+    "name": "normalBike2",
+    "weight": 12.2,
+    "licensePlate": "29B-123457",
+    "manufacturingDate" : "10/1/2019",
+    "producer" : "producer1",
+    "cost": 400000,
+    "dockingStationId" : "ds1",
+    "status" : "Available"
+  },
+  {
+    "type": "normalBike",
+    "id": "nb3",
+    "name": "normalBike3",
+    "weight": 9.6,
+    "licensePlate": "29B-123458",
+    "manufacturingDate" : "10/2/2019",
+    "producer" : "producer1",
+    "cost": 400000,
+    "dockingStationId" : "ds2",
+    "status" : "Available"
+  }
+]
