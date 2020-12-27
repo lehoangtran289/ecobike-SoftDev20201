@@ -18,7 +18,7 @@ public abstract class ADataCreditCardDialog<T> extends JDialog {
     protected String cardNumber;
 
     public ADataCreditCardDialog(EBRUserRentBikeController controller, T t) {
-        super((Frame) null, "CREDIT CARD INFORMATION", true);
+        super((Frame) null, "Credit Card Insert", true);
         this.t = t;
 
         setContentPane(new JPanel());

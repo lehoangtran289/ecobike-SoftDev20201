@@ -10,7 +10,7 @@ import static com.hust.ebr.utils.Constants.*;
 public class CostCalculator {
     public static long calculateRentalFee(Bike bike, ZonedDateTime timeRent, ZonedDateTime timeReturn) {
         long totalCost = 0;
-        double diff = ChronoUnit.SECONDS.between(timeRent, timeReturn);
+        double diff = ChronoUnit.MINUTES.between(timeRent, timeReturn);
         double v =
                 FIRST_COST_TIME_COST + Math.ceil((diff - FIRST_COST_TIME_AMOUNT) / NEXT_COST_TIME_AMOUNT) * COST_EVERY_NEXT_MINUTES;
         if (FREE_TIME_AMOUNT <= diff && diff <= FIRST_COST_TIME_AMOUNT) {
