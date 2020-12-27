@@ -2,6 +2,7 @@ package com.hust.ebr.components.bike.controller;
 
 import com.hust.ebr.beans.Bike;
 import com.hust.ebr.components.abstractdata.controller.ADataPageController;
+import com.hust.ebr.components.abstractdata.controller.IDataDeleteController;
 import com.hust.ebr.components.abstractdata.controller.IDataUpdateController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
@@ -57,6 +58,10 @@ public class AdminBikePageController extends ADataPageController<Bike> {
         return ((BikeApi) getServerApi()).updateBike(bike);
     }
 
+    public boolean deleteBike(Bike bike) {
+        return ((BikeApi) getServerApi()).deleteBike(bike.getId());
+    }
+
     public void onEdit(ADataSinglePane<Bike> singlePane, JButton editButton) {
         IDataUpdateController<Bike> manageController = new IDataUpdateController<Bike>() {
             @Override
@@ -68,6 +73,22 @@ public class AdminBikePageController extends ADataPageController<Bike> {
 
         editButton.addActionListener(e -> {
             new BikeEditDialog(singlePane.getData(), manageController);
+        });
+    }
+
+    public void onDelete(ADataSinglePane<Bike> singlePane, JButton deleteButton) {
+        IDataDeleteController<Bike> manageController = new IDataDeleteController<Bike>() {
+            @Override
+            public void onAct(Bike bike) {
+                if (AdminBikePageController.this.deleteBike(bike)) {
+                    singlePane.updateData(null);
+                    singlePane.removeDataHandlingComponent();
+                }
+            }
+        };
+
+        deleteButton.addActionListener(e -> {
+            manageController.onAct(singlePane.getData());
         });
     }
 
