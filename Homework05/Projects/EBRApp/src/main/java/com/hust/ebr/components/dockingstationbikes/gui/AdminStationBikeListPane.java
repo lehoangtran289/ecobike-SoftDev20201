@@ -7,7 +7,7 @@ import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
 
 public class AdminStationBikeListPane extends ADataListPane<Bike> {
     public AdminStationBikeListPane(ADataPageController<Bike> bikeListController) {
-        this.homePageController = bikeListController;
+        this.dataPageController = bikeListController;
     }
 
     @Override

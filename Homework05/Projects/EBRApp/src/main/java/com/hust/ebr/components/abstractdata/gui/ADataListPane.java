@@ -11,7 +11,7 @@ public abstract class ADataListPane<T> extends JScrollPane {
     private LayoutManager layout;
     protected JPanel pane;
 
-    protected ADataPageController<T> homePageController;
+    protected ADataPageController<T> dataPageController;
 
     public ADataListPane() {
         pane = new JPanel();
@@ -33,7 +33,7 @@ public abstract class ADataListPane<T> extends JScrollPane {
         pane.repaint();
 
         for (T t : list) {
-            ADataSinglePane<T> singlePane = homePageController.createSinglePane();
+            ADataSinglePane<T> singlePane = dataPageController.createSinglePane();
             decorateSinglePane(singlePane);
 
             singlePane.updateData(t);

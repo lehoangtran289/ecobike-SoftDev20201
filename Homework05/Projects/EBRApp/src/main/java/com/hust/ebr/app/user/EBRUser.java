@@ -15,8 +15,14 @@ public class EBRUser extends JFrame {
         BorderLayout layout = new BorderLayout();
         rootPanel.setLayout(layout);
 
-        JPanel homePage = controller.getHomePage();
-        rootPanel.add(homePage);
+        try {
+            Class.forName("com.hust.ebr.components.dockingstation.controller.UserStationPageController");
+        }catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        JPanel stationPage = controller.getPage("userStationPage");
+        rootPanel.add(stationPage);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);

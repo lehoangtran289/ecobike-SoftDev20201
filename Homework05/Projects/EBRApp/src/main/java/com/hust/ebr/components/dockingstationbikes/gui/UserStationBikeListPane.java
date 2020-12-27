@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
 public class UserStationBikeListPane extends ADataListPane<Bike> {
 
     public UserStationBikeListPane(ADataPageController<Bike> bikeListController) {
-        this.homePageController = bikeListController;
+        this.dataPageController = bikeListController;
     }
 
     @Override

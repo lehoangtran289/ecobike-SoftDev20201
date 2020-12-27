@@ -42,4 +42,9 @@ public class AdminStationBikeListPageController extends ADataPageController<Bike
     public ADataListPane<Bike> createListPane() {
         return new AdminStationBikeListPane(this);
     }
+
+    @Override
+    public ADataPageController<?> createPageController() {
+        return null;
+    }
 }

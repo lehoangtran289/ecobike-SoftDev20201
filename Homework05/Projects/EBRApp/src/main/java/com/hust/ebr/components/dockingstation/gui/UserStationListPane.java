@@ -13,8 +13,8 @@ import java.awt.event.ActionListener;
 
 public class UserStationListPane extends ADataListPane<DockingStation> {
 
-    public UserStationListPane(ADataPageController<DockingStation> homePageController) {
-        this.homePageController = homePageController;
+    public UserStationListPane(ADataPageController<DockingStation> dataPageController) {
+        this.dataPageController = dataPageController;
     }
 
     @Override

@@ -58,4 +58,6 @@ public abstract class ADataPageController<T> {
     public abstract ADataSinglePane<T> createSinglePane();
 
     public abstract ADataListPane<T> createListPane();
+
+    public abstract ADataPageController<?> createPageController();
 }
