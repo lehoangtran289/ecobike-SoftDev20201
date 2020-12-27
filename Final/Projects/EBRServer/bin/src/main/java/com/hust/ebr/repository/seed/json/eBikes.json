@@ -1,0 +1,56 @@
+[
+  {
+    "type": "eBike",
+    "id": "eb1",
+    "name": "E Bike 1",
+    "weight": 20.2,
+    "licensePlate": "29E-123456",
+    "manufacturingDate" : "10/12/2019",
+    "producer" : "producer2",
+    "cost": 600.5,
+    "dockingStationId" : "ds3",
+    "status" : "Available",
+    "motor" : {
+      "id": "m1",
+      "batteryPercentage" : 80,
+      "loadCycles" : 20,
+      "remainingTime": 86400
+    }
+  },
+  {
+    "type": "eBike",
+    "id": "eb2",
+    "name": "E Bike 2",
+    "weight": 21.2,
+    "licensePlate": "29E-123457",
+    "manufacturingDate" : "10/1/2019",
+    "producer" : "producer2",
+    "cost": 700,
+    "dockingStationId" : "ds2",
+    "status" : "Available",
+    "motor" : {
+      "id": "m2",
+      "batteryPercentage" : 90,
+      "loadCycles" : 50,
+      "remainingTime": 86400
+    }
+  },
+  {
+    "type": "eBike",
+    "id": "eb3",
+    "name": "E Bike 3",
+    "weight": 20.6,
+    "licensePlate": "29E-123458",
+    "manufacturingDate" : "10/2/2019",
+    "producer" : "producer2",
+    "cost": 750,
+    "dockingStationId" : "ds3",
+    "status" : "Available",
+    "motor" : {
+      "id": "m3",
+      "batteryPercentage" : 85,
+      "loadCycles" : 22,
+      "remainingTime": 86400
+    }
+  }
+]
