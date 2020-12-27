@@ -1,0 +1,35 @@
+[
+  {
+    "bikeType": "EBike",
+    "bikeId": "eb2",
+    "cardNumber": "201767642017",
+    "cardOwner": "hoangtl1",
+    "fromStationId": "ds1",
+    "toStationId": "ds2",
+    "rentalDate" : "12/12/2020",
+    "totalTime" : 3600,
+    "totalMoney": 15000
+  },
+  {
+    "bikeType": "TwinBike",
+    "bikeId": "tb3",
+    "cardNumber": "201768612017",
+    "cardOwner": "hoangtl2",
+    "fromStationId": "ds2",
+    "toStationId": "ds3",
+    "rentalDate": "12/10/2020",
+    "totalTime": 4200,
+    "totalMoney": 15000
+  },
+  {
+    "bikeType": "EBike",
+    "bikeId": "eb3",
+    "cardNumber": "201702242017",
+    "cardOwner": "hoangtl3",
+    "fromStationId": "ds1",
+    "toStationId": "ds3",
+    "rentalDate": "15/11/2020",
+    "totalTime": 3862,
+    "totalMoney": 15000
+  }
+]
