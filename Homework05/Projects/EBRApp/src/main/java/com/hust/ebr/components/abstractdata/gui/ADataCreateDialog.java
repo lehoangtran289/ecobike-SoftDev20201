@@ -12,7 +12,7 @@ public abstract class ADataCreateDialog<T> extends JDialog {
     protected GridBagConstraints c = new GridBagConstraints();
 
     public ADataCreateDialog(IDataManageController<T> controller) {
-        super((Frame) null, "Edit", true);
+        super((Frame) null, "Create", true);
 
         setContentPane(new JPanel());
         layout = new GridBagLayout();
