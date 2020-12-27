@@ -70,6 +70,16 @@ public class BikeSinglePane extends ADataSinglePane<Bike> {
             labelCost.setText("Cost: " + t.getCost() + "VND");
             labelStatus.setText("Status: " + t.getStatus());
             labelDockingStationId.setText("Docking station ID: " + t.getDockingStationId());
+        } else {
+            labelId.setText(null);
+            labelName.setText(null);
+            labelWeight.setText(null);
+            labelLicensePlate.setText(null);
+            labelManufactureDate.setText(null);
+            labelProducer.setText(null);
+            labelCost.setText(null);
+            labelStatus.setText(null);
+            labelDockingStationId.setText(null);
         }
     }
 }

@@ -2,14 +2,13 @@ package com.hust.ebr.components.dockingstation.controller;
 
 import com.hust.ebr.beans.DockingStation;
 import com.hust.ebr.components.abstractdata.controller.ADataPageController;
+import com.hust.ebr.components.abstractdata.controller.IDataDeleteController;
+import com.hust.ebr.components.abstractdata.controller.IDataManageController;
 import com.hust.ebr.components.abstractdata.controller.IDataUpdateController;
 import com.hust.ebr.components.abstractdata.gui.ADataListPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSearchPane;
 import com.hust.ebr.components.abstractdata.gui.ADataSinglePane;
-import com.hust.ebr.components.dockingstation.gui.AdminStationListPane;
-import com.hust.ebr.components.dockingstation.gui.DockingStationEditDialog;
-import com.hust.ebr.components.dockingstation.gui.DockingStationSearchPane;
-import com.hust.ebr.components.dockingstation.gui.DockingStationSinglePane;
+import com.hust.ebr.components.dockingstation.gui.*;
 import com.hust.ebr.factory.AdminPageFactory;
 import com.hust.ebr.serverapi.DockingStationApi;
 import com.hust.ebr.serverapi.abstractdata.IDockingStationApi;
@@ -26,8 +25,20 @@ public class AdminStationPageController extends ADataPageController<DockingStati
                 new AdminStationPageController(DockingStationApi.singleton()));
     }
 
-    public AdminStationPageController(IDockingStationApi stationApi) {
-        super(stationApi);
+    public AdminStationPageController(IDockingStationApi dsApi) {
+        super(dsApi);
+        JButton button = new JButton("Add new Station");
+        button.addActionListener(e -> {
+            new DockingStationCreateDialog(new IDataManageController<DockingStation>() {
+                @Override
+                public void onAct(DockingStation station) {
+                    System.out.println(station);
+                    DockingStationApi.singleton().addStation(station);
+                }
+            });
+        });
+        getDataPagePane().addPane(button);
+        button.setBounds(350, 100, 40, 20);
     }
 
     @Override
@@ -59,7 +70,12 @@ public class AdminStationPageController extends ADataPageController<DockingStati
         return ((IDockingStationApi) getServerApi()).updateStation(dockingStation);
     }
 
-    public void onEdit(ADataSinglePane<DockingStation> singlePane, JButton button) {
+    public boolean deleteDockingStation(DockingStation station) {
+        System.out.println("xxxxxxxxxx");
+        return ((DockingStationApi) getServerApi()).deleteStation(station.getId()) ;
+    }
+
+    public void onEdit(ADataSinglePane<DockingStation> singlePane, JButton editButton) {
         IDataUpdateController<DockingStation> controller = new IDataUpdateController<DockingStation>() {
             @Override
             public void onAct(DockingStation dockingStation) {
@@ -69,10 +85,30 @@ public class AdminStationPageController extends ADataPageController<DockingStati
             }
         };
 
-        button.addActionListener(new ActionListener() {
+        editButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new DockingStationEditDialog(singlePane.getData(), controller);
+            }
+        });
+    }
+
+    public void onDelete(ADataSinglePane<DockingStation> singlePane, JButton delButton) {
+        IDataDeleteController<DockingStation> delController = new IDataDeleteController<DockingStation>() {
+            @Override
+            public void onAct(DockingStation station) {
+                if (AdminStationPageController.this.deleteDockingStation(station)) {
+                    singlePane.updateData(null);
+                    singlePane.removeDataHandlingComponent();
+                    System.out.println("success");
+                }
+            }
+        };
+
+        delButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                delController.onAct(singlePane.getData());
             }
         });
     }

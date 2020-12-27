@@ -20,10 +20,10 @@ public class AdminStationListPane extends ADataListPane<DockingStation> {
 
     @Override
     public void decorateSinglePane(ADataSinglePane<DockingStation> singlePane) {
-        JButton button = new JButton("Edit");
-        singlePane.addDataHandlingComponent(button);
+        JButton editButton = new JButton("Edit");
+        singlePane.addDataHandlingComponent(editButton);
 
-        ((AdminStationPageController) dataPageController).onEdit(singlePane, button);
+        ((AdminStationPageController) dataPageController).onEdit(singlePane, editButton);
 
         JButton viewDockButton = new JButton("View Details");
         singlePane.addDataHandlingComponent(viewDockButton);
@@ -34,5 +34,9 @@ public class AdminStationListPane extends ADataListPane<DockingStation> {
                 new EBRStationBikeList(new EBRAdminStationBikeListController(), singlePane.getData());
             }
         });
+
+        JButton delButton = new JButton("Delete");
+        singlePane.addDataHandlingComponent(delButton);
+        ((AdminStationPageController) dataPageController).onDelete(singlePane, delButton);
     }
 }
