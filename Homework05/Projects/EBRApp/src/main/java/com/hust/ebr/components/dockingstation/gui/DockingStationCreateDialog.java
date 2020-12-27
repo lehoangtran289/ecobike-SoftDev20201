@@ -68,7 +68,7 @@ public class DockingStationCreateDialog extends ADataCreateDialog<DockingStation
         }
 
         if (addressField.getText() != null && !addressField.getText().equals(""))
-            station.setStationName(addressField.getText());
+            station.setStationAddress(addressField.getText());
         else {
             JOptionPane.showMessageDialog(null,
                     "Station address is empty, please try again!",
